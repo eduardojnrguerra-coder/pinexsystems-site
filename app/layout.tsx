@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
@@ -87,6 +88,7 @@ export default function RootLayout({
         <SiteFooter />
         <MobileStickyCta />
         <FloatingWhatsApp />
+        <Analytics />
       </body>
     </html>
   );
