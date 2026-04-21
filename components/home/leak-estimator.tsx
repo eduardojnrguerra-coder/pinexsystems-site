@@ -404,8 +404,9 @@ export function LeakEstimator() {
 
   return (
     <section className="relative overflow-visible">
-      <div className="grid gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(20rem,1.05fr)] md:items-start">
-        <div className="min-w-0 rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
+      <div className="grid gap-5 md:grid-cols-[minmax(0,1.02fr)_minmax(22rem,0.98fr)] md:items-start">
+        <div className="min-w-0">
+          <div className="rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase text-[#a8a8a2]">
@@ -447,35 +448,55 @@ export function LeakEstimator() {
             </div>
           </div>
 
-          <div className="mt-7 grid gap-5">
-            {fieldConfigs.map((field) => {
-              const max = getFieldMax(field.key, values);
-              const value = values[field.key];
+            <div className="mt-7 grid gap-5">
+              {fieldConfigs.map((field) => {
+                const max = getFieldMax(field.key, values);
+                const value = values[field.key];
 
-              return (
-                <div
-                  key={field.key}
-                  className="block rounded-[8px] border border-white/10 bg-white/[0.035] p-4"
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <label
-                        htmlFor={`leak-${field.key}`}
-                        className="text-sm font-semibold text-white"
-                      >
-                        {field.label}
-                      </label>
-                      <p className="mt-1 max-w-xl text-xs leading-5 text-[#a8a8a2]">
-                        {field.helper}
-                      </p>
+                return (
+                  <div
+                    key={field.key}
+                    className="block rounded-[8px] border border-white/10 bg-white/[0.035] p-4"
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <label
+                          htmlFor={`leak-${field.key}`}
+                          className="text-sm font-semibold text-white"
+                        >
+                          {field.label}
+                        </label>
+                        <p className="mt-1 max-w-xl text-xs leading-5 text-[#a8a8a2]">
+                          {field.helper}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="hidden rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-sm font-medium text-white sm:inline-flex">
+                          {formatValue(field, value)}
+                        </span>
+                        <input
+                          id={`leak-${field.key}-number`}
+                          type="number"
+                          min={field.min}
+                          max={max}
+                          step={field.step}
+                          value={value}
+                          onInput={(event) =>
+                            handleControlValue(field.key, event.currentTarget.value)
+                          }
+                          onChange={(event) =>
+                            handleControlValue(field.key, event.currentTarget.value)
+                          }
+                          inputMode="numeric"
+                          className="h-10 w-24 rounded-[8px] border border-white/10 bg-[#05070b] px-3 text-right text-sm font-semibold text-white outline-none transition focus:border-[#67E8F9]/60 sm:w-28"
+                          aria-label={field.label}
+                        />
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="hidden rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-sm font-medium text-white sm:inline-flex">
-                        {formatValue(field, value)}
-                      </span>
+                    <div className="mt-4">
                       <input
-                        id={`leak-${field.key}-number`}
-                        type="number"
+                        id={`leak-${field.key}`}
+                        type="range"
                         min={field.min}
                         max={max}
                         step={field.step}
@@ -486,49 +507,30 @@ export function LeakEstimator() {
                         onChange={(event) =>
                           handleControlValue(field.key, event.currentTarget.value)
                         }
-                        inputMode="numeric"
-                        className="h-10 w-24 rounded-[8px] border border-white/10 bg-[#05070b] px-3 text-right text-sm font-semibold text-white outline-none transition focus:border-[#67E8F9]/60 sm:w-28"
-                        aria-label={field.label}
+                        className="w-full cursor-pointer accent-[#67E8F9]"
+                        aria-valuetext={formatValue(field, value)}
                       />
+                      <div className="mt-2 flex justify-between text-[11px] text-[#7f858f]">
+                        <span>
+                          {field.currency
+                            ? formatCurrency(field.min)
+                            : `${field.min}${field.suffix ?? ""}`}
+                        </span>
+                        <span>
+                          {field.currency
+                            ? formatCurrency(max)
+                            : `${max}${field.suffix ?? ""}`}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div className="mt-4">
-                    <input
-                      id={`leak-${field.key}`}
-                      type="range"
-                      min={field.min}
-                      max={max}
-                      step={field.step}
-                      value={value}
-                      onInput={(event) =>
-                        handleControlValue(field.key, event.currentTarget.value)
-                      }
-                      onChange={(event) =>
-                        handleControlValue(field.key, event.currentTarget.value)
-                      }
-                      className="w-full cursor-pointer accent-[#67E8F9]"
-                      aria-valuetext={formatValue(field, value)}
-                    />
-                    <div className="mt-2 flex justify-between text-[11px] text-[#7f858f]">
-                      <span>
-                        {field.currency
-                          ? formatCurrency(field.min)
-                          : `${field.min}${field.suffix ?? ""}`}
-                      </span>
-                      <span>
-                        {field.currency
-                          ? formatCurrency(max)
-                          : `${max}${field.suffix ?? ""}`}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <aside className="min-w-0 md:self-start lg:sticky lg:top-24 lg:self-start">
+        <aside className="min-w-0 self-start md:sticky md:top-24">
           <div className="light-panel flex flex-col rounded-[8px] p-5 sm:p-7">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
