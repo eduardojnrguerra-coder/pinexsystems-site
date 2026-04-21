@@ -5,6 +5,8 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { navLinks, primaryCta, whatsappCta } from "@/lib/site";
 import { SiteLogo } from "@/components/layout/site-logo";
 
@@ -39,17 +41,22 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
+          <TrackedWhatsAppLink
             href={whatsappCta.href}
             target="_blank"
             rel="noopener noreferrer"
+            location="header_desktop"
             className="cta-secondary"
           >
             WhatsApp
-          </a>
-          <Link href={primaryCta.href} className="cta-primary">
+          </TrackedWhatsAppLink>
+          <TrackedDemoLink
+            href={primaryCta.href}
+            location="header_desktop"
+            className="cta-primary"
+          >
             Book Demo
-          </Link>
+          </TrackedDemoLink>
         </div>
 
         <button
@@ -83,17 +90,22 @@ export function SiteHeader() {
           </nav>
 
           <div className="mt-4 flex gap-3">
-            <a
+            <TrackedWhatsAppLink
               href={whatsappCta.href}
               target="_blank"
               rel="noopener noreferrer"
+              location="header_mobile"
               className="cta-secondary flex-1 text-center"
             >
               WhatsApp
-            </a>
-            <Link href={primaryCta.href} className="cta-primary flex-1 text-center">
+            </TrackedWhatsAppLink>
+            <TrackedDemoLink
+              href={primaryCta.href}
+              location="header_mobile"
+              className="cta-primary flex-1 text-center"
+            >
               Book Demo
-            </Link>
+            </TrackedDemoLink>
           </div>
         </div>
       ) : null}

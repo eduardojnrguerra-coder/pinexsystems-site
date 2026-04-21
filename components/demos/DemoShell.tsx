@@ -5,6 +5,8 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, BarChart3, MessageCircle, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
+import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { DemoDashboard } from "@/components/demos/DemoDashboard";
 import { DemoRoleSwitcher } from "@/components/demos/DemoRoleSwitcher";
 import { DemoSidebar } from "@/components/demos/DemoSidebar";
@@ -304,12 +306,23 @@ export function DemoShell({ system }: { system: DemoSystem }) {
             <ArrowLeft className="h-4 w-4" /> Back to demos
           </Link>
           <div className="flex flex-wrap gap-2">
-            <a href={whatsappCta.href} target="_blank" rel="noopener noreferrer" className="cta-secondary">
+            <TrackedWhatsAppLink
+              href={whatsappCta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              location={`demo_shell_${system.slug}`}
+              className="cta-secondary"
+            >
               <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
-            <Link href="/contact#lead-form" className="cta-button">
+            </TrackedWhatsAppLink>
+            <TrackedDemoLink
+              href="/contact#lead-form"
+              location="demo_shell_request_system"
+              system={system.slug}
+              className="cta-button"
+            >
               Request This System
-            </Link>
+            </TrackedDemoLink>
           </div>
         </div>
 

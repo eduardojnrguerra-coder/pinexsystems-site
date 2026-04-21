@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { LeadForm } from "@/components/ui/lead-form";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
@@ -82,15 +83,16 @@ export default function ContactPage() {
               Direct Contact
             </h2>
             <div className="mt-5 space-y-3">
-              <a
+              <TrackedWhatsAppLink
                 href={`https://wa.me/${siteConfig.phonePlain.replace("+", "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                location="contact_direct"
                 className="flex items-center gap-3 rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3 text-[#2a2a2a]"
               >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp {siteConfig.phoneDisplay}
-              </a>
+              </TrackedWhatsAppLink>
               <a
                 href={`mailto:${siteConfig.email}`}
                 className="flex items-center gap-3 rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3 text-[#2a2a2a]"

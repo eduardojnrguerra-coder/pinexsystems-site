@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
+import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import type { DemoRecord, DemoSystem } from "@/lib/demo-systems";
 import { DemoActivityFeed } from "@/components/demos/DemoActivityFeed";
 import { DemoMetricCard } from "@/components/demos/DemoMetricCard";
@@ -191,17 +193,23 @@ export function DemoDashboard({
               staff workflow, and automation layer for your business.
             </p>
             <div className="mt-4 grid gap-2">
-              <Link href="/contact#lead-form" className="cta-button justify-center">
+              <TrackedDemoLink
+                href="/contact#lead-form"
+                location="demo_dashboard_request_system"
+                system={system.title}
+                className="cta-button justify-center"
+              >
                 Request This System Demo <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a
+              </TrackedDemoLink>
+              <TrackedWhatsAppLink
                 href={whatsappCta.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                location="demo_dashboard_whatsapp"
                 className="cta-secondary justify-center"
               >
                 <MessageCircle className="h-4 w-4" /> WhatsApp Pine X Systems
-              </a>
+              </TrackedWhatsAppLink>
             </div>
           </div>
         </div>

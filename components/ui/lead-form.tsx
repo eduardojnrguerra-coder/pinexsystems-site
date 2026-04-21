@@ -3,6 +3,7 @@
 import { SendHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { trackDemoRequest, trackLeadConversion } from "@/lib/gtag";
 import { siteConfig } from "@/lib/site";
 
 interface LeadFormProps {
@@ -96,6 +97,16 @@ export function LeadForm({
     if (!popup) {
       window.location.href = mailtoUrl;
     }
+
+    trackDemoRequest({
+      location: id,
+      system: form.systemNeeded,
+    });
+    trackLeadConversion({
+      location: id,
+      method: popup ? "whatsapp" : "email_fallback",
+      preferredContact: form.preferredContact,
+    });
 
     setStatus(
       "Thanks. We opened WhatsApp with your details. If WhatsApp does not open, your email app will be used as fallback. We aim to respond within one business day.",

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
+import { Suspense } from "react";
 
+import { GoogleTracking } from "@/components/analytics/google-tracking";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -87,6 +89,9 @@ export default function RootLayout({
       className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#F7F7F2] text-[#111111]">
+        <Suspense fallback={null}>
+          <GoogleTracking />
+        </Suspense>
         <SchemaScript
           data={[organizationSchema(), localBusinessSchema(), websiteSchema()]}
         />

@@ -17,6 +17,8 @@ import {
   UserCheck,
 } from "lucide-react";
 
+import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { whatsappCta } from "@/lib/site";
 
 type Role = "Owner view" | "Salesperson view" | "Finance/admin view";
@@ -669,10 +671,23 @@ export function DealershipDemo() {
             <ArrowLeft className="h-4 w-4" /> Back to demos
           </Link>
           <div className="flex flex-wrap gap-2">
-            <a href={whatsappCta.href} target="_blank" rel="noopener noreferrer" className="cta-secondary">
+            <TrackedWhatsAppLink
+              href={whatsappCta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              location="dealership_demo_header"
+              className="cta-secondary"
+            >
               <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
-            <Link href="/contact#lead-form" className="cta-button">Request This System</Link>
+            </TrackedWhatsAppLink>
+            <TrackedDemoLink
+              href="/contact#lead-form"
+              location="dealership_demo_request_system"
+              system="dealership"
+              className="cta-button"
+            >
+              Request This System
+            </TrackedDemoLink>
           </div>
         </div>
 
@@ -732,7 +747,14 @@ export function DealershipDemo() {
                     <h2 className="mt-2 font-heading text-2xl font-semibold text-white">{profile.title}</h2>
                     <p className="mt-2 max-w-3xl text-sm leading-6 text-[#d8d8d2]">{profile.summary}</p>
                   </div>
-                  <Link href="/contact#lead-form" className="cta-button">Request This Demo <ArrowRight className="h-4 w-4" /></Link>
+                  <TrackedDemoLink
+                    href="/contact#lead-form"
+                    location="dealership_demo_main_cta"
+                    system="dealership"
+                    className="cta-button"
+                  >
+                    Request This Demo <ArrowRight className="h-4 w-4" />
+                  </TrackedDemoLink>
                 </div>
               </div>
 
