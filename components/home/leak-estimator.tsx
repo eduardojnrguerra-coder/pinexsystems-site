@@ -505,103 +505,105 @@ export function LeakEstimator() {
         </div>
       </div>
 
-      <div className="light-panel flex h-full flex-col justify-between rounded-[8px] p-5 sm:p-7 md:sticky md:top-24 md:self-start md:h-fit">
-        <div>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-[11px] uppercase text-[#6b6c70]">
-              Estimated impact
-            </p>
-            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${result.risk.badge} ${result.risk.tone}`}>
-              {result.risk.label}
-            </span>
-          </div>
-
-          <div className="mt-4 rounded-[8px] border border-[#d9d9d1] bg-[linear-gradient(180deg,#ffffff_0%,#f7f7f2_100%)] p-5 shadow-[0_20px_60px_rgba(17,24,39,0.08)]">
-            <p className="text-sm text-[#5b5f66]">Estimated monthly leakage</p>
-            <p
-              key={Math.round(result.monthlyLeakage)}
-              className="number-pop mt-3 font-heading text-4xl font-semibold text-[#0b0c10] sm:text-5xl"
-            >
-              {formatCurrency(result.monthlyLeakage)}
-            </p>
-            <div className="mt-5 h-2.5 rounded-full bg-[#e3e3dc]">
-              <div
-                className="risk-meter-fill h-full rounded-full bg-[linear-gradient(90deg,#67E8F9,#60A5FA,#F5D36C)]"
-                style={{ width: `${result.riskMeter}%` }}
-              />
-            </div>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-[#53565d]">
-              This combines gross profit at risk from missed follow-up with admin
-              waste from disconnected workflows.
-            </p>
-          </div>
-
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-[8px] border border-[#d9d9d1] bg-white p-4 sm:col-span-2">
-              <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
-                <TrendingUp className="h-4 w-4 text-[#60A5FA]" />
-                Estimated yearly leakage
-              </div>
-              <p
-                key={Math.round(result.yearlyLeakage)}
-                className="number-pop mt-3 text-3xl font-semibold text-[#0b0c10]"
-              >
-                {formatCurrency(result.yearlyLeakage)}
-              </p>
-            </div>
-
-            {resultCards.map((card) => {
-              const Icon = card.icon;
-
-              return (
-                <div key={card.label} className="rounded-[8px] border border-[#d9d9d1] bg-white p-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
-                    <Icon className="h-4 w-4 text-[#60A5FA]" />
-                    {card.label}
-                  </div>
-                  <p className="mt-3 text-2xl font-semibold text-[#0b0c10]">
-                    {card.value}
-                  </p>
-                  <p className="mt-2 text-xs leading-5 text-[#63666d]">
-                    {card.detail}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="diagnosis-panel mt-4 rounded-[8px] border border-[#d9d9d1] bg-[#0b0c10] p-5 text-[#f7f7f2]">
+      <div className="md:self-start lg:sticky lg:top-28">
+        <div className="light-panel flex flex-col rounded-[8px] p-5 sm:p-7">
+          <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Gauge className="h-4 w-4 text-[#67E8F9]" />
-                Business diagnosis
-              </div>
-              <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs text-[#d8d8d2]">
+              <p className="text-[11px] uppercase text-[#6b6c70]">
+                Estimated impact
+              </p>
+              <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${result.risk.badge} ${result.risk.tone}`}>
                 {result.risk.label}
               </span>
             </div>
-            <p className="mt-4 text-sm leading-7 text-[#d8d8d2]">
-              {result.risk.message}
-            </p>
-            <div className="mt-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-4">
-              <p className="text-sm font-semibold text-white">
-                {result.diagnosis.headline}
+
+            <div className="rounded-[8px] border border-[#d9d9d1] bg-[linear-gradient(180deg,#ffffff_0%,#f7f7f2_100%)] p-5 shadow-[0_20px_60px_rgba(17,24,39,0.08)]">
+              <p className="text-sm text-[#5b5f66]">Estimated monthly leakage</p>
+              <p
+                key={Math.round(result.monthlyLeakage)}
+                className="number-pop mt-3 font-heading text-4xl font-semibold text-[#0b0c10] sm:text-5xl"
+              >
+                {formatCurrency(result.monthlyLeakage)}
               </p>
-              <p className="mt-2 text-sm leading-7 text-[#d8d8d2]">
-                {result.diagnosis.message}
+              <div className="mt-5 h-2.5 rounded-full bg-[#e3e3dc]">
+                <div
+                  className="risk-meter-fill h-full rounded-full bg-[linear-gradient(90deg,#67E8F9,#60A5FA,#F5D36C)]"
+                  style={{ width: `${result.riskMeter}%` }}
+                />
+              </div>
+              <p className="mt-4 max-w-xl text-sm leading-7 text-[#53565d]">
+                This combines gross profit at risk from missed follow-up with admin
+                waste from disconnected workflows.
               </p>
             </div>
-          </div>
-        </div>
 
-        <div className="mt-6">
-          <p className="text-sm leading-7 text-[#63666d]">
-            This is an estimate only. Actual results depend on margins, close
-            rates, lead quality, and internal process.
-          </p>
-          <Link href="/contact#lead-form" className="cta-button premium-glow mt-5 w-full sm:w-fit">
-            Find The Gaps In My Business <ArrowRight className="h-4 w-4" />
-          </Link>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-[8px] border border-[#d9d9d1] bg-white p-4 sm:col-span-2">
+                <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
+                  <TrendingUp className="h-4 w-4 text-[#60A5FA]" />
+                  Estimated yearly leakage
+                </div>
+                <p
+                  key={Math.round(result.yearlyLeakage)}
+                  className="number-pop mt-3 text-3xl font-semibold text-[#0b0c10]"
+                >
+                  {formatCurrency(result.yearlyLeakage)}
+                </p>
+              </div>
+
+              {resultCards.map((card) => {
+                const Icon = card.icon;
+
+                return (
+                  <div key={card.label} className="rounded-[8px] border border-[#d9d9d1] bg-white p-4">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
+                      <Icon className="h-4 w-4 text-[#60A5FA]" />
+                      {card.label}
+                    </div>
+                    <p className="mt-3 text-2xl font-semibold text-[#0b0c10]">
+                      {card.value}
+                    </p>
+                    <p className="mt-2 text-xs leading-5 text-[#63666d]">
+                      {card.detail}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="diagnosis-panel rounded-[8px] border border-[#d9d9d1] bg-[#0b0c10] p-5 text-[#f7f7f2]">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <Gauge className="h-4 w-4 text-[#67E8F9]" />
+                  Business diagnosis
+                </div>
+                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs text-[#d8d8d2]">
+                  {result.risk.label}
+                </span>
+              </div>
+              <p className="mt-4 text-sm leading-7 text-[#d8d8d2]">
+                {result.risk.message}
+              </p>
+              <div className="mt-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-4">
+                <p className="text-sm font-semibold text-white">
+                  {result.diagnosis.headline}
+                </p>
+                <p className="mt-2 text-sm leading-7 text-[#d8d8d2]">
+                  {result.diagnosis.message}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <p className="text-sm leading-7 text-[#63666d]">
+              This is an estimate only. Actual results depend on margins, close
+              rates, lead quality, and internal process.
+            </p>
+            <Link href="/contact#lead-form" className="cta-button premium-glow mt-5 w-full sm:w-fit">
+              Find The Gaps In My Business <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

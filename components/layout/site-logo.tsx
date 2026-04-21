@@ -14,7 +14,7 @@ export function SiteLogo({ href = "/" }: SiteLogoProps) {
     >
       <span className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-[8px] border border-[#111111]/10 bg-[#071126] shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
         <Image
-          src="/logo.svg"
+          src="/icon.png"
           alt=""
           width={36}
           height={36}

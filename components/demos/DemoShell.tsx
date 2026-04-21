@@ -323,7 +323,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-[6px] bg-[#071126] shadow">
-                      <Image src="/logo.svg" alt="" width={28} height={28} unoptimized className="h-full w-full" />
+                      <Image src="/icon.png" alt="" width={28} height={28} unoptimized className="h-full w-full" />
                     </span>
                     <p className="font-heading text-base font-semibold text-white">Pine X Systems</p>
                     <span className="rounded-full border border-[#67E8F9]/30 bg-[#67E8F9]/10 px-3 py-1 text-xs font-semibold text-[#67E8F9]">

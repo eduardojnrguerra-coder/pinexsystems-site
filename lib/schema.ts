@@ -9,7 +9,7 @@ export function organizationSchema() {
     url: siteConfig.domain,
     email: siteConfig.email,
     telephone: siteConfig.phonePlain,
-    logo: `${siteConfig.domain}/logo.svg`,
+    logo: `${siteConfig.domain}/icon.png`,
     sameAs: [siteConfig.domain],
   };
 }
@@ -20,7 +20,7 @@ export function localBusinessSchema() {
     "@type": "LocalBusiness",
     "@id": `${siteConfig.domain}/#localbusiness`,
     name: siteConfig.name,
-    image: `${siteConfig.domain}/logo.svg`,
+    image: `${siteConfig.domain}/icon.png`,
     url: siteConfig.domain,
     telephone: siteConfig.phonePlain,
     email: siteConfig.email,
@@ -102,7 +102,7 @@ export function blogPostingSchema(article: InsightArticle) {
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.domain}/logo.svg`,
+        url: `${siteConfig.domain}/icon.png`,
       },
     },
     mainEntityOfPage: {

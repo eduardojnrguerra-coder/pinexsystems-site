@@ -5,7 +5,7 @@ export function HeroBrandLockup() {
     <div className="inline-flex max-w-full items-center gap-3 rounded-[8px] border border-[#111111]/10 bg-white/85 px-4 py-3 shadow-[0_14px_32px_rgba(17,17,17,0.08)] backdrop-blur-sm">
       <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[8px] border border-[#111111]/10 bg-[#071126] shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
         <Image
-          src="/logo.svg"
+          src="/icon.png"
           alt=""
           width={48}
           height={48}

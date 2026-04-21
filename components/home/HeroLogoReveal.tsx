@@ -5,10 +5,10 @@ export function HeroLogoReveal() {
     <div className="hero-logo-reveal" aria-label="Pine X Systems">
       <span className="hero-logo-reveal__frame">
         <Image
-          src="/brand/pine-x-logo.png"
+          src="/icon.png"
           alt="Pine X Systems logo"
-          width={4757}
-          height={2586}
+          width={512}
+          height={512}
           priority
           unoptimized
           className="hero-logo-reveal__image"
