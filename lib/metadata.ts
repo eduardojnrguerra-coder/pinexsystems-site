@@ -23,6 +23,14 @@ export function createPageMetadata({
     alternates: {
       canonical: url,
     },
+    icons: {
+      icon: [
+        { url: "/favicon.ico" },
+        { url: "/icon.png", type: "image/png" },
+      ],
+      apple: [{ url: "/apple-icon.png", type: "image/png" }],
+      shortcut: ["/favicon.ico"],
+    },
     openGraph: {
       title,
       description,

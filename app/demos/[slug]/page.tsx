@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { DealershipDemo } from "@/components/demos/DealershipDemo";
 import { DemoShell } from "@/components/demos/DemoShell";
 import { demoSystemSlugs, getDemoSystem } from "@/lib/demo-systems";
 import { createPageMetadata } from "@/lib/metadata";
@@ -45,10 +44,6 @@ export default async function DemoPage({ params }: DemoPageProps) {
 
   if (!system) {
     notFound();
-  }
-
-  if (system.slug === "dealership") {
-    return <DealershipDemo />;
   }
 
   return <DemoShell system={system} />;

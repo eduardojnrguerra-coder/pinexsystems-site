@@ -43,6 +43,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.domain,
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+    shortcut: ["/favicon.ico"],
+  },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     title: "Pine X Systems | Custom Business Systems & Automation South Africa",
     description: siteConfig.description,

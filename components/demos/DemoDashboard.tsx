@@ -14,7 +14,10 @@ interface DemoDashboardProps {
   filteredRecords: DemoRecord[];
   activity: string[];
   activeMetric: string | null;
+  accessMode: "full" | "limited";
+  roleSummary: string;
   selectedRecordId: string | null;
+  selectedRecord: DemoRecord | null;
   search: string;
   onSearchChange: (value: string) => void;
   onMetricClick: (filter: string | null) => void;
@@ -22,6 +25,7 @@ interface DemoDashboardProps {
   onPrimaryAction: () => void;
   onSecondaryAction: () => void;
   onAddRecord: () => void;
+  onDetailAction: (kind: "advance" | "toggle-access") => void;
 }
 
 export function DemoDashboard({
@@ -30,7 +34,10 @@ export function DemoDashboard({
   filteredRecords,
   activity,
   activeMetric,
+  accessMode,
+  roleSummary,
   selectedRecordId,
+  selectedRecord,
   search,
   onSearchChange,
   onMetricClick,
@@ -38,6 +45,7 @@ export function DemoDashboard({
   onPrimaryAction,
   onSecondaryAction,
   onAddRecord,
+  onDetailAction,
 }: DemoDashboardProps) {
   return (
     <div className="space-y-5">
@@ -83,6 +91,60 @@ export function DemoDashboard({
         </div>
 
         <div className="space-y-5">
+          <div className="rounded-[8px] border border-white/10 bg-white/[0.035] p-4">
+            <h2 className="font-heading text-lg font-semibold text-white">Record Details</h2>
+            {selectedRecord ? (
+              <div className="mt-4 space-y-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-xs text-[#a8a8a2]">{selectedRecord.id}</span>
+                  <span className="rounded-full border border-[#67E8F9]/25 bg-[#67E8F9]/10 px-3 py-1 text-xs font-semibold text-[#67E8F9]">
+                    {selectedRecord.status}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{selectedRecord.name}</p>
+                  <p className="mt-1 text-xs text-[#a8a8a2]">
+                    {selectedRecord.category} - {selectedRecord.owner}
+                  </p>
+                </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <div className="rounded-[6px] border border-white/10 bg-black/20 p-3">
+                    <p className="text-[11px] uppercase tracking-[0.08em] text-[#a8a8a2]">Value</p>
+                    <p className="mt-1 text-sm font-semibold text-white">{selectedRecord.value}</p>
+                  </div>
+                  <div className="rounded-[6px] border border-white/10 bg-black/20 p-3">
+                    <p className="text-[11px] uppercase tracking-[0.08em] text-[#a8a8a2]">Access</p>
+                    <p className="mt-1 text-sm font-semibold text-white">
+                      {accessMode === "full" ? "Full detail" : "Limited detail"}
+                    </p>
+                  </div>
+                </div>
+                <div className="rounded-[6px] border border-white/10 bg-black/20 p-3">
+                  <p className="text-[11px] uppercase tracking-[0.08em] text-[#a8a8a2]">Summary</p>
+                  <p className="mt-1 text-sm leading-6 text-[#d8d8d2]">
+                    {accessMode === "limited" ? "Execution view only exposes what the team needs right now." : selectedRecord.detail}
+                  </p>
+                </div>
+                <div className="rounded-[6px] border border-white/10 bg-black/20 p-3">
+                  <p className="text-[11px] uppercase tracking-[0.08em] text-[#a8a8a2]">Role view</p>
+                  <p className="mt-1 text-sm leading-6 text-[#d8d8d2]">{roleSummary}</p>
+                </div>
+                <div className="flex gap-2">
+                  <button type="button" onClick={() => onDetailAction("advance")} className="cta-button flex-1 justify-center">
+                    Advance
+                  </button>
+                  <button type="button" onClick={() => onDetailAction("toggle-access")} className="cta-secondary flex-1 justify-center">
+                    Toggle Access
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <p className="mt-2 text-sm leading-6 text-[#a8a8a2]">
+                Click a record to open the detail panel and visible actions.
+              </p>
+            )}
+          </div>
+
           <div className="rounded-[8px] border border-white/10 bg-white/[0.035] p-4">
             <h2 className="font-heading text-lg font-semibold text-white">Demo Actions</h2>
             <p className="mt-2 text-sm leading-6 text-[#d8d8d2]">
@@ -147,3 +209,4 @@ export function DemoDashboard({
     </div>
   );
 }
+

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { DemoCardGrid } from "@/components/demos/DemoCardGrid";
+import { HeroBrandLockup } from "@/components/home/HeroBrandLockup";
 import { MiniCalculator } from "@/components/home/mini-calculator";
 import { Reveal } from "@/components/ui/reveal";
 import { createPageMetadata } from "@/lib/metadata";
@@ -177,6 +178,7 @@ export default function HomePage() {
         <div className="section-shell relative py-12 sm:py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start xl:gap-12">
             <Reveal>
+              <HeroBrandLockup />
               <SectionBadge>Custom Business Control Systems</SectionBadge>
               <h1 className="mt-5 font-heading text-[2rem] font-semibold leading-[1.1] text-[#0b0c10] sm:text-[2.5rem] lg:text-[2.2rem] xl:text-[2.5rem]">
                 Your Business Is Leaking Money In Places You Cannot See

@@ -24,10 +24,15 @@ export function SiteFooter() {
       <div className="mx-auto grid w-full max-w-7xl gap-9 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <SiteLogo />
-          <p className="mt-5 max-w-xs text-sm leading-7 text-[#555962]">
-            Custom business systems built to give owners full control over
-            operations, teams, and growth.
-          </p>
+          <div className="mt-5 max-w-xs space-y-3">
+            <p className="text-sm leading-7 text-[#555962]">
+              Custom business systems built to give owners full control over
+              operations, teams, and growth.
+            </p>
+            <div className="inline-flex rounded-full border border-[#111111]/10 bg-white px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#6b6f76]">
+              Premium SaaS style for South African businesses
+            </div>
+          </div>
         </div>
 
         <div>
