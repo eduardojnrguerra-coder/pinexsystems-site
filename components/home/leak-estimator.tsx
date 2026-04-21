@@ -403,7 +403,7 @@ export function LeakEstimator() {
   ];
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
+    <div className="grid gap-5 md:grid-cols-[0.95fr_1.05fr] md:items-start">
       <div className="rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -505,7 +505,7 @@ export function LeakEstimator() {
         </div>
       </div>
 
-      <div className="light-panel flex h-full flex-col justify-between rounded-[8px] p-5 sm:p-7">
+      <div className="light-panel flex h-full flex-col justify-between rounded-[8px] p-5 sm:p-7 md:sticky md:top-24 md:self-start md:h-fit">
         <div>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-[11px] uppercase text-[#6b6c70]">
