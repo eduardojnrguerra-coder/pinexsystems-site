@@ -18,6 +18,27 @@ export const metadata = createPageMetadata({
   ],
 });
 
+const insightPriorities = [
+  {
+    title: "Lead control and follow-up",
+    description:
+      "For owners and managers trying to stop silent revenue loss before they spend more on marketing.",
+    href: "/lead-management-system",
+  },
+  {
+    title: "Owner visibility and dashboards",
+    description:
+      "For businesses that need live operational signals instead of delayed reporting and guesswork.",
+    href: "/owner-dashboard-system",
+  },
+  {
+    title: "Operational leakage and bottlenecks",
+    description:
+      "For teams trying to understand where poor process control is hurting throughput, profit, and accountability.",
+    href: "/business-loss-calculator",
+  },
+];
+
 export default function InsightsPage() {
   return (
     <div className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.14),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)]">
@@ -35,6 +56,24 @@ export default function InsightsPage() {
 
       <div className="mt-10">
         <InsightsExplorer articles={insightArticles} />
+      </div>
+
+      <div className="mt-12 grid gap-5 lg:grid-cols-3">
+        {insightPriorities.map((priority) => (
+          <article key={priority.title} className="glass-card p-6">
+            <h2 className="font-heading text-2xl font-semibold text-[#111111]">
+              {priority.title}
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-[#555962] sm:text-base">
+              {priority.description}
+            </p>
+            <div className="mt-5">
+              <Link href={priority.href} className="inline-link inline-flex">
+                Explore related page
+              </Link>
+            </div>
+          </article>
+        ))}
       </div>
 
       <div className="mt-12 grid gap-5 md:grid-cols-2">

@@ -1812,6 +1812,186 @@ seoPages.push(
   },
 );
 
+seoPages.push({
+  slug: "farm-operations-dashboard",
+  pageTitle: "Farm Operations Dashboard South Africa",
+  metaDescription:
+    "Farm operations dashboard South Africa guide covering field activity, labour visibility, input stock tracking, equipment logs, and owner reporting.",
+  purpose:
+    "Explain how farms and agricultural operations can use dashboards, task tracking, resource visibility, and reporting to improve control.",
+  targetKeywords: [
+    "farm operations dashboard",
+    "farm management dashboard South Africa",
+    "agriculture operations system",
+    "farm workflow system",
+  ],
+  heroTitle: "Farm Operations Dashboard South Africa",
+  heroSummary:
+    "A farm operations dashboard helps owners and managers see field activity, labour deployment, input stock, equipment status, and production risk from one practical control layer.",
+  comparisonPoints: [
+    {
+      heading: "Farms run on timing, not only on data capture",
+      content:
+        "When irrigation, spraying, harvesting, transport, and labour tasks are tracked informally, delays create expensive ripple effects. A dashboard helps management respond before small gaps become costly setbacks.",
+    },
+    {
+      heading: "Resource visibility protects operating discipline",
+      content:
+        "Farms need better control over inputs, equipment usage, field activity, and daily progress. That visibility should be available without waiting for several manual updates.",
+    },
+    {
+      heading: "Owner reporting should be useful in the middle of the week",
+      content:
+        "A farm workflow system becomes far more valuable when it gives owners live operational signals instead of after-the-fact summaries.",
+    },
+  ],
+  practicalSections: [
+    {
+      heading: "Modules farms usually need first",
+      paragraphs: [
+        "A practical agriculture operations system often starts with field task tracking, team assignment, equipment status, input stock visibility, and owner reporting. Those modules create a shared operational picture without forcing the farm into unnecessary complexity.",
+        "As the system matures, workflows can expand into harvest planning, dispatch tracking, maintenance scheduling, and supplier coordination.",
+      ],
+      bullets: [
+        "Field and block activity tracking",
+        "Labour and team visibility",
+        "Input stock and reorder control",
+        "Equipment maintenance logs",
+        "Owner dashboard summaries",
+      ],
+    },
+    {
+      heading: "Why this matters for South African farm operations",
+      paragraphs: [
+        "South African farm teams often work across distance, changing weather windows, and time-sensitive production cycles. Weak visibility creates avoidable pressure because managers cannot see where work is delayed or resources are under strain quickly enough.",
+        "A farm operations dashboard improves response speed and helps owners make better decisions about labour, inputs, and daily priorities.",
+      ],
+      bullets: [
+        "Earlier detection of operational delays",
+        "Stronger control over inputs and field execution",
+        "Cleaner communication between managers and teams",
+        "Better owner-level visibility without daily chasing",
+      ],
+    },
+  ],
+  ownerBenefits: [
+    "One view across field activity, labour, and resource risk",
+    "Less dependence on fragmented updates from different teams",
+    "Faster response to delays and shortages",
+    "A clearer operational baseline for growth and planning",
+  ],
+  ctaHeading: "Need a farm dashboard built around your real operation?",
+  ctaBody:
+    "Book a discovery call and we will map the first visibility and workflow layers your farm would benefit from most.",
+  faqs: [
+    {
+      question: "Can this work for different farm sizes?",
+      answer:
+        "Yes. The system can start with a focused dashboard and workflow layer, then grow as operational complexity increases.",
+    },
+    {
+      question: "Can field teams use simpler views than owners?",
+      answer:
+        "Yes. Role-based views can keep owner dashboards strategic while giving field teams simple execution-focused screens.",
+    },
+    {
+      question: "Can this include maintenance and stock control?",
+      answer:
+        "Yes. Equipment logs, input stock visibility, and reorder alerts can be part of the wider farm operations system.",
+    },
+  ],
+});
+
+seoPages.push({
+  slug: "service-business-job-tracking-system",
+  pageTitle: "Service Business Job Tracking System",
+  metaDescription:
+    "Service business job tracking system for teams that need clearer task ownership, booking flow, job status visibility, approvals, and owner reporting.",
+  purpose:
+    "Explain how service businesses can use job tracking, role-based dashboards, and workflow visibility to improve delivery control.",
+  targetKeywords: [
+    "service business job tracking system",
+    "job tracking software for service business",
+    "service workflow system",
+    "operations dashboard for service business",
+  ],
+  heroTitle: "Service Business Job Tracking System",
+  heroSummary:
+    "A service business job tracking system keeps bookings, active work, approvals, overdue tasks, customer updates, and owner reporting connected in one operational flow.",
+  comparisonPoints: [
+    {
+      heading: "Service delivery breaks when status is informal",
+      content:
+        "When jobs are managed through calls, chats, or scattered spreadsheets, nobody sees quickly enough what is waiting, what is blocked, or what is overdue.",
+    },
+    {
+      heading: "Managers need queue visibility, not only a to-do list",
+      content:
+        "A useful service workflow system shows queue pressure, handovers, team load, and bottlenecks so managers can act before service quality drops.",
+    },
+    {
+      heading: "Owners need delivery control without micromanaging",
+      content:
+        "An owner-facing dashboard summarises workload, blocked items, turnaround pressure, and reporting signals without forcing the owner into every small detail.",
+    },
+  ],
+  practicalSections: [
+    {
+      heading: "Core modules service businesses usually include",
+      paragraphs: [
+        "The first layer often includes bookings or requests, job or task stages, assignee ownership, approvals, customer update triggers, and owner reporting. Those modules improve consistency without overcomplicating the day-to-day process.",
+        "As the system evolves, businesses can add client portals, billing triggers, stock usage, or deeper team performance visibility depending on their service model.",
+      ],
+      bullets: [
+        "Bookings or work-request capture",
+        "Job status and queue visibility",
+        "Assignee ownership and handovers",
+        "Approval and escalation workflows",
+        "Owner reporting dashboards",
+      ],
+    },
+    {
+      heading: "Where job tracking improves control fastest",
+      paragraphs: [
+        "Many service businesses feel the first gain in cleaner handovers and fewer missed follow-ups. Teams spend less time asking for updates because the system already shows where the work sits and who owns the next action.",
+        "That clearer flow often improves both client confidence and internal accountability at the same time.",
+      ],
+      bullets: [
+        "Fewer missed or delayed jobs",
+        "Cleaner communication with clients",
+        "Better manager oversight of active workload",
+        "More reliable owner-level reporting",
+      ],
+    },
+  ],
+  ownerBenefits: [
+    "A single view of active work, queue pressure, and blocked jobs",
+    "Less manual chasing for updates across the team",
+    "Better service consistency and handover discipline",
+    "Stronger visibility into where delays are hurting delivery",
+  ],
+  ctaHeading: "Need a service workflow system built around how your team actually works?",
+  ctaBody:
+    "Request a discovery call and we will map the job tracking, approvals, and dashboard layers your service operation needs first.",
+  faqs: [
+    {
+      question: "Can this work for small service teams?",
+      answer:
+        "Yes. Small teams often benefit quickly because visibility and ownership reduce context switching and repeated chasing.",
+    },
+    {
+      question: "Can managers and staff see different levels of detail?",
+      answer:
+        "Yes. Role-based views can keep staff focused on execution while managers and owners see broader workload and exception reporting.",
+    },
+    {
+      question: "Can this connect to client updates or invoicing later?",
+      answer:
+        "Yes. Many businesses start with job control first, then add client-facing updates, billing triggers, or reporting automation over time.",
+    },
+  ],
+});
+
 export const seoPageMap = Object.fromEntries(
   seoPages.map((page) => [page.slug, page]),
 ) as Record<string, SeoPage>;

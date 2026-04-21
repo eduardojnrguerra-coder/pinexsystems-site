@@ -9,8 +9,48 @@ interface InsightArticleProps {
   article: InsightArticle;
 }
 
+function getSupportLinks(article: InsightArticle) {
+  const shared = [
+    { label: "Use the business loss calculator", href: "/business-loss-calculator" },
+    { label: "View Pine X services", href: "/services" },
+    { label: "Open interactive demos", href: "/demos" },
+    { label: "Book a discovery call", href: "/contact#lead-form" },
+  ];
+
+  if (article.category.includes("Dealership")) {
+    return [
+      { label: "Dealership system page", href: "/dealership-management-system-south-africa" },
+      { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
+      ...shared,
+    ];
+  }
+
+  if (article.category.includes("Workshop")) {
+    return [
+      { label: "Workshop system page", href: "/workshop-management-system" },
+      { label: "Lead management systems", href: "/lead-management-system" },
+      ...shared,
+    ];
+  }
+
+  if (article.category.includes("Lead")) {
+    return [
+      { label: "Lead management systems", href: "/lead-management-system" },
+      { label: "Custom CRM systems", href: "/custom-crm-south-africa" },
+      ...shared,
+    ];
+  }
+
+  return [
+    { label: "Custom business systems guide", href: "/business-systems" },
+    { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
+    ...shared,
+  ];
+}
+
 export function InsightArticleView({ article }: InsightArticleProps) {
   const midPointIndex = Math.max(1, Math.floor(article.blocks.length / 2));
+  const supportLinks = getSupportLinks(article);
 
   return (
     <>
@@ -34,7 +74,34 @@ export function InsightArticleView({ article }: InsightArticleProps) {
             <span>Published {article.publishedAt}</span>
             <span>Updated {article.updatedAt}</span>
           </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {article.keywords.slice(0, 5).map((keyword) => (
+              <span
+                key={keyword}
+                className="rounded-full border border-[#111111]/10 bg-white px-3 py-1.5 text-xs font-medium text-[#555962]"
+              >
+                {keyword}
+              </span>
+            ))}
+          </div>
         </header>
+
+        <section className="mx-auto mt-8 max-w-4xl rounded-[8px] border border-[#111111]/10 bg-white p-6 shadow-[0_18px_45px_rgba(17,17,17,0.06)] sm:p-8">
+          <h2 className="font-heading text-2xl font-semibold text-[#111111]">
+            Next useful pages if this problem sounds familiar
+          </h2>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {supportLinks.map((link) => (
+              <Link
+                key={link.href + link.label}
+                href={link.href}
+                className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3 text-sm font-medium text-[#3d4147] transition hover:border-[#111111]/25 hover:text-[#111111]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <div className="mx-auto mt-8 max-w-4xl space-y-6">
           {article.blocks.map((block, index) => (

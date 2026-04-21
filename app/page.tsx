@@ -1,14 +1,12 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  BarChart3,
   CheckCircle2,
   ChevronRight,
   ClipboardList,
   Gauge,
   Target,
   TrendingUp,
-  Users,
 } from "lucide-react";
 
 import { DemoCardGrid } from "@/components/demos/DemoCardGrid";
@@ -95,6 +93,76 @@ const howItWorks = [
     step: "4",
     title: "Launch & Improve",
     description: "The system goes live, the team is trained, and the control layer evolves with the business.",
+  },
+];
+
+const trustBlocks = [
+  {
+    icon: Target,
+    title: "What owners usually fix first",
+    description:
+      "Most projects start by closing the most expensive leak first: missed leads, weak follow-up, delayed job visibility, or manual reporting pressure.",
+    points: [
+      "Missed or stale enquiries",
+      "No clear task ownership",
+      "Slow reporting to owners",
+    ],
+  },
+  {
+    icon: ClipboardList,
+    title: "What the first system usually includes",
+    description:
+      "We focus the first Pine X build around one working control layer instead of trying to digitise the whole business in one jump.",
+    points: [
+      "Role-based dashboards",
+      "Workflow stages and handovers",
+      "Alerts, reminders, and audit history",
+    ],
+  },
+  {
+    icon: Gauge,
+    title: "What happens after launch",
+    description:
+      "You do not get abandoned with a login and a hope. We refine the reporting, tighten the process, and help the team settle into the new operating rhythm.",
+    points: [
+      "Team onboarding support",
+      "Iterative module improvement",
+      "Owner visibility tuned over time",
+    ],
+  },
+];
+
+const typicalImpact = [
+  {
+    title: "Lead control example",
+    description:
+      "A business with scattered WhatsApp enquiries usually starts by centralising lead capture, assigning ownership, and tracking overdue follow-up visibly.",
+    href: "/lead-management-system",
+    label: "Lead management systems",
+  },
+  {
+    title: "Operations control example",
+    description:
+      "A workshop or contractor often needs job progress, delayed items, and blocked work surfaced in one place before management can improve throughput.",
+    href: "/business-loss-calculator",
+    label: "Use the loss calculator",
+  },
+  {
+    title: "Owner visibility example",
+    description:
+      "Owners usually want one trusted view of pipeline, workload, exceptions, and reporting so they can act earlier instead of waiting for manual updates.",
+    href: "/owner-dashboard-system",
+    label: "See owner dashboard pages",
+  },
+];
+
+const strategicLinks = [
+  { label: "Custom business systems", href: "/business-systems" },
+  { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
+  { label: "Workshop management systems", href: "/workshop-management-system" },
+  {
+    label: "Dealership systems in South Africa",
+    href: "/dealership-management-system-south-africa",
   },
 ];
 
@@ -291,6 +359,134 @@ export default function HomePage() {
             <Link href="/services" className="inline-flex items-center gap-2 text-sm font-semibold text-[#111111]">
               View All Services <ArrowRight className="h-4 w-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-[#d9d9d1] bg-[#F7F7F2] py-16 sm:py-20">
+        <div className="section-shell">
+          <Reveal>
+            <div className="mx-auto max-w-3xl text-center text-[#0b0c10]">
+              <SectionBadge>Trust Through Structure</SectionBadge>
+              <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight sm:text-4xl">
+                Pine X Systems Is Built Around Operational Control, Not Hype
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#555962] sm:text-lg">
+                We do not rely on vague transformation language. We map the
+                workflow, define the control points, and build the visibility
+                layer owners and managers actually need.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            {trustBlocks.map((block, index) => {
+              const Icon = block.icon;
+
+              return (
+                <Reveal key={block.title} delayMs={index * 45}>
+                  <article className="light-panel rounded-[8px] p-6">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-[8px] border border-[#111111]/10 bg-white">
+                      <Icon className="h-5 w-5 text-[#111111]" />
+                    </span>
+                    <h3 className="mt-5 font-heading text-xl font-semibold text-[#0b0c10]">
+                      {block.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-[#555962]">
+                      {block.description}
+                    </p>
+                    <ul className="mt-5 space-y-2 text-sm text-[#3d4147]">
+                      {block.points.map((point) => (
+                        <li
+                          key={point}
+                          className="rounded-[8px] border border-[#111111]/10 bg-white px-4 py-3"
+                        >
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+            <Reveal>
+              <article className="rounded-[8px] border border-[#111111]/10 bg-white p-6 shadow-[0_18px_50px_rgba(17,17,17,0.06)] sm:p-8">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-[#7b7e86]">
+                  Typical system impact
+                </p>
+                <h3 className="mt-3 font-heading text-2xl font-semibold text-[#111111] sm:text-3xl">
+                  Honest examples of where businesses usually feel the gain first
+                </h3>
+                <div className="mt-6 space-y-4">
+                  {typicalImpact.map((item) => (
+                    <div
+                      key={item.title}
+                      className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] p-4"
+                    >
+                      <h4 className="font-heading text-lg font-semibold text-[#111111]">
+                        {item.title}
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-[#555962]">
+                        {item.description}
+                      </p>
+                      <Link
+                        href={item.href}
+                        className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#111111]"
+                      >
+                        {item.label} <ChevronRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
+
+            <Reveal delayMs={80}>
+              <article className="light-panel rounded-[8px] p-6 sm:p-8">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-[#7b7e86]">
+                  Useful next steps
+                </p>
+                <h3 className="mt-3 font-heading text-2xl font-semibold text-[#111111]">
+                  Start with the pages most relevant to your business
+                </h3>
+                <div className="mt-6 grid gap-3">
+                  {strategicLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center justify-between rounded-[8px] border border-[#111111]/10 bg-white px-4 py-3 text-sm font-medium text-[#3d4147] transition hover:border-[#67E8F9]/40 hover:text-[#111111]"
+                    >
+                      <span>{link.label}</span>
+                      <ChevronRight className="h-4 w-4 text-[#67E8F9]" />
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-6 rounded-[8px] border border-[#111111]/10 bg-white p-4">
+                  <div className="flex items-start gap-3">
+                    <TrendingUp className="mt-0.5 h-5 w-5 text-[#111111]" />
+                    <div>
+                      <h4 className="font-heading text-base font-semibold text-[#111111]">
+                        Want a fast operational estimate first?
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-[#555962]">
+                        Use the business loss calculator to estimate where weak
+                        follow-up, manual admin, and process gaps may be costing
+                        you each month.
+                      </p>
+                      <Link
+                        href="/business-loss-calculator"
+                        className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#111111]"
+                      >
+                        Open the calculator <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           </div>
         </div>
       </section>

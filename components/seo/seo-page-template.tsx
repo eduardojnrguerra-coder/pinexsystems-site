@@ -11,7 +11,77 @@ interface SeoPageTemplateProps {
   page: SeoPage;
 }
 
+function getRelatedPaths(page: SeoPage) {
+  const sharedLinks = [
+    { label: "View Pine X services", href: "/services" },
+    { label: "Open interactive demos", href: "/demos" },
+    { label: "Use the business loss calculator", href: "/business-loss-calculator" },
+    { label: "Read insights for owners", href: "/insights" },
+    { label: "Book a discovery call", href: "/contact#lead-form" },
+  ];
+
+  if (page.slug.includes("workshop")) {
+    return [
+      { label: "Workshop insight article", href: "/insights/how-workshops-can-use-job-card-systems" },
+      { label: "Workshop industry page", href: "/industries" },
+      ...sharedLinks,
+    ];
+  }
+
+  if (page.slug.includes("dealership")) {
+    return [
+      {
+        label: "Dealership insight article",
+        href: "/insights/how-car-dealerships-can-track-leads-and-stock-better",
+      },
+      { label: "Lead management systems", href: "/lead-management-system" },
+      ...sharedLinks,
+    ];
+  }
+
+  if (page.slug.includes("lead") || page.slug.includes("crm")) {
+    return [
+      {
+        label: "Lead follow-up insight article",
+        href: "/insights/how-to-get-more-leads-without-losing-follow-up",
+      },
+      { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
+      ...sharedLinks,
+    ];
+  }
+
+  if (page.slug.includes("construction")) {
+    return [
+      { label: "Construction industry page", href: "/industries" },
+      {
+        label: "Operational bottlenecks article",
+        href: "/insights/how-operational-bottlenecks-quietly-hurt-profit",
+      },
+      ...sharedLinks,
+    ];
+  }
+
+  if (page.slug.includes("warehouse")) {
+    return [
+      { label: "Industries we support", href: "/industries" },
+      {
+        label: "Business systems guide",
+        href: "/business-systems",
+      },
+      ...sharedLinks,
+    ];
+  }
+
+  return [
+    { label: "Custom business systems guide", href: "/business-systems" },
+    { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
+    ...sharedLinks,
+  ];
+}
+
 export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
+  const relatedPaths = getRelatedPaths(page);
+
   return (
     <>
       <SchemaScript data={servicePageSchema(page)} />
@@ -44,6 +114,25 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
                 </p>
               </article>
             ))}
+          </div>
+
+          <div className="mt-8 rounded-[8px] border border-[#111111]/10 bg-white p-6 shadow-[0_18px_45px_rgba(17,17,17,0.06)] sm:p-8">
+            <p className="text-[11px] uppercase tracking-[0.16em] text-[#7b7e86]">
+              What this page is helping you evaluate
+            </p>
+            <p className="mt-3 max-w-4xl text-sm leading-7 text-[#555962] sm:text-base">
+              {page.purpose}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {page.targetKeywords.slice(0, 4).map((keyword) => (
+                <span
+                  key={keyword}
+                  className="rounded-full border border-[#111111]/10 bg-[#F7F7F2] px-3 py-2 text-xs font-medium text-[#555962]"
+                >
+                  {keyword}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -108,6 +197,30 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
                 See Demo Systems
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell pb-12 sm:pb-16">
+        <div className="rounded-[8px] border border-[#111111]/10 bg-white p-6 shadow-[0_18px_45px_rgba(17,17,17,0.06)] sm:p-8">
+          <h2 className="font-heading text-2xl font-semibold text-[#111111] sm:text-3xl">
+            Related pages that help you evaluate the next move
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#555962] sm:text-base">
+            If this keyword matches the pressure in your business, these pages will
+            help you compare options, see examples, and move toward a practical
+            first step.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedPaths.map((link) => (
+              <Link
+                key={link.href + link.label}
+                href={link.href}
+                className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3 text-sm font-medium text-[#3d4147] transition hover:border-[#111111]/25 hover:text-[#111111]"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -589,23 +589,20 @@ export const demoPageCards: DemoCard[] = [
   },
 ];
 
-export const testimonials = [
+export const exampleOutcomeSnapshots = [
   {
-    quote:
-      "This system gave us visibility we never had before. I can see leads, jobs, and revenue from my phone anywhere.",
-    role: "Business Owner",
-    company: "Car Dealership",
+    title: "Lead control outcome",
+    summary:
+      "A typical first win is clearer lead ownership, faster follow-up, and less silent revenue loss across WhatsApp, calls, and web enquiries.",
   },
   {
-    quote:
-      "Our follow-ups became faster and cleaner. Customers actually compliment us on how organised we are now.",
-    role: "Operations Manager",
-    company: "Workshop Group",
+    title: "Operations visibility outcome",
+    summary:
+      "Many teams gain control by surfacing blocked work, overdue actions, and status changes in one role-based workflow instead of scattered updates.",
   },
   {
-    quote:
-      "We finally had one place to manage the business. The owner dashboard alone was worth it.",
-    role: "Managing Director",
-    company: "Contracting Company",
+    title: "Owner reporting outcome",
+    summary:
+      "Owners usually feel the gain when reporting becomes visible daily, not only after manual consolidation at week-end or month-end.",
   },
 ];

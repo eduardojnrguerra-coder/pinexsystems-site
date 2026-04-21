@@ -98,7 +98,7 @@ export function LeadForm({
     }
 
     setStatus(
-      "Thanks. We opened WhatsApp with your details. If WhatsApp does not open, your email app will be used as fallback.",
+      "Thanks. We opened WhatsApp with your details. If WhatsApp does not open, your email app will be used as fallback. We aim to respond within one business day.",
     );
     setForm(initialState);
   };
@@ -291,7 +291,7 @@ export function LeadForm({
         </form>
 
         <p className={`mt-3 text-sm ${isLight ? "text-[#6b6f77]" : "text-neutral-500"}`}>
-          No spam. No obligation. We only contact you about your demo request.
+          No spam. No hard sell. We only contact you about your demo request and the workflow problem you described.
         </p>
         {status ? (
           <p className="mt-2 text-sm text-[var(--accent)]" role="status">
