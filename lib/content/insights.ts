@@ -1583,6 +1583,459 @@ insightArticles.push({
   ],
 });
 
+insightArticles.push({
+  slug: "why-workshops-lose-money-through-poor-job-tracking",
+  title: "Why Workshops Lose Money Through Poor Job Tracking",
+  description:
+    "A practical look at how weak job tracking reduces workshop throughput, customer trust, and margin without always looking dramatic day to day.",
+  category: "Workshop Systems",
+  publishedAt: "2026-04-21",
+  updatedAt: "2026-04-21",
+  readingTime: "8 min read",
+  keywords: [
+    "why workshops lose money",
+    "poor job tracking workshop",
+    "job card system South Africa",
+    "workshop management system",
+  ],
+  middleCta: {
+    heading: "Want to see what cleaner workshop flow looks like?",
+    body: "Open the workshop demo and compare that flow with how jobs are currently moving through your business.",
+    primaryLabel: "View Workshop Demo",
+    primaryHref: "/demos/workshop",
+    secondaryLabel: "Workshop system page",
+    secondaryHref: "/workshop-management-system",
+  },
+  endCta: {
+    heading: "Fix the handover layer before the queue gets worse",
+    body: "Pine X Systems can map the booking, job card, parts, and reporting flow your workshop needs first.",
+    primaryLabel: "Book A Discovery Call",
+    primaryHref: "/contact",
+  },
+  blocks: [
+    {
+      heading: "Workshops lose margin in the handover gaps",
+      paragraphs: [
+        "Most workshops do not lose money because technicians suddenly stop working. They lose money in the smaller coordination failures between booking, diagnosis, approval, repair, quality check, and invoicing. When that flow is weak, vehicles wait longer, advisors answer more status calls, and invoicing gets delayed.",
+        "Poor job tracking makes those gaps hard to see. The team feels busy, but managers and owners cannot tell quickly enough where jobs are actually blocked or who owns the next step.",
+      ],
+      bullets: [
+        "Vehicles waiting for approval too long",
+        "Technicians unclear on next job priority",
+        "Parts delays discovered too late",
+        "Advisors repeatedly chasing updates",
+      ],
+    },
+    {
+      heading: "A job card should control flow, not only store notes",
+      paragraphs: [
+        "When a job card is only a record of work done, the workshop still relies on memory and verbal updates for execution. A useful job card system shows stage, owner, timing, notes, parts, and customer-update status in one workflow record.",
+        "That makes the job card operationally useful. It becomes the place where the next action is clear, not only the place where the previous action was written down.",
+      ],
+    },
+    {
+      heading: "Why owners should care about job tracking daily",
+      paragraphs: [
+        "Weak job tracking affects more than workshop admin. It affects throughput, customer confidence, staff accountability, and invoice timing. If owners only see completed jobs and total revenue, they miss the operational pressure building underneath.",
+        "An owner view should highlight delayed jobs, waiting approvals, technician load, parts pressure, and invoice-ready work. Those are the signals that help management improve flow before customers complain.",
+      ],
+      bullets: [
+        "Delayed jobs by stage",
+        "Jobs waiting on parts or approval",
+        "Technician workload imbalance",
+        "Invoice-ready work not yet closed",
+      ],
+    },
+    {
+      heading: "What workshops usually improve first",
+      paragraphs: [
+        "The first win is usually cleaner visibility across the live queue. Once advisors and technicians trust the system, customer updates become easier, handovers improve, and management can finally see where the real delay sits.",
+        "That is why poor job tracking is more expensive than it first appears. It quietly damages speed, confidence, and margin at the same time.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Can small workshops benefit from better job tracking?",
+      answer:
+        "Yes. Even small workshops feel the gain quickly because fewer handovers get lost and managers can see blocked work more clearly.",
+    },
+    {
+      question: "Is this only about replacing paper job cards?",
+      answer:
+        "No. The bigger value is creating a visible workflow with ownership, timing, and customer-update discipline.",
+    },
+    {
+      question: "Should owners see technician-level detail?",
+      answer:
+        "Owners usually need a summary of pressure points, while managers can use deeper technician and queue visibility to run daily flow.",
+    },
+  ],
+  relatedLinks: [
+    { label: "Workshop management system", href: "/workshop-management-system" },
+    { label: "Job card system South Africa", href: "/job-card-system-south-africa" },
+    { label: "Business loss calculator", href: "/business-loss-calculator" },
+    { label: "Workshop demo", href: "/demos/workshop" },
+  ],
+});
+
+insightArticles.push({
+  slug: "what-a-dealership-owner-dashboard-should-show-daily",
+  title: "What A Dealership Owner Dashboard Should Show Daily",
+  description:
+    "The most useful daily signals for dealership owners: lead response speed, stock age, finance-stage pressure, overdue follow-up, and conversion health.",
+  category: "Dealership Systems",
+  publishedAt: "2026-04-21",
+  updatedAt: "2026-04-21",
+  readingTime: "7 min read",
+  keywords: [
+    "dealership owner dashboard",
+    "what dealership dashboard should show",
+    "dealership management system South Africa",
+    "owner dashboard for business",
+  ],
+  middleCta: {
+    heading: "Want to compare these signals with a live demo?",
+    body: "The dealership demo shows how owner, manager, and salesperson views can change the operational picture meaningfully.",
+    primaryLabel: "Open Dealership Demo",
+    primaryHref: "/demos/dealership",
+    secondaryLabel: "Dealership system page",
+    secondaryHref: "/dealership-management-system-south-africa",
+  },
+  endCta: {
+    heading: "Build a dealership dashboard around the signals that matter",
+    body: "Pine X Systems can map the lead, stock, finance, and owner reporting layer your dealership needs first.",
+    primaryLabel: "Book A Discovery Call",
+    primaryHref: "/contact",
+  },
+  blocks: [
+    {
+      heading: "Owners need leading indicators, not only month-end totals",
+      paragraphs: [
+        "A dealership owner dashboard should help management act before the month is lost. That means showing leading indicators such as response speed, overdue follow-up, aging leads, stock age, and finance-stage pressure rather than only final revenue numbers.",
+        "Those earlier signals help owners spot where process discipline is slipping and where management attention should go today, not next month.",
+      ],
+      bullets: [
+        "Time to first response",
+        "Overdue lead follow-up",
+        "Lead age by stage",
+        "Stock age and stagnant units",
+        "Finance application progression",
+      ],
+    },
+    {
+      heading: "Stock and lead data should talk to each other",
+      paragraphs: [
+        "Dealerships often separate vehicle stock and lead flow into different systems or spreadsheets. That creates slower decision-making because owners cannot see whether aged stock has enough activity behind it or whether high-interest units are being followed up fast enough.",
+        "A stronger dashboard connects lead activity to stock context so pricing, promotion, and follow-up priorities become easier to judge.",
+      ],
+    },
+    {
+      heading: "Managers and owners should not see the same dashboard",
+      paragraphs: [
+        "Managers usually need a deeper operational view of salesperson queues, missed actions, and stage movement. Owners often need a cleaner summary of exceptions, branch patterns, and performance pressure. Both views matter, but they should not be identical.",
+        "That role-based split makes the dashboard more practical because each user sees the level of detail they can act on effectively.",
+      ],
+    },
+    {
+      heading: "What changes when the dashboard is useful",
+      paragraphs: [
+        "When the dashboard reflects real dealership flow, managers coach earlier, salespeople receive clearer priorities, and owners stop waiting for manually compiled status reports. That creates better control over both conversion and stock movement.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Should the dashboard include branch comparisons?",
+      answer:
+        "Yes, if the dealership has more than one team or branch. Comparison views help owners spot outliers in follow-up and stock performance.",
+    },
+    {
+      question: "Is revenue enough for an owner dashboard?",
+      answer:
+        "No. Revenue is important, but leading indicators like overdue follow-up, lead aging, and stock age are what help owners intervene early.",
+    },
+    {
+      question: "Can the same dashboard support managers too?",
+      answer:
+        "Yes, but usually through role-based views that give managers deeper queue and salesperson detail than the owner needs.",
+    },
+  ],
+  relatedLinks: [
+    { label: "Dealership management system South Africa", href: "/dealership-management-system-south-africa" },
+    { label: "Owner dashboard system", href: "/owner-dashboard-system" },
+    { label: "Dealership demo", href: "/demos/dealership" },
+    { label: "Business loss calculator", href: "/business-loss-calculator" },
+  ],
+});
+
+insightArticles.push({
+  slug: "signs-your-business-is-leaking-money-operationally",
+  title: "Signs Your Business Is Leaking Money Operationally",
+  description:
+    "The early warning signs that poor follow-up, weak workflow control, and delayed reporting are quietly hurting profit and decision quality.",
+  category: "Operations",
+  publishedAt: "2026-04-21",
+  updatedAt: "2026-04-21",
+  readingTime: "7 min read",
+  keywords: [
+    "signs your business is leaking money operationally",
+    "operational leakage signs",
+    "business loss calculator",
+    "operations dashboard for business",
+  ],
+  middleCta: {
+    heading: "Want to estimate the scale of the leakage?",
+    body: "The business loss calculator helps put numbers to the missed follow-up and admin waste pressure many owners already feel.",
+    primaryLabel: "Open The Calculator",
+    primaryHref: "/business-loss-calculator",
+    secondaryLabel: "Read operations pages",
+    secondaryHref: "/operations-dashboard-for-business",
+  },
+  endCta: {
+    heading: "Turn the warning signs into a practical first fix",
+    body: "Once you know where the leakage is likely happening, the next step is mapping the workflow, ownership, and reporting layer around it.",
+    primaryLabel: "Book A Discovery Call",
+    primaryHref: "/contact",
+  },
+  blocks: [
+    {
+      heading: "The first sign is that the business feels busy but unclear",
+      paragraphs: [
+        "Teams are working, messages are moving, and customers are being handled, yet nobody feels fully confident about where things stand. That usually means the business has activity without enough visibility or control.",
+        "Operational leakage often hides inside this feeling of constant movement without enough clarity.",
+      ],
+      bullets: [
+        "Managers spend the day chasing status updates",
+        "Owners do not fully trust the report they receive",
+        "Staff rely on memory for the next action",
+      ],
+    },
+    {
+      heading: "Missed follow-up is one of the clearest warning signs",
+      paragraphs: [
+        "If leads, quotes, approvals, or customer updates are inconsistent, the business is almost certainly leaking money operationally. The reason is simple: good opportunities cool down while the business assumes it is still busy.",
+        "This affects both revenue and trust because customers feel the delay long before the business sees it in the numbers.",
+      ],
+    },
+    {
+      heading: "Delayed reporting usually means delayed decisions",
+      paragraphs: [
+        "When owners only get clarity after someone manually compiles updates, the business is already reacting too late. That does not only create stress. It also means problems grow for longer before someone takes action.",
+        "This is why dashboards and workflow visibility matter. They reduce the time between operational risk and management response.",
+      ],
+    },
+    {
+      heading: "What to do when these signs are present",
+      paragraphs: [
+        "Start with the workflow where delay is recurring and expensive. That may be lead handling, job tracking, approvals, stock control, or reporting. Then build the simplest possible control layer around it: ownership, stages, alerts, and a dashboard.",
+        "You do not need to systemise everything at once. You need to stop the leak that is hurting the business first.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Can operational leakage exist even if sales are still coming in?",
+      answer:
+        "Yes. A business can still grow while leaking money through weak follow-up, delays, repeated admin, and poor visibility.",
+    },
+    {
+      question: "Is reporting delay really that serious?",
+      answer:
+        "Yes. If owners discover problems late, they lose the chance to intervene while the issue is still manageable.",
+    },
+    {
+      question: "What is the best first tool to use?",
+      answer:
+        "The calculator is a good first step because it helps estimate the scale of the problem before you decide what system layer to build.",
+    },
+  ],
+  relatedLinks: [
+    { label: "Business loss calculator", href: "/business-loss-calculator" },
+    { label: "Operations dashboard for business", href: "/operations-dashboard-for-business" },
+    { label: "Owner dashboard system", href: "/owner-dashboard-system" },
+    { label: "Contact Pine X Systems", href: "/contact" },
+  ],
+});
+
+insightArticles.push({
+  slug: "what-a-custom-business-system-should-actually-include",
+  title: "What A Custom Business System Should Actually Include",
+  description:
+    "A practical guide to the modules, visibility layers, and workflow controls that make custom business systems genuinely useful instead of decorative.",
+  category: "Business Systems",
+  publishedAt: "2026-04-21",
+  updatedAt: "2026-04-21",
+  readingTime: "8 min read",
+  keywords: [
+    "what a custom business system should include",
+    "custom business systems South Africa",
+    "owner dashboard system",
+    "workflow control software",
+  ],
+  middleCta: {
+    heading: "Want to see the modules in a real flow?",
+    body: "Explore demos and keyword pages to compare how dashboards, workflows, approvals, and reporting fit different industries.",
+    primaryLabel: "Open Demo Systems",
+    primaryHref: "/demos",
+    secondaryLabel: "Business systems page",
+    secondaryHref: "/business-systems",
+  },
+  endCta: {
+    heading: "Build the first control layer instead of buying more disconnected tools",
+    body: "Pine X Systems can help identify the exact dashboards, workflow stages, and alerts your business should start with.",
+    primaryLabel: "Book A Discovery Call",
+    primaryHref: "/contact",
+  },
+  blocks: [
+    {
+      heading: "A custom business system should reflect real business flow",
+      paragraphs: [
+        "The best custom systems are not built around a feature list. They are built around the real movement of work through the business: enquiries, approvals, job execution, stock, reporting, and owner decisions.",
+        "If the system does not mirror that reality, the team will create workarounds outside it, and the reporting layer will become unreliable again.",
+      ],
+      bullets: [
+        "A visible workflow with clear stages",
+        "Role-based ownership of next actions",
+        "Dashboard views for owners and managers",
+        "Alerts for overdue or blocked work",
+      ],
+    },
+    {
+      heading: "The first system does not need every module at once",
+      paragraphs: [
+        "Many businesses assume a custom system must include everything from day one. In practice, the best first build usually focuses on one high-pressure area and connects only the modules needed to control it properly.",
+        "That could mean lead management plus owner reporting, or booking and job cards plus queue visibility, or stock alerts plus dispatch tracking. The point is to solve a real bottleneck first.",
+      ],
+    },
+    {
+      heading: "What strong systems usually include",
+      paragraphs: [
+        "Most effective builds include a dashboard layer, workflow stages, assignment logic, exception alerts, and a reporting layer. From there, the system can grow into approvals, portals, automation, stock control, or deeper analytics depending on the business.",
+        "The system becomes valuable when these modules work together rather than existing as isolated screens.",
+      ],
+    },
+    {
+      heading: "What to avoid",
+      paragraphs: [
+        "Avoid overbuilding, vanity dashboards, and copying generic software structure that does not match how the business operates. A custom system should reduce friction, not create a more expensive version of the same confusion.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Should every business start with a full platform?",
+      answer:
+        "No. Most businesses get better results by systemising one expensive workflow first and expanding from there.",
+    },
+    {
+      question: "Do we need dashboards from the start?",
+      answer:
+        "Usually yes, but they should focus on the core signals that help owners and managers act early rather than trying to show everything.",
+    },
+    {
+      question: "Can the system keep some existing tools?",
+      answer:
+        "Yes. The goal is better control and visibility, not replacing useful tools unnecessarily.",
+    },
+  ],
+  relatedLinks: [
+    { label: "Custom business systems South Africa", href: "/business-systems" },
+    { label: "Services page", href: "/services" },
+    { label: "Owner dashboard system", href: "/owner-dashboard-system" },
+    { label: "Interactive demos", href: "/demos" },
+  ],
+});
+
+insightArticles.push({
+  slug: "how-owner-visibility-improves-operational-control",
+  title: "How Owner Visibility Improves Operational Control",
+  description:
+    "Why owner visibility is not micromanagement, and how the right dashboard and workflow signals improve control without drowning leadership in detail.",
+  category: "Owner Visibility",
+  publishedAt: "2026-04-21",
+  updatedAt: "2026-04-21",
+  readingTime: "7 min read",
+  keywords: [
+    "how owner visibility improves operational control",
+    "owner visibility",
+    "owner dashboard for business",
+    "operations dashboard for business",
+  ],
+  middleCta: {
+    heading: "Need better owner visibility without more reporting admin?",
+    body: "The owner dashboard and operations pages show how the right signals can replace fragmented status chasing.",
+    primaryLabel: "Owner dashboard page",
+    primaryHref: "/owner-dashboard-system",
+    secondaryLabel: "Operations dashboard page",
+    secondaryHref: "/operations-dashboard-for-business",
+  },
+  endCta: {
+    heading: "Give owners the right signals, not more noise",
+    body: "Pine X Systems can help define which workflow, pipeline, and exception signals leadership should actually see daily.",
+    primaryLabel: "Book A Discovery Call",
+    primaryHref: "/contact",
+  },
+  blocks: [
+    {
+      heading: "Owner visibility is about earlier decisions, not more interference",
+      paragraphs: [
+        "Many businesses treat owner visibility as if it automatically means micromanagement. In reality, poor visibility often causes more interference because owners only hear about issues late and then need to dive into operational detail to understand what happened.",
+        "The right visibility layer does the opposite. It gives leadership a cleaner view of risk, performance, and bottlenecks so they can act earlier with less disruption.",
+      ],
+    },
+    {
+      heading: "What owners actually need to see",
+      paragraphs: [
+        "Owners usually do not need every line item or every task note. They need signals such as stale leads, blocked jobs, queue pressure, stock risk, reporting lag, and major trend shifts. Those are the indicators that improve operational control.",
+        "Once those signals are visible, management conversations become sharper because everyone is responding to the same version of reality.",
+      ],
+      bullets: [
+        "Overdue or aging work",
+        "Workload and queue pressure",
+        "Follow-up and approval exceptions",
+        "Trend shifts that need attention",
+      ],
+    },
+    {
+      heading: "Why visibility improves accountability",
+      paragraphs: [
+        "When roles, stages, and exceptions are visible, managers can coach with more fairness and less guesswork. Staff are less likely to feel randomly chased because the process itself shows where work is waiting or overdue.",
+        "That creates a healthier form of accountability. The system supports the conversation instead of replacing it.",
+      ],
+    },
+    {
+      heading: "The practical gain for the business",
+      paragraphs: [
+        "Owner visibility shortens decision cycles, reduces reporting admin, and helps management intervene before small issues become expensive habits. That is why dashboard and workflow design matter so much in growing businesses.",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "Will better owner visibility make staff feel watched?",
+      answer:
+        "Not when the system is designed well. Good visibility focuses on workflow health and exceptions, not unnecessary surveillance.",
+    },
+    {
+      question: "Should owners and managers share the same dashboard?",
+      answer:
+        "Usually not. Owners often need a cleaner summary while managers need deeper execution detail.",
+    },
+    {
+      question: "Can owner visibility reduce reporting meetings?",
+      answer:
+        "Yes. If leadership can already see the most important signals, meetings become more about decisions and less about collecting updates.",
+    },
+  ],
+  relatedLinks: [
+    { label: "Owner dashboard system", href: "/owner-dashboard-system" },
+    { label: "Operations dashboard for business", href: "/operations-dashboard-for-business" },
+    { label: "Business systems page", href: "/business-systems" },
+    { label: "Contact Pine X Systems", href: "/contact" },
+  ],
+});
+
 export const insightArticleMap = Object.fromEntries(
   insightArticles.map((article) => [article.slug, article]),
 ) as Record<string, InsightArticle>;

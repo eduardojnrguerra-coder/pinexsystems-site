@@ -1992,6 +1992,186 @@ seoPages.push({
   ],
 });
 
+seoPages.push({
+  slug: "operations-dashboard-for-business",
+  pageTitle: "Operations Dashboard For Business",
+  metaDescription:
+    "Operations dashboard for business with live visibility into workflow bottlenecks, overdue actions, team load, lead pressure, and owner reporting.",
+  purpose:
+    "Explain what an operations dashboard should show, who it is for, and how it improves owner and manager control in real businesses.",
+  targetKeywords: [
+    "operations dashboard for business",
+    "operations dashboard",
+    "business operations dashboard",
+    "owner dashboard for business",
+  ],
+  heroTitle: "Operations Dashboard For Business",
+  heroSummary:
+    "An operations dashboard for business brings the most important live signals into one owner and manager view: workload pressure, overdue actions, blocked items, follow-up risk, and operational exceptions.",
+  comparisonPoints: [
+    {
+      heading: "A good dashboard shows pressure, not only totals",
+      content:
+        "Revenue totals and completed counts matter, but operations improve faster when managers can see blocked work, queue size, overdue actions, and stage delays early enough to respond.",
+    },
+    {
+      heading: "Dashboards should reflect your real workflow",
+      content:
+        "A workshop, warehouse, dealership, and contractor each need different operational signals. Generic templates miss the details that actually help management act.",
+    },
+    {
+      heading: "Owners and managers need different levels of detail",
+      content:
+        "Managers often need queue and workload visibility, while owners need a cleaner exception view and summary of what requires attention.",
+    },
+  ],
+  practicalSections: [
+    {
+      heading: "What to include on a useful operations dashboard",
+      paragraphs: [
+        "Most businesses benefit from a mix of volume, flow, and risk indicators. That usually means active workload, overdue items, waiting approvals, queue pressure, follow-up risk, and a small set of outcome metrics like conversion or throughput.",
+        "The most important rule is that every visible metric should support a decision. If the team cannot act on the number, it does not need prime dashboard space.",
+      ],
+      bullets: [
+        "Overdue tasks or jobs",
+        "Blocked or waiting items",
+        "Lead or booking follow-up pressure",
+        "Team workload distribution",
+        "Owner summary and exception alerts",
+      ],
+    },
+    {
+      heading: "Why operations dashboards improve control",
+      paragraphs: [
+        "Without a dashboard, managers often find problems too late because the signal is scattered across several people and tools. A live business operations dashboard shortens the time between risk and response.",
+        "That is what makes the dashboard valuable. It is not decoration. It is a practical control layer that helps the business respond sooner and more consistently.",
+      ],
+      bullets: [
+        "Earlier detection of bottlenecks",
+        "Better coaching and workload balancing",
+        "Cleaner owner visibility without manual chasing",
+        "More confidence in reporting quality",
+      ],
+    },
+  ],
+  ownerBenefits: [
+    "One trusted view of operational pressure",
+    "Faster decisions with less guesswork",
+    "Cleaner exception reporting for owners",
+    "Better manager visibility into queues and delays",
+  ],
+  ctaHeading: "Need an operations dashboard built around your business reality?",
+  ctaBody:
+    "Book a discovery call and we will map the live signals your owner and management team should be seeing first.",
+  faqs: [
+    {
+      question: "Is this different from a normal KPI dashboard?",
+      answer:
+        "Yes. An operations dashboard focuses on live flow, exceptions, delays, and workload pressure, not only high-level summary metrics.",
+    },
+    {
+      question: "Can dashboards show different views for owners and managers?",
+      answer:
+        "Yes. Role-based dashboards can keep the owner view clean while giving managers deeper queue and execution detail.",
+    },
+    {
+      question: "Can an operations dashboard connect to leads and jobs together?",
+      answer:
+        "Yes. Many businesses need one view that combines follow-up pressure, active work, and reporting signals across the operation.",
+    },
+  ],
+});
+
+seoPages.push({
+  slug: "job-card-system-south-africa",
+  pageTitle: "Job Card System South Africa",
+  metaDescription:
+    "Job card system South Africa for workshops and service teams that need booking flow, technician ownership, parts visibility, job status control, and invoice-ready history.",
+  purpose:
+    "Explain how digital job card systems help South African service businesses improve flow, accountability, and owner visibility.",
+  targetKeywords: [
+    "job card system South Africa",
+    "digital job card system",
+    "workshop job card system",
+    "service job tracking system",
+  ],
+  heroTitle: "Job Card System South Africa",
+  heroSummary:
+    "A job card system gives service businesses one operational flow from booking to execution, updates, quality control, and invoice-ready closeout.",
+  comparisonPoints: [
+    {
+      heading: "Paper and chat-based tracking slows service flow",
+      content:
+        "When status changes live in chats, paper notes, and memory, managers cannot see queue pressure or blocked work early enough to keep throughput healthy.",
+    },
+    {
+      heading: "A job card should be a workflow record, not only a note sheet",
+      content:
+        "A digital job card system connects assignment, timing, parts, approvals, notes, and customer updates so the whole team works from the same record.",
+    },
+    {
+      heading: "Owners need a summary view, not only a pile of individual jobs",
+      content:
+        "The wider system should also show delayed jobs, technician workload, parts pressure, and invoice-ready work so the owner can see where the operation needs help.",
+    },
+  ],
+  practicalSections: [
+    {
+      heading: "Core modules a job card system usually includes",
+      paragraphs: [
+        "A practical system starts with booking capture, check-in, diagnosis notes, technician assignment, job stages, parts requirements, and customer update milestones. These modules keep the flow visible from start to finish.",
+        "It can then expand into approvals, quality checks, invoicing triggers, branch-level reporting, and owner dashboards as the business grows.",
+      ],
+      bullets: [
+        "Booking and intake flow",
+        "Digital job card timeline",
+        "Technician ownership and stages",
+        "Parts and approval tracking",
+        "Invoice-ready job summaries",
+      ],
+    },
+    {
+      heading: "Where South African service teams feel the gain first",
+      paragraphs: [
+        "Most teams notice cleaner handovers and fewer status surprises quickly. Advisors spend less time chasing technicians, technicians get clearer next actions, and customers receive more consistent updates.",
+        "That combination improves both throughput and trust, which is why job card systems are often a high-value first step for workshops and service operations.",
+      ],
+      bullets: [
+        "Less confusion between front desk and floor",
+        "Cleaner customer communication",
+        "Better manager visibility into delays",
+        "Stronger owner reporting on active workload",
+      ],
+    },
+  ],
+  ownerBenefits: [
+    "One view of active jobs, delays, and blocked work",
+    "Better service consistency across the team",
+    "Cleaner invoice-ready histories and reporting",
+    "Earlier visibility into queue pressure and parts risk",
+  ],
+  ctaHeading: "Need a job card system designed around your service flow?",
+  ctaBody:
+    "Request a discovery call and we will map the booking, job, parts, and reporting stages your team needs first.",
+  faqs: [
+    {
+      question: "Can small workshops use a digital job card system?",
+      answer:
+        "Yes. Small teams often benefit quickly because it reduces handover confusion and improves daily visibility.",
+    },
+    {
+      question: "Can this work beyond automotive workshops?",
+      answer:
+        "Yes. Any service business with bookings, active jobs, approvals, and customer updates can adapt the same structure.",
+    },
+    {
+      question: "Can owners see a summary without checking every job?",
+      answer:
+        "Yes. Job card systems can feed owner dashboards that highlight delayed work, workload pressure, and invoice-ready items.",
+    },
+  ],
+});
+
 export const seoPageMap = Object.fromEntries(
   seoPages.map((page) => [page.slug, page]),
 ) as Record<string, SeoPage>;

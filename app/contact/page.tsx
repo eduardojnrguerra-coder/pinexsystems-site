@@ -54,6 +54,12 @@ const prepItems = [
   "Any current tools, spreadsheets, WhatsApp flows, or reports you rely on",
 ];
 
+const bestFitItems = [
+  "Businesses dealing with missed leads, delayed follow-up, or weak pipeline visibility",
+  "Operations-heavy teams with jobs, bookings, approvals, staff handovers, or stock pressure",
+  "Owners who want better reporting and visibility without micromanaging every detail",
+];
+
 export default function ContactPage() {
   return (
     <div className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.12),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)]">
@@ -157,6 +163,22 @@ export default function ContactPage() {
                 View Services
               </Link>
             </div>
+          </article>
+
+          <article className="glass-card p-6">
+            <h2 className="font-heading text-2xl font-semibold text-[#111111]">
+              Best Fit For
+            </h2>
+            <ul className="mt-5 space-y-2 text-sm text-[#3d4147]">
+              {bestFitItems.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
           </article>
         </div>
 
