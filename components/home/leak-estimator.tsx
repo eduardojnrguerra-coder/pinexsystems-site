@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   CircleDollarSign,
@@ -177,6 +177,9 @@ const currencyFormatter = new Intl.NumberFormat("en-ZA", {
   maximumFractionDigits: 0,
 });
 
+const FLOATING_BREAKPOINT = 768;
+const FLOATING_TOP_OFFSET = 96;
+
 function clamp(value: number, min: number, max: number) {
   if (!Number.isFinite(value)) return min;
   return Math.min(Math.max(value, min), max);
@@ -302,6 +305,12 @@ function getDiagnosis({
 export function LeakEstimator() {
   const [values, setValues] = useState<CalculatorValues>(defaultValues);
   const [activePreset, setActivePreset] = useState("Custom");
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const frameRef = useRef<number | null>(null);
+  const currentOffsetRef = useRef(0);
+  const targetOffsetRef = useRef(0);
+  const lastScrollYRef = useRef(0);
 
   const updateField = useCallback((key: FieldKey, rawValue: number) => {
     setActivePreset("Custom");
@@ -402,8 +411,122 @@ export function LeakEstimator() {
     },
   ];
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const panel = panelRef.current;
+
+    if (!section || !panel || typeof window === "undefined") return;
+
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const applyFloatingState = (offset: number, depth: number, active: boolean) => {
+      panel.style.transform = `translate3d(0, ${offset}px, 0)`;
+      panel.style.setProperty("--floating-depth", depth.toFixed(3));
+      panel.dataset.floatingActive = active ? "true" : "false";
+    };
+
+    const resetFloatingState = () => {
+      currentOffsetRef.current = 0;
+      targetOffsetRef.current = 0;
+      applyFloatingState(0, 0, false);
+    };
+
+    const readTargetOffset = () => {
+      if (window.innerWidth < FLOATING_BREAKPOINT) {
+        resetFloatingState();
+        return null;
+      }
+
+      const sectionRect = section.getBoundingClientRect();
+      const sectionTop = window.scrollY + sectionRect.top;
+      const sectionHeight = sectionRect.height;
+      const panelHeight = panel.offsetHeight;
+      const maxOffset = Math.max(0, sectionHeight - panelHeight);
+      const desiredOffset = clamp(
+        window.scrollY + FLOATING_TOP_OFFSET - sectionTop,
+        0,
+        maxOffset,
+      );
+
+      return { desiredOffset, maxOffset };
+    };
+
+    const requestFrame = () => {
+      if (frameRef.current !== null) return;
+
+      frameRef.current = window.requestAnimationFrame(() => {
+        frameRef.current = null;
+
+        const layout = readTargetOffset();
+
+        if (!layout) return;
+
+        targetOffsetRef.current = layout.desiredOffset;
+        const scrollVelocity = window.scrollY - lastScrollYRef.current;
+        lastScrollYRef.current = window.scrollY;
+
+        if (reducedMotionQuery.matches) {
+          currentOffsetRef.current = targetOffsetRef.current;
+        } else {
+          const delta = targetOffsetRef.current - currentOffsetRef.current;
+          const easing = Math.abs(delta) > 20 ? 0.18 : 0.12;
+          currentOffsetRef.current += delta * easing;
+
+          if (Math.abs(delta) < 0.25) {
+            currentOffsetRef.current = targetOffsetRef.current;
+          }
+        }
+
+        const isWithinBounds =
+          layout.desiredOffset > 0 && layout.desiredOffset < layout.maxOffset;
+        const active = isWithinBounds && Math.abs(scrollVelocity) > 0.3;
+        const depth = reducedMotionQuery.matches
+          ? 0
+          : Math.min(
+              1,
+              Math.abs(scrollVelocity) / 42 + currentOffsetRef.current / 1600,
+            );
+
+        applyFloatingState(currentOffsetRef.current, depth, active);
+
+        if (
+          !reducedMotionQuery.matches &&
+          Math.abs(targetOffsetRef.current - currentOffsetRef.current) > 0.25
+        ) {
+          requestFrame();
+        }
+      });
+    };
+
+    const handleViewportChange = () => requestFrame();
+    const resizeObserver = new ResizeObserver(() => requestFrame());
+
+    resizeObserver.observe(section);
+    resizeObserver.observe(panel);
+    lastScrollYRef.current = window.scrollY;
+    requestFrame();
+
+    window.addEventListener("scroll", handleViewportChange, { passive: true });
+    window.addEventListener("resize", handleViewportChange);
+    reducedMotionQuery.addEventListener("change", handleViewportChange);
+
+    return () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", handleViewportChange);
+      window.removeEventListener("resize", handleViewportChange);
+      reducedMotionQuery.removeEventListener("change", handleViewportChange);
+      panel.style.transform = "";
+      panel.style.removeProperty("--floating-depth");
+      delete panel.dataset.floatingActive;
+    };
+  }, []);
+
   return (
-    <section className="relative overflow-visible">
+    <section ref={sectionRef} className="relative overflow-visible">
       <div className="grid gap-5 md:grid-cols-[minmax(0,1.02fr)_minmax(22rem,0.98fr)] md:items-start">
         <div className="min-w-0">
           <div className="rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
@@ -530,8 +653,11 @@ export function LeakEstimator() {
           </div>
         </div>
 
-        <aside className="min-w-0 self-start md:sticky md:top-24">
-          <div className="light-panel flex flex-col rounded-[8px] p-5 sm:p-7">
+        <aside className="min-w-0 self-start">
+          <div
+            ref={panelRef}
+            className="floating-results-panel light-panel flex flex-col rounded-[8px] p-5 sm:p-7"
+          >
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="text-[11px] uppercase text-[#6b6c70]">
