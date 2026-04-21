@@ -173,6 +173,7 @@ export default function HomePage() {
   return (
     <>
       <section className="hero-stage relative overflow-hidden border-b border-[#111111]/10 bg-[#F7F7F2]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(103,232,249,0.08),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(96,165,250,0.05),transparent_40%)]" />
         <div className="section-shell relative py-12 sm:py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start xl:gap-12">
             <Reveal>
@@ -194,20 +195,23 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              <div className="mt-7 flex flex-wrap gap-3 text-sm text-[#555962]">
-                {[
-                  "Free 30-minute discovery call",
-                  "Built around your workflow",
-                  "South African business experts",
-                ].map((point) => (
-                  <div
-                    key={point}
-                    className="flex items-center gap-2"
-                  >
-                    <CheckCircle2 className="h-4 w-4 text-[#67E8F9]" />
-                    <span>{point}</span>
-                  </div>
-                ))}
+              <div className="mt-8">
+                <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-[#a8a8a2]">Why business owners trust us</p>
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    { icon: CheckCircle2, text: "Free 30-minute discovery call" },
+                    { icon: CheckCircle2, text: "Built around your workflow" },
+                    { icon: CheckCircle2, text: "South African business experts" },
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 rounded-full border border-[#111111]/10 bg-white px-4 py-2 text-sm text-[#555962] shadow-[0_4px_12px_rgba(17,17,17,0.04)]"
+                    >
+                      <item.icon className="h-4 w-4 text-[#67E8F9]" />
+                      <span>{item.text}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Reveal>
 
@@ -217,27 +221,33 @@ export default function HomePage() {
               </div>
             </Reveal>
           </div>
-        </div>
-      </section>
 
-      <section className="border-b border-[#111111]/10 bg-white py-8">
-        <div className="section-shell">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[#555962]">
-            <span className="text-[#a8a8a2]">Built for:</span>
-            {industryLinks.map((link) => (
+          <div className="mt-12 lg:mt-16">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <span className="text-[11px] uppercase tracking-[0.16em] text-[#a8a8a2]">Built for</span>
+              <div className="flex flex-wrap justify-center gap-2">
+                {industryLinks.slice(0, -1).map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="rounded-full border border-[#111111]/15 bg-white px-5 py-2.5 text-sm font-medium text-[#555962] shadow-[0_4px_16px_rgba(17,17,17,0.06)] transition-all hover:border-[#67E8F9]/40 hover:text-[#111111] hover:shadow-[0_6px_24px_rgba(17,17,17,0.1)]"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
               <Link
-                key={link.label}
-                href={link.href}
-                className="rounded-full border border-[#111111]/10 px-4 py-2 text-sm font-medium text-[#555962] transition hover:border-[#67E8F9]/40 hover:text-[#111111]"
+                href={industryLinks[industryLinks.length - 1].href}
+                className="text-sm font-medium text-[#67E8F9] transition hover:text-[#0e7490]"
               >
-                {link.label}
+                View all industries
               </Link>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="value-strip-section border-b border-[#111111]/10 bg-[#F7F7F2] py-6">
+      <section className="value-strip-section border-b border-[#111111]/10 bg-[linear-gradient(90deg,#F7F7F2_0%,#F3F2EE_50%,#F7F7F2_100%)] py-8">
         <div className="section-shell">
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
             {quickValue.map((item, index) => (

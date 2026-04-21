@@ -1111,3 +1111,64 @@ body {
   mask-composite: exclude;
   animation: shimmer 3s linear infinite;
 }
+
+/* Calculator slider */
+.calculator-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #67E8F9;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(103, 232, 249, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.calculator-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 18px rgba(103, 232, 249, 0.7), 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.calculator-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #67E8F9;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 12px rgba(103, 232, 249, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.calculator-slider::-moz-range-track {
+  background: transparent;
+}
+
+/* Slower pulse for live indicator */
+@keyframes pulseNode {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
