@@ -403,8 +403,9 @@ export function LeakEstimator() {
   ];
 
   return (
-    <div className="grid gap-5 md:grid-cols-[0.95fr_1.05fr] md:items-start">
-      <div className="rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
+    <div className="relative">
+      <div className="grid gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(21rem,1.05fr)] md:items-start">
+        <section className="rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase text-[#a8a8a2]">
@@ -503,10 +504,11 @@ export function LeakEstimator() {
             );
           })}
         </div>
-      </div>
+        </section>
 
-      <div className="md:self-start lg:sticky lg:top-28">
-        <div className="light-panel flex flex-col rounded-[8px] p-5 sm:p-7">
+        <aside className="md:self-start">
+          <div className="md:sticky md:top-24 md:self-start">
+            <div className="light-panel flex flex-col rounded-[8px] p-5 sm:p-7">
           <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="text-[11px] uppercase text-[#6b6c70]">
@@ -604,7 +606,9 @@ export function LeakEstimator() {
               Find The Gaps In My Business <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-        </div>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   );
