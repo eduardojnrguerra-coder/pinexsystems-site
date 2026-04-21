@@ -6,7 +6,7 @@ interface DemoSidebarProps {
 
 export function DemoSidebar({ tabs, activeTab, onTabChange }: DemoSidebarProps) {
   return (
-    <aside className="demo-sidebar rounded-[8px] border border-white/10 bg-white/[0.035] p-3">
+    <aside className="demo-sidebar min-w-0 rounded-[8px] border border-white/10 bg-white/[0.035] p-3">
       <nav className="flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
         {tabs.map((tab) => (
           <button

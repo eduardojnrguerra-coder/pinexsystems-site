@@ -10,7 +10,7 @@ export function DemoPipeline({ stages, records, accent }: DemoPipelineProps) {
   return (
     <div className="rounded-[8px] border border-white/10 bg-white/[0.035] p-4">
       <h2 className="font-heading text-lg font-semibold text-white">Pipeline / Workflow</h2>
-      <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-4 grid gap-3 md:grid-cols-2 2xl:grid-cols-3">
         {stages.map((stage) => {
           const stageRecords = records.filter((record) => record.status === stage);
 

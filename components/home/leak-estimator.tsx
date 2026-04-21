@@ -403,213 +403,243 @@ export function LeakEstimator() {
   ];
 
   return (
-    <div className="relative">
-      <div className="grid gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(21rem,1.05fr)] md:items-start">
-        <section className="rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p className="text-[11px] uppercase text-[#a8a8a2]">
-              Business leakage diagnostic
-            </p>
-            <h3 className="mt-3 font-heading text-2xl font-semibold text-white sm:text-3xl">
-              How Much Is Operational Chaos Costing You?
-            </h3>
+    <section className="relative overflow-visible">
+      <div className="grid gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(20rem,1.05fr)] md:items-start">
+        <div className="min-w-0 rounded-[8px] border border-[#1d2430] bg-[linear-gradient(180deg,#0f141b_0%,#0b0c10_100%)] p-5 text-[#f7f7f2] shadow-[0_32px_90px_rgba(11,12,16,0.3)] sm:p-7">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p className="text-[11px] uppercase text-[#a8a8a2]">
+                Business leakage diagnostic
+              </p>
+              <h3 className="mt-3 font-heading text-2xl font-semibold text-white sm:text-3xl">
+                How Much Is Operational Chaos Costing You?
+              </h3>
+            </div>
+            <span className="live-indicator rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs text-[#d8d8d2]">
+              <span className="live-dot" /> Live calculator
+            </span>
           </div>
-          <span className="live-indicator rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs text-[#d8d8d2]">
-            <span className="live-dot" /> Live calculator
-          </span>
-        </div>
 
-        <p className="mt-4 max-w-xl text-base leading-8 text-[#d8d8d2]">
-          Use the sliders or type exact numbers. The leakage estimate, risk level,
-          and recommendation update instantly.
-        </p>
-
-        <div className="mt-6">
-          <p className="text-xs font-semibold uppercase text-[#a8a8a2]">
-            Quick industry presets
+          <p className="mt-4 max-w-xl text-base leading-8 text-[#d8d8d2]">
+            Use the sliders or type exact numbers. The leakage estimate, risk
+            level, and recommendation update instantly.
           </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {presets.map((preset) => (
-              <button
-                key={preset.label}
-                type="button"
-                onClick={() => applyPreset(preset.label, preset.values)}
-                className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
-                  activePreset === preset.label
-                    ? "border-[#67E8F9]/50 bg-[#67E8F9]/12 text-[#67E8F9]"
-                    : "border-white/10 bg-white/[0.04] text-[#d8d8d2] hover:border-[#67E8F9]/40"
-                }`}
-              >
-                {preset.label}
-              </button>
-            ))}
+
+          <div className="mt-6">
+            <p className="text-xs font-semibold uppercase text-[#a8a8a2]">
+              Quick industry presets
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {presets.map((preset) => (
+                <button
+                  key={preset.label}
+                  type="button"
+                  onClick={() => applyPreset(preset.label, preset.values)}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                    activePreset === preset.label
+                      ? "border-[#67E8F9]/50 bg-[#67E8F9]/12 text-[#67E8F9]"
+                      : "border-white/10 bg-white/[0.04] text-[#d8d8d2] hover:border-[#67E8F9]/40"
+                  }`}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="mt-7 grid gap-5">
-          {fieldConfigs.map((field) => {
-            const max = getFieldMax(field.key, values);
-            const value = values[field.key];
+          <div className="mt-7 grid gap-5">
+            {fieldConfigs.map((field) => {
+              const max = getFieldMax(field.key, values);
+              const value = values[field.key];
 
-            return (
-              <div key={field.key} className="block rounded-[8px] border border-white/10 bg-white/[0.035] p-4">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <label htmlFor={`leak-${field.key}`} className="text-sm font-semibold text-white">
-                      {field.label}
-                    </label>
-                    <p className="mt-1 max-w-xl text-xs leading-5 text-[#a8a8a2]">
-                      {field.helper}
-                    </p>
+              return (
+                <div
+                  key={field.key}
+                  className="block rounded-[8px] border border-white/10 bg-white/[0.035] p-4"
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <label
+                        htmlFor={`leak-${field.key}`}
+                        className="text-sm font-semibold text-white"
+                      >
+                        {field.label}
+                      </label>
+                      <p className="mt-1 max-w-xl text-xs leading-5 text-[#a8a8a2]">
+                        {field.helper}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="hidden rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-sm font-medium text-white sm:inline-flex">
+                        {formatValue(field, value)}
+                      </span>
+                      <input
+                        id={`leak-${field.key}-number`}
+                        type="number"
+                        min={field.min}
+                        max={max}
+                        step={field.step}
+                        value={value}
+                        onInput={(event) =>
+                          handleControlValue(field.key, event.currentTarget.value)
+                        }
+                        onChange={(event) =>
+                          handleControlValue(field.key, event.currentTarget.value)
+                        }
+                        inputMode="numeric"
+                        className="h-10 w-24 rounded-[8px] border border-white/10 bg-[#05070b] px-3 text-right text-sm font-semibold text-white outline-none transition focus:border-[#67E8F9]/60 sm:w-28"
+                        aria-label={field.label}
+                      />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="hidden rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-sm font-medium text-white sm:inline-flex">
-                      {formatValue(field, value)}
-                    </span>
+                  <div className="mt-4">
                     <input
-                      id={`leak-${field.key}-number`}
-                      type="number"
+                      id={`leak-${field.key}`}
+                      type="range"
                       min={field.min}
                       max={max}
                       step={field.step}
                       value={value}
-                      onInput={(event) => handleControlValue(field.key, event.currentTarget.value)}
-                      onChange={(event) => handleControlValue(field.key, event.currentTarget.value)}
-                      inputMode="numeric"
-                      className="h-10 w-24 rounded-[8px] border border-white/10 bg-[#05070b] px-3 text-right text-sm font-semibold text-white outline-none transition focus:border-[#67E8F9]/60 sm:w-28"
-                      aria-label={field.label}
+                      onInput={(event) =>
+                        handleControlValue(field.key, event.currentTarget.value)
+                      }
+                      onChange={(event) =>
+                        handleControlValue(field.key, event.currentTarget.value)
+                      }
+                      className="w-full cursor-pointer accent-[#67E8F9]"
+                      aria-valuetext={formatValue(field, value)}
                     />
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <input
-                    id={`leak-${field.key}`}
-                    type="range"
-                    min={field.min}
-                    max={max}
-                    step={field.step}
-                    value={value}
-                    onInput={(event) => handleControlValue(field.key, event.currentTarget.value)}
-                    onChange={(event) => handleControlValue(field.key, event.currentTarget.value)}
-                    className="w-full cursor-pointer accent-[#67E8F9]"
-                    aria-valuetext={formatValue(field, value)}
-                  />
-                  <div className="mt-2 flex justify-between text-[11px] text-[#7f858f]">
-                    <span>{field.currency ? formatCurrency(field.min) : `${field.min}${field.suffix ?? ""}`}</span>
-                    <span>{field.currency ? formatCurrency(max) : `${max}${field.suffix ?? ""}`}</span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        </section>
-
-        <aside className="md:self-start">
-          <div className="md:sticky md:top-24 md:self-start">
-            <div className="light-panel flex flex-col rounded-[8px] p-5 sm:p-7">
-          <div className="space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="text-[11px] uppercase text-[#6b6c70]">
-                Estimated impact
-              </p>
-              <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${result.risk.badge} ${result.risk.tone}`}>
-                {result.risk.label}
-              </span>
-            </div>
-
-            <div className="rounded-[8px] border border-[#d9d9d1] bg-[linear-gradient(180deg,#ffffff_0%,#f7f7f2_100%)] p-5 shadow-[0_20px_60px_rgba(17,24,39,0.08)]">
-              <p className="text-sm text-[#5b5f66]">Estimated monthly leakage</p>
-              <p
-                key={Math.round(result.monthlyLeakage)}
-                className="number-pop mt-3 font-heading text-4xl font-semibold text-[#0b0c10] sm:text-5xl"
-              >
-                {formatCurrency(result.monthlyLeakage)}
-              </p>
-              <div className="mt-5 h-2.5 rounded-full bg-[#e3e3dc]">
-                <div
-                  className="risk-meter-fill h-full rounded-full bg-[linear-gradient(90deg,#67E8F9,#60A5FA,#F5D36C)]"
-                  style={{ width: `${result.riskMeter}%` }}
-                />
-              </div>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-[#53565d]">
-                This combines gross profit at risk from missed follow-up with admin
-                waste from disconnected workflows.
-              </p>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-[8px] border border-[#d9d9d1] bg-white p-4 sm:col-span-2">
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
-                  <TrendingUp className="h-4 w-4 text-[#60A5FA]" />
-                  Estimated yearly leakage
-                </div>
-                <p
-                  key={Math.round(result.yearlyLeakage)}
-                  className="number-pop mt-3 text-3xl font-semibold text-[#0b0c10]"
-                >
-                  {formatCurrency(result.yearlyLeakage)}
-                </p>
-              </div>
-
-              {resultCards.map((card) => {
-                const Icon = card.icon;
-
-                return (
-                  <div key={card.label} className="rounded-[8px] border border-[#d9d9d1] bg-white p-4">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
-                      <Icon className="h-4 w-4 text-[#60A5FA]" />
-                      {card.label}
+                    <div className="mt-2 flex justify-between text-[11px] text-[#7f858f]">
+                      <span>
+                        {field.currency
+                          ? formatCurrency(field.min)
+                          : `${field.min}${field.suffix ?? ""}`}
+                      </span>
+                      <span>
+                        {field.currency
+                          ? formatCurrency(max)
+                          : `${max}${field.suffix ?? ""}`}
+                      </span>
                     </div>
-                    <p className="mt-3 text-2xl font-semibold text-[#0b0c10]">
-                      {card.value}
-                    </p>
-                    <p className="mt-2 text-xs leading-5 text-[#63666d]">
-                      {card.detail}
-                    </p>
                   </div>
-                );
-              })}
-            </div>
-
-            <div className="diagnosis-panel rounded-[8px] border border-[#d9d9d1] bg-[#0b0c10] p-5 text-[#f7f7f2]">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <Gauge className="h-4 w-4 text-[#67E8F9]" />
-                  Business diagnosis
                 </div>
-                <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs text-[#d8d8d2]">
+              );
+            })}
+          </div>
+        </div>
+
+        <aside className="min-w-0 md:self-start lg:sticky lg:top-24 lg:self-start">
+          <div className="light-panel flex flex-col rounded-[8px] p-5 sm:p-7">
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="text-[11px] uppercase text-[#6b6c70]">
+                  Estimated impact
+                </p>
+                <span
+                  className={`rounded-full border px-3 py-1 text-xs font-semibold ${result.risk.badge} ${result.risk.tone}`}
+                >
                   {result.risk.label}
                 </span>
               </div>
-              <p className="mt-4 text-sm leading-7 text-[#d8d8d2]">
-                {result.risk.message}
-              </p>
-              <div className="mt-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-4">
-                <p className="text-sm font-semibold text-white">
-                  {result.diagnosis.headline}
+
+              <div className="rounded-[8px] border border-[#d9d9d1] bg-[linear-gradient(180deg,#ffffff_0%,#f7f7f2_100%)] p-5 shadow-[0_20px_60px_rgba(17,24,39,0.08)]">
+                <p className="text-sm text-[#5b5f66]">
+                  Estimated monthly leakage
                 </p>
-                <p className="mt-2 text-sm leading-7 text-[#d8d8d2]">
-                  {result.diagnosis.message}
+                <p
+                  key={Math.round(result.monthlyLeakage)}
+                  className="number-pop mt-3 font-heading text-4xl font-semibold text-[#0b0c10] sm:text-5xl"
+                >
+                  {formatCurrency(result.monthlyLeakage)}
+                </p>
+                <div className="mt-5 h-2.5 rounded-full bg-[#e3e3dc]">
+                  <div
+                    className="risk-meter-fill h-full rounded-full bg-[linear-gradient(90deg,#67E8F9,#60A5FA,#F5D36C)]"
+                    style={{ width: `${result.riskMeter}%` }}
+                  />
+                </div>
+                <p className="mt-4 max-w-xl text-sm leading-7 text-[#53565d]">
+                  This combines gross profit at risk from missed follow-up with
+                  admin waste from disconnected workflows.
                 </p>
               </div>
-            </div>
-          </div>
 
-          <div className="mt-6">
-            <p className="text-sm leading-7 text-[#63666d]">
-              This is an estimate only. Actual results depend on margins, close
-              rates, lead quality, and internal process.
-            </p>
-            <Link href="/contact#lead-form" className="cta-button premium-glow mt-5 w-full sm:w-fit">
-              Find The Gaps In My Business <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-[8px] border border-[#d9d9d1] bg-white p-4 sm:col-span-2">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
+                    <TrendingUp className="h-4 w-4 text-[#60A5FA]" />
+                    Estimated yearly leakage
+                  </div>
+                  <p
+                    key={Math.round(result.yearlyLeakage)}
+                    className="number-pop mt-3 text-3xl font-semibold text-[#0b0c10]"
+                  >
+                    {formatCurrency(result.yearlyLeakage)}
+                  </p>
+                </div>
+
+                {resultCards.map((card) => {
+                  const Icon = card.icon;
+
+                  return (
+                    <div
+                      key={card.label}
+                      className="rounded-[8px] border border-[#d9d9d1] bg-white p-4"
+                    >
+                      <div className="flex items-center gap-2 text-sm font-semibold text-[#0b0c10]">
+                        <Icon className="h-4 w-4 text-[#60A5FA]" />
+                        {card.label}
+                      </div>
+                      <p className="mt-3 text-2xl font-semibold text-[#0b0c10]">
+                        {card.value}
+                      </p>
+                      <p className="mt-2 text-xs leading-5 text-[#63666d]">
+                        {card.detail}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="diagnosis-panel rounded-[8px] border border-[#d9d9d1] bg-[#0b0c10] p-5 text-[#f7f7f2]">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-sm font-semibold">
+                    <Gauge className="h-4 w-4 text-[#67E8F9]" />
+                    Business diagnosis
+                  </div>
+                  <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs text-[#d8d8d2]">
+                    {result.risk.label}
+                  </span>
+                </div>
+                <p className="mt-4 text-sm leading-7 text-[#d8d8d2]">
+                  {result.risk.message}
+                </p>
+                <div className="mt-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-4">
+                  <p className="text-sm font-semibold text-white">
+                    {result.diagnosis.headline}
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-[#d8d8d2]">
+                    {result.diagnosis.message}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <p className="text-sm leading-7 text-[#63666d]">
+                This is an estimate only. Actual results depend on margins, close
+                rates, lead quality, and internal process.
+              </p>
+              <Link
+                href="/contact#lead-form"
+                className="cta-button premium-glow mt-5 w-full sm:w-fit"
+              >
+                Find The Gaps In My Business <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </aside>
       </div>
-    </div>
+    </section>
   );
 }

@@ -341,7 +341,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
             {notice ? <div className="mt-4 rounded-[8px] border border-[#67E8F9]/20 bg-[#67E8F9]/10 px-4 py-3 text-sm text-[#d8f8ff]">{notice}</div> : null}
           </div>
 
-          <div className="grid gap-0 lg:grid-cols-[14rem_1fr]">
+          <div className="grid gap-0 lg:grid-cols-[13rem_minmax(0,1fr)] xl:grid-cols-[14rem_minmax(0,1fr)]">
             <DemoSidebar tabs={orderedSections.map((item) => item.label)} activeTab={section?.label ?? "Overview"} onTabChange={handleSectionChange} />
 
             <main className="min-w-0 p-4 sm:p-5">

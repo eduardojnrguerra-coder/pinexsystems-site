@@ -14,7 +14,7 @@ export function DemoTable({
   return (
     <div className="overflow-hidden rounded-[8px] border border-white/10 bg-white/[0.035]">
       <div className="overflow-x-auto">
-        <table className="min-w-[760px] w-full border-collapse text-left text-sm">
+        <table className="w-full min-w-[640px] xl:min-w-[700px] border-collapse text-left text-sm">
           <thead className="border-b border-white/10 text-xs uppercase text-[#a8a8a2]">
             <tr>
               <th className="px-4 py-3">Record</th>

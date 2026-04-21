@@ -48,7 +48,7 @@ export function DemoDashboard({
   onDetailAction,
 }: DemoDashboardProps) {
   return (
-    <div className="space-y-5">
+    <div className="min-w-0 space-y-5">
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {system.metrics.map((metric) => (
           <DemoMetricCard
@@ -61,8 +61,8 @@ export function DemoDashboard({
         ))}
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
-        <div className="space-y-5">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1.12fr)_minmax(19rem,0.88fr)] 2xl:grid-cols-[minmax(0,1.18fr)_minmax(21rem,0.82fr)] xl:items-start">
+        <div className="min-w-0 space-y-5">
           <div className="rounded-[8px] border border-white/10 bg-white/[0.035] p-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
@@ -90,7 +90,7 @@ export function DemoDashboard({
           <DemoPipeline stages={system.pipeline} records={records} accent={system.accent} />
         </div>
 
-        <div className="space-y-5">
+        <div className="min-w-0 space-y-5">
           <div className="rounded-[8px] border border-white/10 bg-white/[0.035] p-4">
             <h2 className="font-heading text-lg font-semibold text-white">Record Details</h2>
             {selectedRecord ? (
