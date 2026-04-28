@@ -296,6 +296,7 @@ export function LeadForm({
             type="submit"
             className="cta-button mt-2 sm:col-span-2"
             aria-label="Submit demo request"
+            data-event="contact_form_submit"
           >
             Send My Demo Request <SendHorizontal className="h-4 w-4" />
           </button>

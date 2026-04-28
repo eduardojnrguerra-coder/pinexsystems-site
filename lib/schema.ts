@@ -113,3 +113,46 @@ export function blogPostingSchema(article: InsightArticle) {
     inLanguage: "en-ZA",
   };
 }
+
+export function breadcrumbSchema(
+  items: { name: string; path: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${siteConfig.domain}${item.path}`,
+    })),
+  };
+}
+
+export function softwareApplicationSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+  category: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: input.name,
+    description: input.description,
+    applicationCategory: input.category,
+    operatingSystem: "Web",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "ZAR",
+    },
+    creator: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.domain,
+    },
+    areaServed: "South Africa",
+    url: `${siteConfig.domain}${input.path}`,
+  };
+}

@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries",
     "/business-loss-calculator",
     "/demos",
+    "/case-studies",
     "/about",
     "/contact",
     "/insights",

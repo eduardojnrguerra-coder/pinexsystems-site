@@ -54,6 +54,9 @@ export default function DemosPage() {
             <Link href="/services" className="cta-secondary">
               View Services
             </Link>
+            <Link href="/case-studies" className="cta-secondary">
+              Demo Case Studies
+            </Link>
           </div>
         </div>
       </div>

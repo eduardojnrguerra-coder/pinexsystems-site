@@ -1,6 +1,6 @@
 export type { DemoRecord, DemoSystem, DemoSection, DemoMetric, DemoAction, DemoAlert } from "./demo-types";
 
-import type { DemoRecord, DemoSection, DemoMetric } from "./demo-types";
+import type { DemoSection } from "./demo-types";
 
 export const dealershipSections: DemoSection[] = [
   {

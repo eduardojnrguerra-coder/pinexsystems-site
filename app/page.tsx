@@ -10,16 +10,19 @@ import {
 } from "lucide-react";
 
 import { DemoCardGrid } from "@/components/demos/DemoCardGrid";
+import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
 import { HeroBrandLockup } from "@/components/home/HeroBrandLockup";
 import { MiniCalculator } from "@/components/home/mini-calculator";
+import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
+import { homeFaq } from "@/lib/content/core";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
   title:
-    "Custom Business Systems & Automation South Africa | Pine X Systems",
+    "Custom Business Systems South Africa | Pine X Systems",
   description:
-    "Pine X Systems builds custom business dashboards, lead management, staff workflows, job tracking, and automation tools for South African businesses.",
+    "Pine X Systems builds custom business systems, dashboards, workflow apps, automation platforms, and management tools for South African businesses that want to move away from paper, spreadsheets, and disconnected processes.",
   path: "/",
   keywords: [
     "custom business systems south africa",
@@ -38,6 +41,13 @@ const quickValue = [
   "Live owner dashboard",
   "Automate follow-ups",
   "Control jobs and stock",
+];
+
+const problemSignals = [
+  "Leads and updates still move through WhatsApp and memory instead of one workflow",
+  "Reports are delayed because someone still needs to clean spreadsheets manually",
+  "Jobs, staff, customers, and stock live in disconnected tools",
+  "Owners cannot see the real bottlenecks early enough to make fast decisions",
 ];
 
 const serviceCards = [
@@ -76,23 +86,33 @@ const serviceCards = [
 const howItWorks = [
   {
     step: "1",
-    title: "Discovery Call",
-    description: "We map pressure points, missed visibility, and what the owner needs to control.",
+    title: "Discover",
+    description: "We map the current workflow, pressure points, and where paper, spreadsheets, or scattered chats are slowing the business down.",
   },
   {
     step: "2",
-    title: "System Blueprint",
-    description: "You get a clear control-layer plan with dashboards, logic, roles, and automations.",
+    title: "Design",
+    description: "We define the dashboards, workflow stages, roles, and automation rules the business actually needs first.",
   },
   {
     step: "3",
-    title: "Demo Build",
-    description: "A tailored preview validates the operating flow before full implementation starts.",
+    title: "Build",
+    description: "The first version is built around the highest-impact control layer instead of a bloated all-at-once rollout.",
   },
   {
     step: "4",
-    title: "Launch & Improve",
-    description: "The system goes live, the team is trained, and the control layer evolves with the business.",
+    title: "Test",
+    description: "We validate the workflow with real users and tighten the details before rollout.",
+  },
+  {
+    step: "5",
+    title: "Launch",
+    description: "The system goes live with practical team onboarding and clear role-based usage.",
+  },
+  {
+    step: "6",
+    title: "Improve",
+    description: "The control layer evolves as reporting improves and the next bottleneck becomes visible.",
   },
 ];
 
@@ -247,31 +267,46 @@ export default function HomePage() {
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start xl:gap-12">
             <Reveal>
               <HeroBrandLockup />
-              <SectionBadge>Custom Business Control Systems</SectionBadge>
+              <SectionBadge>Custom Business Systems South Africa</SectionBadge>
               <h1 className="mt-5 font-heading text-[2rem] font-semibold leading-[1.1] text-[#0b0c10] sm:text-[2.5rem] lg:text-[2.2rem] xl:text-[2.5rem]">
-                Your Business Is Leaking Money In Places You Cannot See
+                Custom Business Systems Built for South African Companies
               </h1>
               <p className="mt-5 max-w-xl text-base leading-8 text-[#555962] sm:text-lg">
-                Pine X Systems builds custom dashboards, lead systems, staff
-                workflows, job tracking, automation, and reporting tools that
-                expose operational gaps before they cost you more money.
+                We build custom dashboards, internal business apps, workflow
+                systems, and automation tools for businesses that want to
+                replace paper, spreadsheets, and scattered WhatsApp processes
+                with one easy-to-use system.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/contact#lead-form" className="cta-button">
-                  Book A Free Demo <ArrowRight className="h-4 w-4" />
+                <Link href="/demos" className="cta-button" data-event="cta_view_demo_systems">
+                  View Demo Systems
                 </Link>
-                <Link href="/demos" className="cta-secondary">
-                  View Live Demos
-                </Link>
+                <TrackedDemoLink
+                  href="/contact#lead-form"
+                  location="home_hero_system_review"
+                  className="cta-secondary"
+                  data-event="cta_book_system_review"
+                >
+                  Book a Free System Review <ArrowRight className="h-4 w-4" />
+                </TrackedDemoLink>
+              </div>
+
+              <div className="mt-6 max-w-2xl rounded-[8px] border border-[#111111]/10 bg-white p-4 shadow-[0_12px_34px_rgba(17,17,17,0.05)]">
+                <p className="text-sm leading-7 text-[#555962]">
+                  Pine X Systems builds custom business systems, dashboards,
+                  workflow apps, and automation platforms that make it easier to
+                  manage jobs, staff, customers, stock, and reporting from one
+                  place.
+                </p>
               </div>
 
               <div className="mt-8">
                 <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-[#a8a8a2]">Why business owners trust us</p>
                 <div className="flex flex-wrap gap-3">
                   {[
-                    { icon: CheckCircle2, text: "Free 30-minute discovery call" },
+                    { icon: CheckCircle2, text: "Built in South Africa for practical control" },
                     { icon: CheckCircle2, text: "Built around your workflow" },
-                    { icon: CheckCircle2, text: "South African business experts" },
+                    { icon: CheckCircle2, text: "Easy enough for non-technical staff" },
                   ].map((item, idx) => (
                     <div
                       key={idx}
@@ -332,17 +367,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-[#111111]/10 bg-[#F7F7F2] py-16 sm:py-20">
+        <div className="section-shell">
+          <Reveal>
+            <div className="mx-auto max-w-3xl text-center text-[#0b0c10]">
+              <SectionBadge>Common Operational Problem</SectionBadge>
+              <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight sm:text-4xl">
+                Is your business still running on paper, WhatsApp, and spreadsheets?
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#555962] sm:text-lg">
+                That usually means the business is already paying for slow
+                follow-up, delayed visibility, repeated admin, and weak control.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {problemSignals.map((item, index) => (
+              <Reveal key={item} delayMs={index * 45}>
+                <div className="light-panel rounded-[8px] p-5 text-sm leading-7 text-[#555962]">
+                  {item}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="services-preview-section bg-[linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)] py-16 sm:py-20">
         <div className="section-shell">
           <Reveal>
             <div className="mx-auto max-w-3xl text-center text-[#0b0c10]">
               <SectionBadge>What We Build</SectionBadge>
               <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight sm:text-4xl">
-                Control Layers Designed Around Your Business
+                What Pine X Systems Builds
               </h2>
               <p className="mt-4 text-base leading-8 text-[#555962] sm:text-lg">
-                Each module solves a specific operational problem. Choose what
-                your business needs now and grow the platform as you evolve.
+                Custom business systems, dashboards, workflow apps, internal
+                tools, and practical automation built around how your business
+                actually works.
               </p>
             </div>
           </Reveal>
@@ -518,18 +581,53 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-y border-[#d9d9d1] bg-[linear-gradient(180deg,#ECEAE4_0%,#F7F7F2_100%)] py-16 sm:py-20">
+        <div className="section-shell">
+          <Reveal>
+            <div className="mx-auto max-w-3xl text-center">
+              <SectionBadge>Business Loss Calculator</SectionBadge>
+              <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight text-[#111111] sm:text-4xl">
+                Not sure what manual admin is costing you?
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#555962] sm:text-lg">
+                Use the Business Loss Calculator to estimate how much revenue,
+                time, and visibility your business may be losing every month.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/business-loss-calculator"
+              className="cta-button"
+              data-event="cta_open_business_loss_calculator"
+            >
+              Use The Business Loss Calculator
+            </Link>
+            <TrackedDemoLink
+              href="/contact#lead-form"
+              location="home_calculator_system_review"
+              className="cta-secondary"
+              data-event="cta_book_system_review"
+            >
+              Book a Free System Review
+            </TrackedDemoLink>
+          </div>
+        </div>
+      </section>
+
       <section className="how-it-works-section bg-[linear-gradient(180deg,#ECEAE4_0%,#F7F7F2_100%)] py-16 sm:py-20">
         <div className="section-shell">
           <Reveal>
             <div className="mx-auto max-w-3xl text-center text-[#0b0c10]">
               <SectionBadge>How It Works</SectionBadge>
               <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight sm:text-4xl">
-                A Clear Path From Messy Operations To Working System
+                Discover, Design, Build, Test, Launch, Improve
               </h2>
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-4">
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {howItWorks.map((step, index) => (
               <Reveal key={step.step} delayMs={index * 40}>
                 <HowItWorksStep
@@ -543,23 +641,47 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-t border-[#111111]/10 bg-[#F7F7F2] py-16 sm:py-20">
+        <div className="section-shell">
+          <Reveal>
+            <div className="mx-auto max-w-3xl text-center text-[#111111]">
+              <SectionBadge>FAQ</SectionBadge>
+              <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight sm:text-4xl">
+                Common Questions About Custom Business Systems
+              </h2>
+            </div>
+          </Reveal>
+          <div className="mx-auto mt-10 max-w-4xl">
+            <FaqAccordion items={homeFaq} />
+          </div>
+        </div>
+      </section>
+
       <section className="final-cta-section relative overflow-hidden border-t border-[#111111]/10 bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.16),transparent_25%),linear-gradient(180deg,#ECEAE4_0%,#F7F7F2_100%)] py-16 sm:py-20">
         <div className="section-shell relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionBadge>Ready To Take Control?</SectionBadge>
+            <SectionBadge>Replace Paper With A Proper System</SectionBadge>
             <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight text-[#111111] sm:text-4xl">
-              Stop Running Your Business Blind
+              See What Your Business Could Look Like With One Proper System
             </h2>
             <p className="mt-4 text-base leading-8 text-[#555962] sm:text-lg">
-              If your business depends on scattered messages, spreadsheets,
-              memory, and manual follow-ups, you are losing money quietly. Let us
-              show you what a proper control system could look like.
+              Pine X Systems builds custom business systems for South African
+              businesses that need better control, cleaner reporting, and one
+              workflow layer built around their real process.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/contact#lead-form" className="cta-button">
-                Book My Free Demo
+              <Link href="/demos" className="cta-button" data-event="cta_view_demo_systems">
+                View Demo Systems
               </Link>
-              <Link href="/business-loss-calculator" className="cta-secondary">
+              <TrackedDemoLink
+                href="/contact#lead-form"
+                location="home_final_system_review"
+                className="cta-secondary"
+                data-event="cta_book_system_review"
+              >
+                Book a Free System Review
+              </TrackedDemoLink>
+              <Link href="/business-loss-calculator" className="cta-secondary" data-event="cta_open_business_loss_calculator">
                 Try The Loss Calculator
               </Link>
             </div>

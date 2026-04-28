@@ -7,6 +7,7 @@ import { trackWhatsAppClick } from "@/lib/gtag";
 type TrackedWhatsAppLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   children: ReactNode;
   location: string;
+  "data-event"?: string;
 };
 
 export function TrackedWhatsAppLink({
@@ -15,14 +16,17 @@ export function TrackedWhatsAppLink({
   onClick,
   ...props
 }: TrackedWhatsAppLinkProps) {
+  const { ["data-event"]: dataEvent, ...rest } = props;
+
   return (
     <a
-      {...props}
+      {...rest}
+      data-event={dataEvent ?? "click_whatsapp"}
       onClick={(event) => {
         trackWhatsAppClick({
           location,
           label:
-            typeof children === "string" ? children : props["aria-label"] ?? "WhatsApp",
+            typeof children === "string" ? children : rest["aria-label"] ?? "WhatsApp",
         });
         onClick?.(event);
       }}

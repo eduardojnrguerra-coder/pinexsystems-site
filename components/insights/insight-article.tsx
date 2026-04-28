@@ -1,8 +1,9 @@
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { SchemaScript } from "@/components/ui/schema-script";
-import { blogPostingSchema, faqSchema } from "@/lib/schema";
+import { blogPostingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import type { InsightArticle } from "@/lib/types";
 
 interface InsightArticleProps {
@@ -13,6 +14,8 @@ function getSupportLinks(article: InsightArticle) {
   const shared = [
     { label: "Use the business loss calculator", href: "/business-loss-calculator" },
     { label: "View Pine X services", href: "/services" },
+    { label: "View industry hub", href: "/industries" },
+    { label: "Review demo case studies", href: "/case-studies" },
     { label: "Open interactive demos", href: "/demos" },
     { label: "Book a discovery call", href: "/contact#lead-form" },
   ];
@@ -56,10 +59,24 @@ export function InsightArticleView({ article }: InsightArticleProps) {
     <>
       <SchemaScript data={blogPostingSchema(article)} />
       <SchemaScript data={faqSchema(article.faq)} />
+      <SchemaScript
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Insights", path: "/insights" },
+          { name: article.title, path: `/insights/${article.slug}` },
+        ])}
+      />
 
       <article className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.12),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)] py-12 sm:py-16">
         <div className="section-shell">
         <header className="mx-auto max-w-4xl">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Insights", href: "/insights" },
+              { label: article.title },
+            ]}
+          />
           <p className="inline-flex rounded-[6px] border border-[#111111]/10 bg-white px-3 py-1 text-xs font-medium text-[#555962]">
             Insights / {article.category}
           </p>

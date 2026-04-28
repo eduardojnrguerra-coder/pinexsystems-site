@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, BarChart3, MessageCircle, Sparkles } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, BarChart3, MessageCircle } from "lucide-react";
+import { useMemo, useState } from "react";
 
 import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
 import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
@@ -76,13 +76,6 @@ function nextStatus(record: DemoRecord, roleKind: RoleKind) {
   if (status.includes("delayed")) return "Active";
   return roleKind === "staff" ? "Complete" : "Ready";
 }
-function statusTone(status: string) {
-  if (/ready|approved|resolved|complete|delivered|sold|published/i.test(status)) return "green";
-  if (/waiting|pending|docs outstanding|blocked|overdue|low stock|hold|risk|delayed/i.test(status)) return "amber";
-  if (/assigned|booked|in progress|contacted|submitted|active|diagnos|receiv|review/i.test(status)) return "blue";
-  return "cyan";
-}
-
 function filtered(records: DemoRecord[], roleKind: RoleKind, search: string) {
   const base = roleKind === "owner" ? records : roleKind === "manager" ? records.filter((r) => isBlocked(r) || isActive(r) || r.priority === "High") : records.filter((r) => isBlocked(r) || isActive(r) || r.priority === "High");
   const q = search.trim().toLowerCase();
@@ -100,7 +93,6 @@ function filtered(records: DemoRecord[], roleKind: RoleKind, search: string) {
 function makeMetrics(records: DemoRecord[], section: DemoSection, roleKind: RoleKind, nouns: Nouns) {
   const totalValue = records.reduce((sum, record) => sum + parseMoney(record.value), 0);
   const blocked = records.filter(isBlocked).length;
-  const active = records.filter(isActive).length;
   const complete = records.filter(isComplete).length;
   const dueToday = records.filter((record) => /today|tomorrow|mon|tue|wed|thu|fri|sat|sun/i.test(`${record.value} ${record.detail}`)).length;
   if (roleKind === "owner") {
@@ -145,23 +137,13 @@ export function DemoShell({ system }: { system: DemoSystem }) {
   const [activeSectionId, setActiveSectionId] = useState<string>(getDemoSections(system.slug)[0]?.id ?? "overview");
   const [selectedRecordId, setSelectedRecordId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-  const [feed, setFeed] = useState<string[]>([]);
+  const [feed, setFeed] = useState<string[]>([
+    `Loaded ${system.shortTitle} demo.`,
+    "Role-based state is ready.",
+  ]);
   const [notice, setNotice] = useState<string | null>(null);
   const [accessMode, setAccessMode] = useState<"full" | "limited">("full");
   const [activeMetric, setActiveMetric] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fresh = getDemoSections(system.slug);
-    setSections(fresh);
-    setActiveRole(system.roles[0]);
-    setActiveSectionId(fresh[0]?.id ?? "overview");
-    setSelectedRecordId(null);
-    setSearch("");
-    setNotice(null);
-    setAccessMode("full");
-    setActiveMetric(null);
-    setFeed([`Loaded ${system.shortTitle} demo.`, "Role-based state is ready."]);
-  }, [system.roles, system.shortTitle, system.slug]);
 
   const roleKind = roleKindFromLabel(activeRole);
   const nouns = nounsBySystem[system.slug] ?? nounsBySystem.dealership;
@@ -238,13 +220,6 @@ export function DemoShell({ system }: { system: DemoSystem }) {
     setAccessMode((current) => (current === "full" ? "limited" : "full"));
     setNotice((current) => (current?.includes("Limited") ? "Full detail visibility restored." : "Limited team visibility enabled."));
     updateFeed("Access mode toggled for the current record.");
-  };
-  const handleAction = (label: string) => {
-    const lower = label.toLowerCase();
-    if (lower.includes("summary")) return handleSummary();
-    if (lower.includes("access") || lower.includes("permission") || lower.includes("help") || lower.includes("view")) return handleToggleAccess();
-    if (lower.includes("add sample")) return handleAddRecord();
-    return handleAdvance();
   };
   const handleMetricClick = (filter: string | null) => {
     if (!filter) return;

@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { faqSchema, servicePageSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema, servicePageSchema } from "@/lib/schema";
 import type { SeoPage } from "@/lib/types";
 
 interface SeoPageTemplateProps {
@@ -14,7 +15,9 @@ interface SeoPageTemplateProps {
 function getRelatedPaths(page: SeoPage) {
   const sharedLinks = [
     { label: "View Pine X services", href: "/services" },
+    { label: "View industry hub", href: "/industries" },
     { label: "Open interactive demos", href: "/demos" },
+    { label: "Review demo case studies", href: "/case-studies" },
     { label: "Use the business loss calculator", href: "/business-loss-calculator" },
     { label: "Read insights for owners", href: "/insights" },
     { label: "Book a discovery call", href: "/contact#lead-form" },
@@ -86,10 +89,22 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
     <>
       <SchemaScript data={servicePageSchema(page)} />
       <SchemaScript data={faqSchema(page.faqs)} />
+      <SchemaScript
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: page.pageTitle, path: `/${page.slug}` },
+        ])}
+      />
 
       <section className="relative overflow-hidden border-b border-[#111111]/10 bg-[#F7F7F2] pb-12 pt-12 sm:pb-16 sm:pt-16">
         <div className="animated-hero-bg opacity-70" aria-hidden="true" />
         <div className="section-shell relative">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: page.pageTitle },
+            ]}
+          />
           <SectionHeading
             badge="Service Insight"
             title={

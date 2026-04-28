@@ -10,6 +10,7 @@ type TrackedDemoLinkProps = PropsWithChildren<
     Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> & {
       location: string;
       system?: string;
+      "data-event"?: string;
     }
 >;
 
@@ -20,9 +21,12 @@ export function TrackedDemoLink({
   system,
   ...props
 }: TrackedDemoLinkProps) {
+  const { ["data-event"]: dataEvent, ...rest } = props;
+
   return (
     <Link
-      {...props}
+      {...rest}
+      data-event={dataEvent ?? "cta_book_system_review"}
       onClick={(event) => {
         trackDemoRequest({ location, system });
         onClick?.(event);

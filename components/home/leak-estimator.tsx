@@ -559,6 +559,7 @@ export function LeakEstimator() {
                   key={preset.label}
                   type="button"
                   onClick={() => applyPreset(preset.label, preset.values)}
+                  data-event="calculator_start"
                   className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                     activePreset === preset.label
                       ? "border-[#67E8F9]/50 bg-[#67E8F9]/12 text-[#67E8F9]"
@@ -760,6 +761,7 @@ export function LeakEstimator() {
               </p>
               <Link
                 href="/contact#lead-form"
+                data-event="calculator_submit"
                 className="cta-button premium-glow mt-5 w-full sm:w-fit"
               >
                 Find The Gaps In My Business <ArrowRight className="h-4 w-4" />

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
 import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";

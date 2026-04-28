@@ -20,6 +20,7 @@ export function DemoCardGrid({ tone = "dark", compact = false }: DemoCardGridPro
           <Link
             key={demo.slug}
             href={`/demos/${demo.slug}`}
+            data-event={`click_${demo.slug.replace(/-/g, "_")}_demo`}
             className={`group rounded-[8px] border p-5 transition hover:-translate-y-1 ${
               isLight
                 ? "border-[#d9d9d1] bg-white text-[#0b0c10] shadow-[0_20px_55px_rgba(17,24,39,0.08)] hover:border-[#67E8F9]/55"

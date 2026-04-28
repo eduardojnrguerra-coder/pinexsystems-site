@@ -56,6 +56,28 @@ const demos = [
     bars: [32, 46, 39, 58, 62, 69, 76, 71],
   },
   {
+    id: "hutton-motors-service-centre",
+    href: "/demos/hutton-motors-service-centre",
+    label: "Hutton Motors",
+    title: "Service Centre Operating System",
+    summary:
+      "Premium service-centre demo for reception intake, digital job cards, workshop stages, parts, shuttle coordination, and WhatsApp updates.",
+    metrics: ["6 active jobs", "3 transport tasks", "5 inbox items"],
+    modules: [
+      "Reception intake",
+      "Job cards",
+      "Workshop board",
+      "Parts memory",
+      "WhatsApp centre",
+    ],
+    activity: [
+      "Vito job waiting on NOx sensor ETA",
+      "Shuttle pickup assigned for diagnostics booking",
+      "Approval message routed to workshop manager",
+    ],
+    bars: [30, 40, 52, 61, 70, 74, 82, 88],
+  },
+  {
     id: "agency",
     href: "/demos/agency",
     label: "Agency",
