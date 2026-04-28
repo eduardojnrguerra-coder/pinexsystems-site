@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { Suspense } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { GoogleTracking } from "@/components/analytics/google-tracking";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
@@ -101,6 +102,7 @@ export default function RootLayout({
         <SiteFooter />
         <MobileStickyCta />
         <FloatingWhatsApp />
+        <SpeedInsights />
       </body>
     </html>
   );
