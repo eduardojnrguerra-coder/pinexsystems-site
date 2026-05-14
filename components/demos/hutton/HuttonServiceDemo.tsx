@@ -12,8 +12,10 @@ import {
   ShoppingCart,
   Sparkles,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
+import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { HuttonDashboard } from "@/components/demos/hutton/HuttonDashboard";
 import { HuttonCalendar } from "@/components/demos/hutton/HuttonCalendar";
 import { JobCardDetail } from "@/components/demos/hutton/JobCardDetail";
@@ -27,9 +29,12 @@ import {
   HuttonPanelHeader,
   HuttonStatusBadge,
 } from "@/components/demos/hutton/HuttonUi";
+import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import { WhatsAppCommunicationCentre } from "@/components/demos/hutton/WhatsAppCommunicationCentre";
 import { WorkshopBoard } from "@/components/demos/hutton/WorkshopBoard";
+import { trackCustomEvent } from "@/lib/gtag";
 import { huttonServiceData } from "@/lib/hutton-service-data";
+import { whatsappCta } from "@/lib/site";
 import type {
   HuttonBookingForm,
   HuttonCalendarEvent,
@@ -72,6 +77,44 @@ const sections = [
   icon: typeof LayoutDashboard;
   description: string;
 }>;
+
+const huttonDemoSlug = "hutton-service-centre";
+const contactHref = `/contact?demo_slug=${huttonDemoSlug}&lead_intent=demo_page#lead-form`;
+const whatsappHref = `${whatsappCta.href}?text=${encodeURIComponent(
+  "Hi Eddy, I saw the Hutton Motors Service Centre demo and want to map my service-centre workflow.",
+)}`;
+
+const heroBullets = [
+  "See today's bookings, blocked jobs, and pressure in one operating view",
+  "Keep parts, transport, approvals, and WhatsApp tied to live job cards",
+  "Give owners and advisors the same source of truth",
+];
+
+const proofCards = [
+  "Designed around real service-centre pressure",
+  "Bookings, approvals, parts, shuttle, and communication connected",
+  "Manager-friendly and meeting-friendly",
+  "Built for phased rollout and refinement",
+];
+
+const previewFrames = [
+  {
+    title: "Service desk overview",
+    detail: "Morning pressure, arrivals, blocked work, and advisor visibility in one view.",
+  },
+  {
+    title: "Job-card detail",
+    detail: "A live record tying approvals, notes, parts, and next steps to one service job.",
+  },
+  {
+    title: "Transport board",
+    detail: "Pickup, shuttle, and return-trip movement without losing the workshop context.",
+  },
+  {
+    title: "WhatsApp centre",
+    detail: "Client communication linked to bookings, approvals, and live operating state.",
+  },
+];
 
 const stageFlow: JobStatus[] = [
   "Booking Confirmed",
@@ -359,6 +402,11 @@ const sampleBookingForm: HuttonBookingForm = {
 };
 
 export function HuttonServiceDemo() {
+  const heroRef = useRef<HTMLElement | null>(null);
+  const moduleNavRef = useRef<HTMLElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const meetingRef = useRef<HTMLDivElement | null>(null);
+  const [showStickyBar, setShowStickyBar] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId>("dashboard");
   const [selectedJobId, setSelectedJobId] = useState(huttonServiceData.jobs[0]?.id ?? "");
   const [partsSearch, setPartsSearch] = useState("");
@@ -373,6 +421,31 @@ export function HuttonServiceDemo() {
   const [calendarEvents, setCalendarEvents] = useState(huttonServiceData.calendarEvents);
   const [bookingForm, setBookingForm] = useState<HuttonBookingForm>(initialBookingForm);
   const [selectedPartId, setSelectedPartId] = useState(huttonServiceData.parts[0]?.id ?? "");
+
+  const trackHuttonEvent = (
+    eventName: string,
+    extra?: Record<string, string | number | boolean | undefined>,
+  ) => {
+    trackCustomEvent(eventName, {
+      demo_slug: huttonDemoSlug,
+      ...extra,
+    });
+  };
+
+  useEffect(() => {
+    trackHuttonEvent("demo_view");
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const threshold = heroRef.current?.offsetHeight ?? 280;
+      setShowStickyBar(window.scrollY > threshold);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const selectedJob = useMemo(
     () => jobs.find((job) => job.id === selectedJobId) ?? jobs[0],
@@ -742,21 +815,51 @@ export function HuttonServiceDemo() {
     return items;
   }, [inbox, jobs, liveCalendarEvents, partRequests, transportTasks]);
 
+  const scrollToContent = () => {
+    window.setTimeout(() => {
+      contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      contentRef.current?.focus({ preventScroll: true });
+    }, 80);
+  };
+
+  const openSection = (
+    section: SectionId,
+    source?: string,
+    options?: { jobId?: string; note?: string },
+  ) => {
+    if (options?.jobId) {
+      setSelectedJobId(options.jobId);
+      trackHuttonEvent("demo_job_select", {
+        job_id: options.jobId,
+        source: source ?? "section_open",
+      });
+    }
+
+    setActiveSection(section);
+
+    if (source) {
+      trackHuttonEvent("demo_route_step_click", {
+        section,
+        source,
+      });
+    }
+
+    scrollToContent();
+  };
+
   const openJob = (jobId: string) => {
-    setSelectedJobId(jobId);
-    setActiveSection("job-card");
+    openSection("job-card", "job_open", { jobId });
   };
 
   const openReceptionWithPrefill = (prefill?: Partial<HuttonBookingForm>) => {
     if (prefill) {
       setBookingForm((current) => ({ ...current, ...prefill }));
     }
-    setActiveSection("reception");
+    openSection("reception", "reception_prefill");
   };
 
   const openWhatsAppForJob = (jobId: string) => {
-    setSelectedJobId(jobId);
-    setActiveSection("whatsapp");
+    openSection("whatsapp", "whatsapp_open", { jobId });
   };
 
   const updateBookingForm = <K extends keyof HuttonBookingForm>(
@@ -1586,6 +1689,9 @@ export function HuttonServiceDemo() {
   };
 
   const simulateIncomingBookingWhatsApp = () => {
+    trackHuttonEvent("demo_simulation_click", {
+      action: "simulate_incoming_whatsapp",
+    });
     const nextMessage = {
       id: `IN-${900 + inbox.length}`,
       clientId: "CL-008",
@@ -1622,10 +1728,13 @@ export function HuttonServiceDemo() {
     };
 
     setInbox((current) => [nextMessage, ...current]);
-    setActiveSection("whatsapp");
+    openSection("whatsapp", "simulation_whatsapp");
   };
 
   const resetDemoData = () => {
+    trackHuttonEvent("demo_simulation_click", {
+      action: "reset_demo_data",
+    });
     setParts(huttonServiceData.parts);
     setClients(huttonServiceData.clients);
     setVehicles(huttonServiceData.vehicles);
@@ -1650,7 +1759,7 @@ export function HuttonServiceDemo() {
       | "open-whatsapp",
   ) => {
     if (action === "open-whatsapp") {
-      setActiveSection("whatsapp");
+      openSection("whatsapp", "quick_action");
       return;
     }
 
@@ -1662,6 +1771,9 @@ export function HuttonServiceDemo() {
         quantity: 1,
         urgency: selected.priority === "Urgent" ? "Urgent" : "Priority",
         notes: `Created from dashboard quick action for ${selected.id}.`,
+      });
+      trackHuttonEvent("demo_simulation_click", {
+        action: "request_part",
       });
       return;
     }
@@ -1696,36 +1808,113 @@ export function HuttonServiceDemo() {
             : job,
         ),
       );
-      setActiveSection("transport");
+      trackHuttonEvent("demo_simulation_click", {
+        action: "transport_request",
+      });
+      openSection("transport", "quick_action");
       return;
     }
 
     if (action === "check-in") {
       const pending = jobs.find((job) => job.status === "Booking Confirmed");
       if (pending) {
+        trackHuttonEvent("demo_simulation_click", {
+          action: "check_in_vehicle",
+        });
         checkInVehicle(pending.id);
       }
       return;
     }
 
-    setActiveSection("reception");
+    openSection("reception", "quick_action");
   };
 
   return (
     <div className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.14),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)]">
-      <div className="section-shell py-8 sm:py-10 lg:py-12">
-        <div className="rounded-[14px] border border-[#111111]/10 bg-[linear-gradient(135deg,rgba(17,17,17,0.98),rgba(34,38,48,0.96))] p-5 text-white shadow-[0_30px_80px_rgba(17,17,17,0.18)] sm:p-6">
+      {showStickyBar ? (
+        <div className="fixed inset-x-0 bottom-3 z-40 px-3 sm:bottom-auto sm:top-4 sm:px-6">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 rounded-[12px] border border-[#111111]/10 bg-[#111111]/95 px-4 py-3 text-white shadow-[0_20px_40px_rgba(17,17,17,0.28)] backdrop-blur">
+            <p className="text-sm font-medium text-[#d8d8d2]">
+              Hutton Motors Service Centre OS
+            </p>
+            <div className="flex flex-1 flex-wrap justify-end gap-2">
+              <TrackedDemoLink
+                href={contactHref}
+                location="hutton_demo_sticky_cta"
+                system={huttonDemoSlug}
+                className="cta-button"
+                data-event="demo_sticky_cta_click"
+                data-demo-slug={huttonDemoSlug}
+                onClick={() =>
+                  trackHuttonEvent("demo_sticky_cta_click", { location: "sticky_bar" })
+                }
+              >
+                Map My Service Centre Workflow
+              </TrackedDemoLink>
+              <TrackedWhatsAppLink
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                location="hutton_demo_sticky_whatsapp"
+                className="cta-secondary"
+                data-demo-slug={huttonDemoSlug}
+                aria-label="WhatsApp Eddy about my service centre"
+              >
+                <MessageCircleMore className="h-4 w-4" />
+                WhatsApp Eddy About My Service Centre
+              </TrackedWhatsAppLink>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <div className="section-shell py-8 pb-28 sm:py-10 sm:pb-16 lg:py-12">
+        <section
+          ref={heroRef}
+          className="rounded-[14px] border border-[#111111]/10 bg-[linear-gradient(135deg,rgba(17,17,17,0.98),rgba(34,38,48,0.96))] p-5 text-white shadow-[0_30px_80px_rgba(17,17,17,0.18)] sm:p-6"
+        >
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div className="max-w-3xl">
               <p className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#d8d8d2]">
                 Hutton Motors Demo
               </p>
-              <h1 className="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                Service Centre Operating System
+              <h1 className="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+                Run Reception, Workshop, Parts, Shuttle, and Client Updates From One Service-Centre OS
               </h1>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-[#d8d8d2] sm:text-base">
-                The operational heart of the Hutton Motors workshop, now wired with live mock state for bookings, stages, approvals, parts, transport, and WhatsApp communication.
+              <ul className="mt-5 grid gap-3 text-sm leading-7 text-[#f7f7f2] sm:text-base">
+                {heroBullets.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <Sparkles className="mt-1 h-4 w-4 shrink-0 text-[#67E8F9]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-[#d8d8d2] sm:text-base">
+                Interactive service-centre concept demo with live mock state, built to show how a Pine X operating system can coordinate one workshop day.
               </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedDemoLink
+                  href={contactHref}
+                  location="hutton_demo_hero_cta"
+                  system={huttonDemoSlug}
+                  className="cta-button"
+                  data-demo-slug={huttonDemoSlug}
+                >
+                  Map My Service Centre Workflow
+                </TrackedDemoLink>
+                <TrackedWhatsAppLink
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  location="hutton_demo_hero_whatsapp"
+                  className="cta-secondary"
+                  data-demo-slug={huttonDemoSlug}
+                  aria-label="WhatsApp Eddy about my service centre"
+                >
+                  <MessageCircleMore className="h-4 w-4" />
+                  WhatsApp Eddy About My Service Centre
+                </TrackedWhatsAppLink>
+              </div>
             </div>
             <div className="flex flex-wrap gap-2">
               <HuttonStatusBadge value={`${jobs.length} live jobs`} />
@@ -1734,7 +1923,72 @@ export function HuttonServiceDemo() {
               <HuttonStatusBadge value={`${liveCalendarEvents.length} calendar items`} />
             </div>
           </div>
-        </div>
+          <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {previewFrames.map((frame) => (
+              <div
+                key={frame.title}
+                className="rounded-[12px] border border-white/10 bg-white/5 p-4"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+                  {frame.title}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[#d8d8d2]">{frame.detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          className="mt-5 rounded-[14px] border border-[#111111]/10 bg-white/80 p-5 shadow-[0_20px_50px_rgba(17,17,17,0.06)] backdrop-blur"
+          aria-labelledby="hutton-guided-tour"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0f766e]">
+            Start Here in 90 Seconds
+          </p>
+          <h2
+            id="hutton-guided-tour"
+            className="mt-2 font-heading text-2xl font-semibold text-[#111111]"
+          >
+            Guide the meeting through the service-centre flow
+          </h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            <button
+              type="button"
+              onClick={() => openSection("reception", "guided_tour")}
+              className="rounded-[12px] border border-[#111111]/10 bg-[#FAFAF7] p-4 text-left text-sm font-semibold text-[#111111] transition hover:border-[#67E8F9]/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]"
+            >
+              Reception and booking flow
+            </button>
+            <button
+              type="button"
+              onClick={() => openSection("job-card", "guided_tour", { jobId: selectedJob.id })}
+              className="rounded-[12px] border border-[#111111]/10 bg-[#FAFAF7] p-4 text-left text-sm font-semibold text-[#111111] transition hover:border-[#67E8F9]/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]"
+            >
+              Live job card + workshop board
+            </button>
+            <button
+              type="button"
+              onClick={() => openSection("transport", "guided_tour", { jobId: selectedJob.id })}
+              className="rounded-[12px] border border-[#111111]/10 bg-[#FAFAF7] p-4 text-left text-sm font-semibold text-[#111111] transition hover:border-[#67E8F9]/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]"
+            >
+              Parts, shuttle, and WhatsApp coordination
+            </button>
+          </div>
+        </section>
+
+        <section
+          className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+          aria-label="Hutton service-centre proof points"
+        >
+          {proofCards.map((item) => (
+            <div
+              key={item}
+              className="rounded-[12px] border border-[#111111]/10 bg-white/85 p-4 text-sm leading-6 text-[#111111] shadow-[0_18px_35px_rgba(17,17,17,0.05)]"
+            >
+              {item}
+            </div>
+          ))}
+        </section>
 
         <div className="mt-5 grid gap-5 xl:grid-cols-[18rem_minmax(0,1fr)]">
           <div className="space-y-5 xl:sticky xl:top-24 xl:self-start">
@@ -1744,7 +1998,11 @@ export function HuttonServiceDemo() {
                 title="Service centre map"
                 description="Move through the demo in a meeting-friendly sequence without leaving the Hutton service centre route."
               />
-              <nav className="flex gap-2 overflow-x-auto p-3 xl:flex-col xl:overflow-visible">
+              <nav
+                ref={moduleNavRef}
+                className="flex gap-2 overflow-x-auto p-3 xl:flex-col xl:overflow-visible"
+                aria-label="Hutton service centre modules"
+              >
                 {sections.map((section) => {
                   const Icon = section.icon;
                   const active = section.id === activeSection;
@@ -1752,8 +2010,8 @@ export function HuttonServiceDemo() {
                     <button
                       key={section.id}
                       type="button"
-                      onClick={() => setActiveSection(section.id)}
-                      className={`flex shrink-0 items-start gap-3 rounded-[10px] border px-4 py-3 text-left transition xl:w-full ${
+                      onClick={() => openSection(section.id, "module_navigation")}
+                      className={`flex shrink-0 items-start gap-3 rounded-[10px] border px-4 py-3 text-left transition xl:w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9] ${
                         active
                           ? "border-[#111111]/20 bg-[#111111] text-white"
                           : "border-[#111111]/8 bg-white text-[#111111] hover:border-[#67E8F9]/45"
@@ -1785,8 +2043,14 @@ export function HuttonServiceDemo() {
                     <button
                       key={job.id}
                       type="button"
-                      onClick={() => setSelectedJobId(job.id)}
-                      className={`w-full rounded-[10px] border px-4 py-3 text-left transition ${
+                      onClick={() => {
+                        setSelectedJobId(job.id);
+                        trackHuttonEvent("demo_job_select", {
+                          job_id: job.id,
+                          source: "job_navigator",
+                        });
+                      }}
+                      className={`w-full rounded-[10px] border px-4 py-3 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9] ${
                         selectedJobId === job.id
                           ? "border-[#111111]/18 bg-[#111111] text-white"
                           : "border-[#111111]/8 bg-[#FAFAF7] text-[#111111]"
@@ -1811,7 +2075,11 @@ export function HuttonServiceDemo() {
             </HuttonPanel>
           </div>
 
-          <div className="space-y-5">
+          <div
+            ref={contentRef}
+            tabIndex={-1}
+            className="space-y-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#67E8F9]"
+          >
             {activeSection === "dashboard" ? (
               <HuttonDashboard
                 jobs={jobs}
@@ -1943,7 +2211,8 @@ export function HuttonServiceDemo() {
               />
             ) : null}
 
-            <HuttonPanel className="overflow-hidden">
+            <div ref={meetingRef}>
+              <HuttonPanel className="overflow-hidden">
               <HuttonPanelHeader
                 eyebrow="Demo highlights"
                 title="What to show in the meeting"
@@ -1960,7 +2229,12 @@ export function HuttonServiceDemo() {
                 <button
                   type="button"
                   className="cta-button"
-                  onClick={() => createBooking(sampleBookingForm)}
+                  onClick={() => {
+                    trackHuttonEvent("demo_simulation_click", {
+                      action: "create_sample_booking",
+                    });
+                    createBooking(sampleBookingForm);
+                  }}
                 >
                   Create sample booking
                 </button>
@@ -1974,7 +2248,12 @@ export function HuttonServiceDemo() {
                 <button
                   type="button"
                   className="cta-secondary"
-                  onClick={() => advanceJob(selectedJob.id)}
+                  onClick={() => {
+                    trackHuttonEvent("demo_simulation_click", {
+                      action: "advance_active_job",
+                    });
+                    advanceJob(selectedJob.id);
+                  }}
                 >
                   Advance active job
                 </button>
@@ -1986,7 +2265,62 @@ export function HuttonServiceDemo() {
                   Reset demo data
                 </button>
               </div>
-            </HuttonPanel>
+              </HuttonPanel>
+            </div>
+
+            <section className="grid gap-6 rounded-[14px] border border-[#111111]/10 bg-[linear-gradient(180deg,#111111_0%,#1E2430_100%)] p-5 text-white shadow-[0_24px_60px_rgba(17,17,17,0.18)] lg:grid-cols-[1fr_0.9fr] lg:p-7">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#67E8F9]">
+                  Next step
+                </p>
+                <h2 className="mt-2 font-heading text-2xl font-semibold sm:text-3xl">
+                  Map the first service-centre workflow before committing to the full rollout
+                </h2>
+                <div className="mt-5 grid gap-3">
+                  {[
+                    "You send the workshop bottleneck, booking pressure, or coordination gap that hurts the day most.",
+                    "We map the first operating board, job-card view, and communication loop your team should see.",
+                    "You get a practical rollout recommendation before any full build decision.",
+                  ].map((step, index) => (
+                    <div
+                      key={step}
+                      className="flex gap-3 rounded-[12px] border border-white/10 bg-white/5 p-4 text-sm leading-6 text-[#f7f7f2]"
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] bg-white text-sm font-semibold text-[#111111]">
+                        {index + 1}
+                      </span>
+                      <span>{step}</span>
+                    </div>
+                  ))}
+                </div>
+                <TrackedWhatsAppLink
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  location="hutton_demo_close_whatsapp"
+                  className="cta-secondary mt-5"
+                  data-demo-slug={huttonDemoSlug}
+                  aria-label="WhatsApp Eddy about my service centre"
+                >
+                  <MessageCircleMore className="h-4 w-4" />
+                  WhatsApp Eddy About My Service Centre
+                </TrackedWhatsAppLink>
+              </div>
+
+              <ShortAuditForm
+                id="hutton-service-centre-audit"
+                title="Tell us the service-centre bottleneck you want fixed first"
+                subtitle="Send the part of your workshop day that feels messy and Pine X Systems will reply with practical ideas for bookings, job cards, parts, transport, and client updates."
+                problemLabel="Biggest service-centre bottleneck"
+                problemPlaceholder="Reception pressure, approvals, parts delays, shuttle coordination, WhatsApp follow-up..."
+                buttonLabel="Map My Service Centre Workflow"
+                leadOffer="Service Centre Workflow Audit"
+                source="hutton_service_centre_demo_close_form"
+                demoSlug={huttonDemoSlug}
+                leadIntent="demo_page"
+                submitEvent="demo_form_submit"
+              />
+            </section>
           </div>
         </div>
       </div>

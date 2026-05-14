@@ -9,7 +9,7 @@ export function MobileStickyCta() {
         location="mobile_sticky_cta"
         className="cta-button w-full justify-center py-3 text-sm"
       >
-        Book a Free Demo
+        {primaryCta.label}
       </TrackedDemoLink>
     </div>
   );

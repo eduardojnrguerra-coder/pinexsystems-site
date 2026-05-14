@@ -2,16 +2,26 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, BarChart3, MessageCircle } from "lucide-react";
-import { useMemo, useState } from "react";
+import {
+  ArrowLeft,
+  BarChart3,
+  CheckCircle2,
+  ClipboardList,
+  MessageCircle,
+  PackageSearch,
+  ReceiptText,
+} from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
 import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { DemoDashboard } from "@/components/demos/DemoDashboard";
 import { DemoRoleSwitcher } from "@/components/demos/DemoRoleSwitcher";
 import { DemoSidebar } from "@/components/demos/DemoSidebar";
+import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import type { DemoRecord, DemoSection } from "@/lib/demo-data";
 import { getDemoSections } from "@/lib/demo-data";
+import { trackCustomEvent } from "@/lib/gtag";
 import type { DemoSystem } from "@/lib/demo-systems";
 import { demoIconMap } from "@/lib/demo-systems";
 import { whatsappCta } from "@/lib/site";
@@ -25,9 +35,12 @@ const nounsBySystem: Record<string, Nouns> = {
   agency: { singular: "campaign", plural: "campaigns", queue: "client queue", detail: "approvals", ownerSection: "Overview", managerSection: "Clients", staffSection: "Content" },
   construction: { singular: "project", plural: "projects", queue: "site queue", detail: "materials", ownerSection: "Overview", managerSection: "Projects", staffSection: "Projects" },
   warehouse: { singular: "stock item", plural: "stock items", queue: "pick queue", detail: "receiving", ownerSection: "Overview", managerSection: "Inventory", staffSection: "Dispatch" },
+  logistics: { singular: "delivery", plural: "deliveries", queue: "dispatch board", detail: "POD", ownerSection: "Overview", managerSection: "Dispatch", staffSection: "Deliveries" },
   farm: { singular: "task", plural: "tasks", queue: "field queue", detail: "equipment", ownerSection: "Overview", managerSection: "Tasks", staffSection: "Tasks" },
   security: { singular: "incident", plural: "incidents", queue: "shift queue", detail: "check-ins", ownerSection: "Overview", managerSection: "Incidents", staffSection: "Sites" },
   "custom-business": { singular: "workflow", plural: "workflows", queue: "approval queue", detail: "documents", ownerSection: "Overview", managerSection: "Approvals", staffSection: "Workflows" },
+  "accounting-os": { singular: "client workflow", plural: "client workflows", queue: "review queue", detail: "documents", ownerSection: "Overview", managerSection: "Reviews", staffSection: "Documents" },
+  "marine-business": { singular: "work item", plural: "work items", queue: "sales and service queue", detail: "parts", ownerSection: "Overview", managerSection: "Service", staffSection: "Parts" },
 };
 
 function roleKindFromLabel(label: string): RoleKind {
@@ -38,6 +51,281 @@ function roleKindFromLabel(label: string): RoleKind {
 }
 
 const moneyFormatter = new Intl.NumberFormat("en-ZA", { style: "currency", currency: "ZAR", maximumFractionDigits: 0 });
+const workshopProofCards = [
+  "Replaces paper job cards and scattered WhatsApp updates",
+  "Built around your actual workshop flow",
+  "Easy for advisors, technicians, and owners to use",
+  "Support continues after launch",
+];
+
+const workshopHeroBullets = [
+  "See blocked jobs before customers start chasing",
+  "Track waiting parts, technician flow, and invoice-ready work",
+  "Give owners one board instead of paper, chats, and spreadsheets",
+];
+
+const workshopGuidedTasks = [
+  {
+    label: "Show blocked jobs",
+    targetSection: "Job Cards",
+    search: "waiting",
+    icon: ClipboardList,
+  },
+  {
+    label: "Show waiting parts",
+    targetSection: "Parts",
+    search: "low",
+    icon: PackageSearch,
+  },
+  {
+    label: "Show invoice-ready work",
+    targetSection: "Job Cards",
+    search: "quality",
+    icon: ReceiptText,
+  },
+];
+
+type DemoConversionConfig = {
+  headline: string;
+  bullets: string[];
+  primaryCta: string;
+  secondaryCta: string;
+  industrySlug?: string;
+  proof: string[];
+  frames: string[];
+  guidedTasks: { label: string; targetSection: string; search: string }[];
+  closeTitle: string;
+  closeSubtitle: string;
+  problemLabel: string;
+  problemPlaceholder: string;
+  nextSteps: string[];
+  modulePicker?: string[];
+  secondaryHref?: string;
+  secondaryEvent?: string;
+};
+
+const demoConversion: Record<string, DemoConversionConfig> = {
+  logistics: {
+    headline: "Track Dispatch, Fleet Status, POD, and Delivery Profit From One Logistics Command Centre",
+    bullets: [
+      "Assign jobs and see delayed deliveries in one board",
+      "Track vehicles, drivers, POD records, and customer updates",
+      "Give owners a live exceptions dashboard instead of delayed reporting",
+    ],
+    primaryCta: "Show Me My Logistics Command Centre",
+    secondaryCta: "WhatsApp Eddy About My Logistics Flow",
+    industrySlug: "logistics",
+    proof: [
+      "Jobs, fleet, POD, and reporting in one system",
+      "Built for South African logistics operations",
+      "Owner, dispatcher, and driver views",
+      "Supports phased rollout",
+    ],
+    frames: ["Dispatch board", "Fleet status", "POD capture", "Owner exceptions"],
+    guidedTasks: [
+      { label: "Assign a job", targetSection: "Dispatch", search: "assigned" },
+      { label: "Capture POD", targetSection: "POD", search: "pending" },
+      { label: "Surface delayed deliveries", targetSection: "Deliveries", search: "delayed" },
+    ],
+    closeTitle: "Map the logistics command centre your team should see first",
+    closeSubtitle: "Send the messy part of your dispatch, POD, driver, or reporting flow and Eddy will reply with practical system ideas.",
+    problemLabel: "Biggest logistics bottleneck",
+    problemPlaceholder: "Delayed routes, missing POD, driver updates, fleet visibility...",
+    nextSteps: [
+      "You send the delivery, fleet, or POD bottleneck.",
+      "We map the first command board and driver workflow.",
+      "You get practical next steps before committing to a full build.",
+    ],
+  },
+  warehouse: {
+    headline: "See Receiving, Dispatch, Reorder Risk, and Stock Exceptions in One Warehouse Dashboard",
+    bullets: [
+      "Trust stock movement and receiving again",
+      "Surface dispatch pressure and low-stock risk early",
+      "Give owners and warehouse managers one live control layer",
+    ],
+    primaryCta: "Show Me My Warehouse Control System",
+    secondaryCta: "Need Fleet and POD Too? Ask for the Logistics Version",
+    industrySlug: "warehouses",
+    proof: [
+      "Receiving, dispatch, reorder, and supplier pressure in one view",
+      "Built for warehouse teams using paper, spreadsheets, or disconnected tools",
+      "Owner and warehouse manager views",
+      "Clean bridge into fleet and POD workflows",
+    ],
+    frames: ["Receiving queue", "Dispatch pressure", "Low-stock risk", "Supplier follow-up"],
+    guidedTasks: [
+      { label: "Review receiving queue", targetSection: "Inventory", search: "receiving" },
+      { label: "Surface a dispatch exception", targetSection: "Dispatch", search: "dispatch" },
+      { label: "Trigger a reorder", targetSection: "Inventory", search: "low" },
+    ],
+    closeTitle: "Map your warehouse control system before adding logistics layers",
+    closeSubtitle: "Start with stock movement, receiving, dispatch, and reorder risk. If fleet and POD matter too, we can extend the same control layer.",
+    problemLabel: "Biggest warehouse bottleneck",
+    problemPlaceholder: "Receiving delays, dispatch pressure, stock accuracy, reorder risk...",
+    nextSteps: [
+      "You send the warehouse bottleneck.",
+      "We map the first receiving, dispatch, or reorder dashboard.",
+      "If needed, we show how it connects into the Logistics Command Centre.",
+    ],
+    secondaryHref: "/demos/logistics",
+    secondaryEvent: "warehouse_to_logistics_click",
+  },
+  construction: {
+    headline: "Track Site Tasks, Materials, and Delay Risk Without Waiting for End-of-Day Updates",
+    bullets: [
+      "See milestone, procurement, and weather risk early",
+      "Keep site managers, owners, and clients aligned",
+      "Replace scattered updates with one live project control layer",
+    ],
+    primaryCta: "Map My Construction Control Layer",
+    secondaryCta: "WhatsApp Eddy About My Project Workflow",
+    industrySlug: "construction",
+    proof: ["Milestone risk visible early", "Materials and procurement pressure surfaced", "Owner, site manager, and client views", "Reporting built around live project status"],
+    frames: ["Milestone board", "Material risk", "Weather delay", "Client report"],
+    guidedTasks: [
+      { label: "Show material risk", targetSection: "Materials", search: "risk" },
+      { label: "Show delayed milestone", targetSection: "Projects", search: "delayed" },
+      { label: "Show client report preview", targetSection: "Reports", search: "report" },
+    ],
+    closeTitle: "Map the control layer your project team needs first",
+    closeSubtitle: "Send the site, procurement, or reporting pressure that slows you down and Eddy will suggest a practical starting system.",
+    problemLabel: "Biggest construction bottleneck",
+    problemPlaceholder: "Material delays, site updates, milestone risk, client reporting...",
+    nextSteps: ["You send the project pressure point.", "We map the first live control board.", "You get a phased rollout idea before a full build."],
+  },
+  agency: {
+    headline: "Keep Campaign Delivery, Approvals, and Client Reporting Under One Ops Layer",
+    bullets: [
+      "Stop approvals and content status from getting lost in chat",
+      "See who is blocked, what is due, and which reports are still open",
+      "Give owners and account managers cleaner visibility",
+    ],
+    primaryCta: "Map My Agency Delivery System",
+    secondaryCta: "WhatsApp Eddy About My Approval Flow",
+    industrySlug: "agencies",
+    proof: ["Approvals, delivery, and reports in one workflow", "Built for owner and account-manager visibility", "Clear status for blocked work", "Useful before clients start chasing"],
+    frames: ["Client approvals", "Campaign delivery", "Monthly reports", "Owner queue"],
+    guidedTasks: [
+      { label: "Show client approval flow", targetSection: "Content", search: "approval" },
+      { label: "Show monthly report view", targetSection: "Reports", search: "report" },
+      { label: "Show campaign delivery status", targetSection: "Clients", search: "campaign" },
+    ],
+    closeTitle: "Map your agency delivery system around the work that gets stuck",
+    closeSubtitle: "Send the approvals, reporting, or delivery bottleneck and Eddy will map a focused ops layer.",
+    problemLabel: "Biggest agency delivery bottleneck",
+    problemPlaceholder: "Approvals, reporting, campaign delivery, account-manager visibility...",
+    nextSteps: ["You send the delivery bottleneck.", "We map the approval and reporting flow.", "You get the first demo direction before a full build."],
+  },
+  security: {
+    headline: "See Missed Check-Ins, Patrols, Incidents, and Rosters Before Clients Do",
+    bullets: [
+      "Escalate missed activity early",
+      "Track patrols and incidents across sites",
+      "Give management one live exception view",
+    ],
+    primaryCta: "Map My Security Operations System",
+    secondaryCta: "WhatsApp Eddy About My Incident Flow",
+    industrySlug: "security",
+    proof: ["Incidents, patrols, rosters, and reports in one view", "Built for security owners and ops managers", "Exception visibility before clients chase", "Supports phased site rollout"],
+    frames: ["Missed check-ins", "Incident queue", "Roster gaps", "Client reporting"],
+    guidedTasks: [
+      { label: "Show missed check-ins", targetSection: "Patrols", search: "missed" },
+      { label: "Show open incident", targetSection: "Incidents", search: "open" },
+      { label: "Show roster/site reporting", targetSection: "Reporting", search: "report" },
+    ],
+    closeTitle: "Map the security operations view your managers need first",
+    closeSubtitle: "Send the missed check-in, incident, patrol, or roster problem and Eddy will suggest a practical control layer.",
+    problemLabel: "Biggest security operations bottleneck",
+    problemPlaceholder: "Missed check-ins, incidents, patrol reporting, roster gaps...",
+    nextSteps: ["You send the risk area.", "We map the first exception dashboard.", "You get a rollout path for sites and teams."],
+  },
+  farm: {
+    headline: "Run Field Tasks, Inputs, Equipment, and Harvest Dispatch From One Farm Ops Layer",
+    bullets: [
+      "Surface blocked field work and low inputs early",
+      "Track equipment and labour visibility from one dashboard",
+      "Give owners clearer harvest and dispatch reporting",
+    ],
+    primaryCta: "Map My Farm Operations System",
+    secondaryCta: "WhatsApp Eddy About My Field Workflow",
+    industrySlug: "farms",
+    proof: ["Field tasks, inputs, equipment, and dispatch in one system", "Season-aware owner visibility", "Farm manager and worker views", "Phased rollout around the season"],
+    frames: ["Field tasks", "Low inputs", "Equipment maintenance", "Harvest dispatch"],
+    guidedTasks: [
+      { label: "Show low-input alert", targetSection: "Inputs", search: "low" },
+      { label: "Show equipment maintenance", targetSection: "Equipment", search: "maintenance" },
+      { label: "Show harvest/dispatch view", targetSection: "Harvest", search: "harvest" },
+    ],
+    closeTitle: "Map the farm ops layer that fits your season",
+    closeSubtitle: "Send the field, input, equipment, or dispatch pressure and Eddy will map the practical first system.",
+    problemLabel: "Biggest farm operations bottleneck",
+    problemPlaceholder: "Low inputs, equipment maintenance, labour visibility, harvest dispatch...",
+    nextSteps: ["You send the seasonal pressure point.", "We map the first operations view.", "You get a practical rollout idea for your team."],
+  },
+  "custom-business": {
+    headline: "Choose the Modules Your Business Actually Needs and See How They Work Together",
+    bullets: [
+      "Start with approvals, dashboards, client portals, documents, automation, or recurring workflows",
+      "See how a custom Pine X system can be structured around your business",
+    ],
+    primaryCta: "Request My Custom Workflow Demo",
+    secondaryCta: "Tell Eddy What Feels Messy",
+    industrySlug: "custom-business",
+    proof: ["Built around your workflow", "Choose only the modules you need", "Owner, staff, and client views", "Designed for phased rollout"],
+    frames: ["Approvals", "Client portal", "Documents", "Owner dashboard"],
+    guidedTasks: [
+      { label: "Show approval flow", targetSection: "Approvals", search: "approval" },
+      { label: "Show owner dashboard", targetSection: "Overview", search: "" },
+      { label: "Show client portal", targetSection: "Client Portal", search: "client" },
+    ],
+    closeTitle: "Tell Eddy what feels messy and get a focused workflow demo direction",
+    closeSubtitle: "Choose modules first, then map how they should connect for your team.",
+    problemLabel: "Biggest workflow bottleneck",
+    problemPlaceholder: "Approvals, documents, client portal, reporting, automation...",
+    nextSteps: ["You choose the modules that matter.", "We map how the workflows connect.", "You get a custom demo direction before a full build."],
+    modulePicker: ["Approvals", "Client portal", "Documents", "Owner dashboard", "Automation", "Staff workflow"],
+  },
+  "accounting-os": {
+    headline: "Control Recurring Client Work, Document Chasing, Reviews, and Deadlines in One Practice OS",
+    bullets: ["Track onboarding, document requests, review flow, and reporting", "Surface overdue work and deadline risk early", "Give partners one owner dashboard instead of scattered reminders"],
+    primaryCta: "Map My Practice Operating System",
+    secondaryCta: "WhatsApp Eddy About My Review Workflow",
+    industrySlug: "accounting",
+    proof: ["Recurring work and deadlines in one view", "Built for partners, managers, and staff", "Document chasing and reviews connected", "Useful for compliance-heavy service teams"],
+    frames: ["Problem summary", "System modules", "Review queue", "Deadline dashboard"],
+    guidedTasks: [
+      { label: "Show document chasing", targetSection: "Documents", search: "document" },
+      { label: "Show review flow", targetSection: "Reviews", search: "review" },
+      { label: "Show deadline risk", targetSection: "Deadlines", search: "risk" },
+    ],
+    closeTitle: "Map the practice OS your client work needs first",
+    closeSubtitle: "Send the recurring work, document, review, or deadline bottleneck and Eddy will map a practical operating flow.",
+    problemLabel: "Biggest practice workflow bottleneck",
+    problemPlaceholder: "Document chasing, reviews, deadlines, onboarding...",
+    nextSteps: ["You send the practice bottleneck.", "We map the first operating workflow.", "You get practical next steps before a full build."],
+  },
+  "marine-business": {
+    headline: "Unify Sales, Service Bookings, Parts, and After-Sales Visibility in One Marine System",
+    bullets: ["Track enquiries, unit availability, service bookings, and parts requests", "Give sales and service one shared owner view", "Stop after-sales pressure from living in disconnected tools"],
+    primaryCta: "Show Me My Marine Business System",
+    secondaryCta: "WhatsApp Eddy About My Marine Workflow",
+    industrySlug: "marine",
+    proof: ["Sales, service, parts, and after-sales in one view", "Built for hybrid marine operations", "Owner, sales, and service views", "Supports phased rollout"],
+    frames: ["Sales enquiries", "Service bookings", "Parts requests", "Owner dashboard"],
+    guidedTasks: [
+      { label: "Show sales workflow", targetSection: "Sales", search: "enquiry" },
+      { label: "Show service booking", targetSection: "Service", search: "booking" },
+      { label: "Show parts pressure", targetSection: "Parts", search: "supplier" },
+    ],
+    closeTitle: "Map the marine system that connects sales and service",
+    closeSubtitle: "Send the sales, service, parts, or after-sales bottleneck and Eddy will suggest the first operating layer.",
+    problemLabel: "Biggest marine workflow bottleneck",
+    problemPlaceholder: "Sales enquiries, unit availability, service bookings, parts requests...",
+    nextSteps: ["You send the marine workflow issue.", "We map the shared sales and service view.", "You get a practical rollout path."],
+  },
+};
+
 function formatMoney(value: number) {
   return moneyFormatter.format(Math.max(0, Math.round(value))).replace(/\u00a0/g, " ");
 }
@@ -132,18 +420,29 @@ function actionLabels(roleKind: RoleKind, nouns: Nouns) {
 }
 
 export function DemoShell({ system }: { system: DemoSystem }) {
+  const isWorkshopDemo = system.slug === "workshop";
+  const conversion = demoConversion[system.slug];
+  const canvasRef = useRef<HTMLElement | null>(null);
   const [sections, setSections] = useState<DemoSection[]>(() => getDemoSections(system.slug));
   const [activeRole, setActiveRole] = useState(system.roles[0]);
   const [activeSectionId, setActiveSectionId] = useState<string>(getDemoSections(system.slug)[0]?.id ?? "overview");
   const [selectedRecordId, setSelectedRecordId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [feed, setFeed] = useState<string[]>([
-    `Loaded ${system.shortTitle} demo.`,
-    "Role-based state is ready.",
+    `Loaded ${system.shortTitle} interactive concept preview.`,
+    "Example owner and team views are ready.",
   ]);
   const [notice, setNotice] = useState<string | null>(null);
   const [accessMode, setAccessMode] = useState<"full" | "limited">("full");
   const [activeMetric, setActiveMetric] = useState<string | null>(null);
+
+  useEffect(() => {
+    trackCustomEvent("demo_view", {
+      demo_slug: system.slug,
+      industry_slug: conversion?.industrySlug,
+      lead_intent: "demo_page",
+    });
+  }, [conversion?.industrySlug, system.slug]);
 
   const roleKind = roleKindFromLabel(activeRole);
   const nouns = nounsBySystem[system.slug] ?? nounsBySystem.dealership;
@@ -246,6 +545,11 @@ export function DemoShell({ system }: { system: DemoSystem }) {
     setActiveMetric(null);
     setNotice(`${role} activated. ${summaryText(system, kind, nouns)}`);
     updateFeed(`${role} activated for ${system.shortTitle}.`);
+    trackCustomEvent("demo_role_switch", {
+      demo_slug: system.slug,
+      industry_slug: conversion?.industrySlug,
+      role,
+    });
   };
   const handleSectionChange = (label: string) => {
     const next = orderedSections.find((item) => item.label === label);
@@ -254,9 +558,71 @@ export function DemoShell({ system }: { system: DemoSystem }) {
     setSelectedRecordId(null);
     setNotice(`Switched to ${next.label}.`);
     updateFeed(`Viewed ${next.label} in the ${activeRole} mode.`);
+    trackCustomEvent("demo_tab_click", {
+      demo_slug: system.slug,
+      industry_slug: conversion?.industrySlug,
+      tab: label,
+    });
+  };
+
+  const handleGuidedTask = (task: NonNullable<DemoConversionConfig["guidedTasks"]>[number]) => {
+    const next = orderedSections.find((item) => item.label === task.targetSection);
+    trackCustomEvent("demo_guided_task_start", {
+      demo_slug: system.slug,
+      industry_slug: conversion?.industrySlug,
+      task: task.label,
+    });
+    if (next) {
+      setActiveSectionId(next.id);
+    }
+    setSearch(task.search);
+    setSelectedRecordId(null);
+    setNotice(`${task.label} opened in the ${system.shortTitle} demo.`);
+    updateFeed(`${task.label} guided task opened.`);
+    window.setTimeout(() => {
+      canvasRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      canvasRef.current?.focus({ preventScroll: true });
+      trackCustomEvent("demo_guided_task_complete", {
+        demo_slug: system.slug,
+        industry_slug: conversion?.industrySlug,
+        task: task.label,
+      });
+    }, 80);
+  };
+
+  const handleWorkshopGuidedTask = (task: (typeof workshopGuidedTasks)[number]) => {
+    const next = orderedSections.find((item) => item.label === task.targetSection);
+    trackCustomEvent("demo_guided_task_start", {
+      demo_slug: "workshop",
+      task: task.label,
+    });
+    if (next) {
+      setActiveSectionId(next.id);
+    }
+    setSearch(task.search);
+    setSelectedRecordId(null);
+    setNotice(`${task.label} opened in the workshop demo.`);
+    updateFeed(`${task.label} guided task opened.`);
+    window.setTimeout(() => {
+      canvasRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      canvasRef.current?.focus({ preventScroll: true });
+      trackCustomEvent("demo_guided_task_complete", {
+        demo_slug: "workshop",
+        task: task.label,
+      });
+    }, 80);
   };
 
   const Icon = demoIconMap[system.icon];
+  const contactHref = `/contact?demo_slug=${system.slug}${conversion?.industrySlug ? `&industry_slug=${conversion.industrySlug}` : ""}&lead_intent=demo_page#lead-form`;
+  const workshopWhatsAppHref = `${whatsappCta.href}?text=${encodeURIComponent(
+    "Hi Eddy, I saw the Workshop Control System demo and want to talk about my workshop flow.",
+  )}`;
+  const whatsAppHref = isWorkshopDemo
+    ? workshopWhatsAppHref
+    : `${whatsappCta.href}?text=${encodeURIComponent(
+        `Hi Eddy, I saw the ${system.title} demo and want to talk about my workflow.`,
+      )}`;
   const viewSystem = useMemo(
     () => ({
       ...system,
@@ -276,32 +642,308 @@ export function DemoShell({ system }: { system: DemoSystem }) {
   return (
     <div className="bg-[linear-gradient(180deg,#050505_0%,#0B0C10_44%,#111820_100%)] text-[#f7f7f2]">
       <div className="section-shell py-8 sm:py-10 lg:py-12">
+        {isWorkshopDemo ? (
+          <>
+            <section className="grid gap-6 rounded-[8px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(255,255,255,0.025))] p-5 shadow-[0_30px_90px_rgba(0,0,0,0.28)] lg:grid-cols-[1.02fr_0.98fr] lg:p-7">
+              <div>
+                <Link href="/demos" className="inline-flex items-center gap-2 text-sm font-semibold text-[#d8d8d2] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]">
+                  <ArrowLeft className="h-4 w-4" /> Back to demos
+                </Link>
+                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+                  Interactive concept preview for workshops
+                </p>
+                <h1 className="mt-3 font-heading text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                  Digital Job Cards, Live Workshop Board, and Parts Control for Busy South African Service Centres
+                </h1>
+                <ul className="mt-6 grid gap-3 text-sm leading-6 text-[#f7f7f2] sm:text-base">
+                  {workshopHeroBullets.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-[#67E8F9]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <TrackedDemoLink
+                    href={contactHref}
+                    location="workshop_demo_hero_audit"
+                    system="workshop"
+                    className="cta-button"
+                    data-event="demo_cta_click"
+                    data-demo-slug="workshop"
+                    data-industry-slug="workshops"
+                    data-lead-intent="demo_page"
+                  >
+                    Get My Workshop Control Audit
+                  </TrackedDemoLink>
+                  <TrackedWhatsAppLink
+                    href={workshopWhatsAppHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    location="workshop_demo_hero_whatsapp"
+                    className="cta-secondary"
+                    data-event="demo_whatsapp_click"
+                    data-demo-slug="workshop"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp Eddy About My Workshop Flow
+                  </TrackedWhatsAppLink>
+                </div>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {[
+                  ["Live workshop board", "38 open jobs with blocked work visible"],
+                  ["Parts control", "7 jobs waiting on parts surfaced early"],
+                  ["Invoice-ready queue", "9 jobs ready for admin follow-up"],
+                ].map(([title, detail]) => (
+                  <div key={title} className="rounded-[8px] border border-white/10 bg-black/25 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#67E8F9]">
+                      {title}
+                    </p>
+                    <p className="mt-3 text-2xl font-semibold text-white">{detail.split(" ")[0]}</p>
+                    <p className="mt-2 text-sm leading-6 text-[#d8d8d2]">
+                      {detail.split(" ").slice(1).join(" ")}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section aria-label="Workshop system proof points" className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {workshopProofCards.map((item) => (
+                <div key={item} className="rounded-[8px] border border-white/10 bg-white/[0.045] p-4 text-sm leading-6 text-[#f7f7f2]">
+                  {item}
+                </div>
+              ))}
+            </section>
+          </>
+        ) : null}
+
+        {conversion && !isWorkshopDemo ? (
+          <>
+            <section className="grid gap-6 rounded-[8px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(255,255,255,0.025))] p-5 shadow-[0_30px_90px_rgba(0,0,0,0.28)] lg:grid-cols-[1.02fr_0.98fr] lg:p-7">
+              <div>
+                <Link href="/demos" className="inline-flex items-center gap-2 text-sm font-semibold text-[#d8d8d2] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]">
+                  <ArrowLeft className="h-4 w-4" /> Back to demos
+                </Link>
+                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+                  Interactive concept preview
+                </p>
+                <h1 className="mt-3 font-heading text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                  {conversion.headline}
+                </h1>
+                <ul className="mt-6 grid gap-3 text-sm leading-6 text-[#f7f7f2] sm:text-base">
+                  {conversion.bullets.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-[#67E8F9]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <TrackedDemoLink
+                    href={contactHref}
+                    location={`${system.slug}_demo_hero_cta`}
+                    system={system.slug}
+                    className="cta-button"
+                    data-event="demo_cta_click"
+                    data-demo-slug={system.slug}
+                    data-industry-slug={conversion.industrySlug}
+                    data-lead-intent="demo_page"
+                    onClick={() =>
+                      trackCustomEvent("demo_cta_click", {
+                        demo_slug: system.slug,
+                        industry_slug: conversion.industrySlug,
+                        cta_type: "primary",
+                      })
+                    }
+                  >
+                    {conversion.primaryCta}
+                  </TrackedDemoLink>
+                  {conversion.secondaryHref ? (
+                    <Link
+                      href={conversion.secondaryHref}
+                      className="cta-secondary"
+                      data-event={conversion.secondaryEvent}
+                      data-demo-slug={system.slug}
+                      onClick={() =>
+                        trackCustomEvent(conversion.secondaryEvent ?? "demo_cta_click", {
+                          demo_slug: system.slug,
+                          industry_slug: conversion.industrySlug,
+                          cta_type: "secondary",
+                        })
+                      }
+                    >
+                      {conversion.secondaryCta}
+                    </Link>
+                  ) : (
+                    <TrackedWhatsAppLink
+                      href={whatsAppHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      location={`${system.slug}_demo_hero_whatsapp`}
+                      className="cta-secondary"
+                      data-event="demo_whatsapp_click"
+                      data-demo-slug={system.slug}
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      {conversion.secondaryCta}
+                    </TrackedWhatsAppLink>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                {conversion.frames.map((frame, index) => (
+                  <div key={frame} className="rounded-[8px] border border-white/10 bg-black/25 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#67E8F9]">
+                      {frame}
+                    </p>
+                    <p className="mt-3 text-2xl font-semibold text-white">
+                      {system.metrics[index]?.value ?? "Live"}
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-[#d8d8d2]">
+                      {system.metrics[index]?.detail ?? "Placeholder frame for a real system screenshot."}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section aria-label={`${system.shortTitle} proof points`} className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {conversion.proof.map((item) => (
+                <div key={item} className="rounded-[8px] border border-white/10 bg-white/[0.045] p-4 text-sm leading-6 text-[#f7f7f2]">
+                  {item}
+                </div>
+              ))}
+            </section>
+          </>
+        ) : null}
+
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <Link href="/demos" className="inline-flex items-center gap-2 text-sm font-semibold text-[#d8d8d2] hover:text-white">
+          <Link href="/demos" className={`inline-flex items-center gap-2 text-sm font-semibold text-[#d8d8d2] hover:text-white ${isWorkshopDemo || conversion ? "sr-only" : ""}`}>
             <ArrowLeft className="h-4 w-4" /> Back to demos
           </Link>
           <div className="flex flex-wrap gap-2">
             <TrackedWhatsAppLink
-              href={whatsappCta.href}
+              href={whatsAppHref}
               target="_blank"
               rel="noopener noreferrer"
               location={`demo_shell_${system.slug}`}
               className="cta-secondary"
+              data-event={isWorkshopDemo || conversion ? "demo_whatsapp_click" : undefined}
+              data-demo-slug={system.slug}
             >
-              <MessageCircle className="h-4 w-4" /> WhatsApp
+              <MessageCircle className="h-4 w-4" />
+              {isWorkshopDemo ? "WhatsApp Eddy About My Workshop Flow" : conversion ? "WhatsApp Eddy About This Demo" : "WhatsApp"}
             </TrackedWhatsAppLink>
             <TrackedDemoLink
-              href="/contact#lead-form"
+              href={contactHref}
               location="demo_shell_request_system"
               system={system.slug}
               className="cta-button"
+              data-event={isWorkshopDemo || conversion ? "demo_cta_click" : "request_my_version_click"}
+              data-demo-slug={system.slug}
+              data-industry-slug={conversion?.industrySlug}
+              data-lead-intent="demo_page"
             >
-              Request This System
+              {isWorkshopDemo ? "Get My Workshop Control Audit" : conversion ? conversion.primaryCta : "Map This Demo Around My Business"}
             </TrackedDemoLink>
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-[12px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] shadow-[0_30px_90px_rgba(0,0,0,0.34)]">
+        {isWorkshopDemo ? (
+          <section className="mb-5 mt-6 rounded-[8px] border border-white/10 bg-white/[0.04] p-5" aria-labelledby="guided-workshop-tasks">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+                  Guided demo tasks
+                </p>
+                <h2 id="guided-workshop-tasks" className="mt-2 font-heading text-2xl font-semibold text-white">
+                  Start with the pressure point your workshop feels most
+                </h2>
+              </div>
+            </div>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              {workshopGuidedTasks.map((task) => {
+                const TaskIcon = task.icon;
+
+                return (
+                  <button
+                    key={task.label}
+                    type="button"
+                    onClick={() => handleWorkshopGuidedTask(task)}
+                    className="rounded-[8px] border border-white/10 bg-black/20 p-4 text-left text-sm font-semibold text-white transition hover:border-[#67E8F9]/50 hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]"
+                    data-event="demo_guided_task_start"
+                    data-demo-slug="workshop"
+                  >
+                    <TaskIcon className="mb-3 h-5 w-5 text-[#67E8F9]" />
+                    {task.label}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        ) : null}
+
+        {conversion && !isWorkshopDemo ? (
+          <section className="mb-5 mt-6 rounded-[8px] border border-white/10 bg-white/[0.04] p-5" aria-labelledby={`${system.slug}-guided-tasks`}>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+                  Guided demo tasks
+                </p>
+                <h2 id={`${system.slug}-guided-tasks`} className="mt-2 font-heading text-2xl font-semibold text-white">
+                  Start with the workflow pressure point you want to inspect
+                </h2>
+              </div>
+            </div>
+            {conversion.modulePicker ? (
+              <div className="mt-4 flex flex-wrap gap-2" aria-label="Custom workflow module picker">
+                {conversion.modulePicker.map((module) => (
+                  <button
+                    key={module}
+                    type="button"
+                    onClick={() => {
+                      setSearch(module);
+                      setNotice(`${module} selected for the custom workflow preview.`);
+                      trackCustomEvent("module_select", {
+                        demo_slug: system.slug,
+                        industry_slug: conversion.industrySlug,
+                        task: module,
+                      });
+                    }}
+                    className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-xs font-semibold text-[#f7f7f2] transition hover:border-[#67E8F9]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]"
+                  >
+                    {module}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              {conversion.guidedTasks.map((task) => (
+                <button
+                  key={task.label}
+                  type="button"
+                  onClick={() => handleGuidedTask(task)}
+                  className="rounded-[8px] border border-white/10 bg-black/20 p-4 text-left text-sm font-semibold text-white transition hover:border-[#67E8F9]/50 hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#67E8F9]"
+                  data-event="demo_guided_task_start"
+                  data-demo-slug={system.slug}
+                >
+                  {task.label}
+                </button>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <section
+          ref={canvasRef}
+          tabIndex={-1}
+          aria-label={isWorkshopDemo ? "Interactive workshop control demo" : `${system.title} interactive demo`}
+          className="overflow-hidden rounded-[12px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] shadow-[0_30px_90px_rgba(0,0,0,0.34)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#67E8F9]"
+        >
           <div className="border-b border-white/10 bg-[linear-gradient(90deg,rgba(255,255,255,0.04),transparent)] p-5 sm:p-6">
             <div className="flex flex-wrap items-start justify-between gap-5">
               <div className="flex gap-4">
@@ -315,7 +957,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                     </span>
                     <p className="font-heading text-base font-semibold text-white">Pine X Systems</p>
                     <span className="rounded-full border border-[#67E8F9]/30 bg-[#67E8F9]/10 px-3 py-1 text-xs font-semibold text-[#67E8F9]">
-                      Demo Mode
+                      Interactive concept preview
                     </span>
                   </div>
                   <h1 className="mt-3 font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl">
@@ -324,7 +966,12 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                   <p className="mt-2 max-w-2xl text-sm leading-7 text-[#a8a8a2]">{roleSummary}</p>
                 </div>
               </div>
-              <DemoRoleSwitcher roles={system.roles} activeRole={activeRole} onRoleChange={handleRoleChange} />
+              <DemoRoleSwitcher
+                roles={system.roles}
+                activeRole={activeRole}
+                onRoleChange={handleRoleChange}
+                demoSlug={isWorkshopDemo ? "workshop" : system.slug}
+              />
             </div>
             {notice ? <div className="mt-4 rounded-[8px] border border-[#67E8F9]/20 bg-[#67E8F9]/10 px-4 py-3 text-sm text-[#d8f8ff]">{notice}</div> : null}
           </div>
@@ -341,7 +988,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                     </p>
                     <h2 className="mt-2 font-heading text-2xl font-semibold text-white">{roleSummary}</h2>
                     <p className="mt-2 max-w-3xl text-sm leading-6 text-[#d8d8d2]">
-                      {section?.subtitle ?? "Role-specific view with live state changes."}
+                      {section?.subtitle ?? "Example owner and team views with visible workflow actions."}
                     </p>
                   </div>
                   <button type="button" onClick={handleSummary} className="cta-button">
@@ -379,7 +1026,131 @@ export function DemoShell({ system }: { system: DemoSystem }) {
               />
             </main>
           </div>
-        </div>
+        </section>
+
+        {isWorkshopDemo ? (
+          <section
+            className="mt-8 grid gap-6 rounded-[8px] border border-white/10 bg-white/[0.04] p-5 lg:grid-cols-[1fr_0.9fr] lg:p-7"
+            aria-labelledby="workshop-next-step"
+          >
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+                Next step
+              </p>
+              <h2 id="workshop-next-step" className="mt-2 font-heading text-2xl font-semibold text-white sm:text-3xl">
+                Get a workshop control audit before committing to a full build
+              </h2>
+              <div className="mt-5 grid gap-3">
+                {[
+                  "You send the bottleneck: job cards, waiting parts, technician flow, or reporting.",
+                  "We map the first control board your workshop should see.",
+                  "You get practical next steps before any full system commitment.",
+                ].map((step, index) => (
+                  <div key={step} className="flex gap-3 rounded-[8px] border border-white/10 bg-black/20 p-4 text-sm leading-6 text-[#f7f7f2]">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] bg-white text-sm font-semibold text-[#0b0c10]">
+                      {index + 1}
+                    </span>
+                    <span>{step}</span>
+                  </div>
+                ))}
+              </div>
+              <TrackedWhatsAppLink
+                href={workshopWhatsAppHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                location="workshop_demo_close_whatsapp"
+                className="cta-secondary mt-5"
+                data-event="demo_whatsapp_click"
+                data-demo-slug="workshop"
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp Eddy About My Workshop Flow
+              </TrackedWhatsAppLink>
+            </div>
+
+            <ShortAuditForm
+              id="workshop-demo-audit"
+              title="Tell us your biggest workshop bottleneck"
+              subtitle="Send the messy part of your workshop flow and Eddy will reply with practical system ideas for job cards, parts, technicians, or owner visibility."
+              problemLabel="Biggest workshop bottleneck"
+              problemPlaceholder="Waiting parts, paper job cards, customer updates, invoice-ready work..."
+              buttonLabel="Get My Workshop Control Audit"
+              leadOffer="Workshop Control Audit"
+              source="workshop_demo_close_form"
+              demoSlug="workshop"
+              industrySlug="workshops"
+              leadIntent="demo_page"
+              submitEvent="demo_form_submit"
+            />
+          </section>
+        ) : null}
+
+        {conversion && !isWorkshopDemo ? (
+          <section
+            className="mt-8 grid gap-6 rounded-[8px] border border-white/10 bg-white/[0.04] p-5 lg:grid-cols-[1fr_0.9fr] lg:p-7"
+            aria-labelledby={`${system.slug}-next-step`}
+          >
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+                Next step
+              </p>
+              <h2 id={`${system.slug}-next-step`} className="mt-2 font-heading text-2xl font-semibold text-white sm:text-3xl">
+                {conversion.closeTitle}
+              </h2>
+              <p className="mt-3 text-sm leading-7 text-[#d8d8d2]">
+                {conversion.closeSubtitle}
+              </p>
+              <div className="mt-5 grid gap-3">
+                {conversion.nextSteps.map((step, index) => (
+                  <div key={step} className="flex gap-3 rounded-[8px] border border-white/10 bg-black/20 p-4 text-sm leading-6 text-[#f7f7f2]">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] bg-white text-sm font-semibold text-[#0b0c10]">
+                      {index + 1}
+                    </span>
+                    <span>{step}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 rounded-[8px] border border-white/10 bg-black/20 p-4">
+                <h3 className="font-heading text-lg font-semibold text-white">
+                  Built by Eddy from Pine X Systems
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[#d8d8d2]">
+                  I work with South African business owners to turn paper, spreadsheets, WhatsApp chaos and manual admin into systems their teams can actually use.
+                </p>
+                <div className="mt-4 flex h-24 items-center justify-center rounded-[8px] border border-dashed border-white/20 bg-white/[0.03] text-xs font-semibold uppercase tracking-[0.12em] text-[#a8a8a2]">
+                  Founder photo slot
+                </div>
+              </div>
+              <TrackedWhatsAppLink
+                href={whatsAppHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                location={`${system.slug}_demo_close_whatsapp`}
+                className="cta-secondary mt-5"
+                data-event="demo_whatsapp_click"
+                data-demo-slug={system.slug}
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp Eddy About This Demo
+              </TrackedWhatsAppLink>
+            </div>
+
+            <ShortAuditForm
+              id={`${system.slug}-demo-audit`}
+              title={`Tell us your biggest ${system.shortTitle.toLowerCase()} bottleneck`}
+              subtitle="Send the messy part of your operation and Eddy will reply with practical system ideas for the first control layer."
+              problemLabel={conversion.problemLabel}
+              problemPlaceholder={conversion.problemPlaceholder}
+              buttonLabel={conversion.primaryCta}
+              leadOffer={`${system.shortTitle} Demo Audit`}
+              source={`${system.slug}_demo_close_form`}
+              demoSlug={system.slug}
+              industrySlug={conversion.industrySlug}
+              leadIntent="demo_page"
+              submitEvent="demo_form_submit"
+            />
+          </section>
+        ) : null}
       </div>
     </div>
   );

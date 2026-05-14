@@ -193,9 +193,9 @@ export default function IndustriesPage() {
               href="/contact#lead-form"
               location="industries_system_review"
               className="cta-button"
-              data-event="cta_book_system_review"
+              data-event="free_audit_click"
             >
-              Book a Free System Review
+              Get My Free System Audit
             </TrackedDemoLink>
             <Link href="/case-studies" className="cta-secondary">
               View Case Studies

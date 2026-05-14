@@ -53,6 +53,12 @@ export interface SeoPage {
     heading: string;
     content: string;
   }[];
+  comparisonTable?: {
+    headers: [string, string, string];
+    rows: [string, string, string][];
+  };
+  whoThisIsFor?: string[];
+  whoThisIsNotFor?: string[];
   practicalSections: {
     heading: string;
     paragraphs: string[];

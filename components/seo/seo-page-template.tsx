@@ -20,7 +20,7 @@ function getRelatedPaths(page: SeoPage) {
     { label: "Review demo case studies", href: "/case-studies" },
     { label: "Use the business loss calculator", href: "/business-loss-calculator" },
     { label: "Read insights for owners", href: "/insights" },
-    { label: "Book a discovery call", href: "/contact#lead-form" },
+    { label: "Get My Free System Audit", href: "/contact#lead-form" },
   ];
 
   if (page.slug.includes("workshop")) {
@@ -153,6 +153,33 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
       </section>
 
       <section className="section-shell py-12 sm:py-16">
+        {page.comparisonTable ? (
+          <div className="mb-6 overflow-x-auto rounded-[8px] border border-[#111111]/10 bg-white shadow-[0_18px_45px_rgba(17,17,17,0.06)]">
+            <table className="min-w-full text-left text-sm">
+              <thead className="bg-[#F7F7F2] text-[#111111]">
+                <tr>
+                  {page.comparisonTable.headers.map((header) => (
+                    <th key={header} className="border-b border-[#111111]/10 px-4 py-3 font-heading font-semibold">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {page.comparisonTable.rows.map((row) => (
+                  <tr key={row.join("-")} className="align-top">
+                    {row.map((cell) => (
+                      <td key={cell} className="border-b border-[#111111]/10 px-4 py-3 text-[#555962]">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+
         <div className="grid gap-5">
           {page.practicalSections.map((section) => (
             <article key={section.heading} className="glass-card p-6 sm:p-8">
@@ -183,6 +210,32 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
 
       <section className="section-shell pb-12 sm:pb-16">
         <div className="glass-card p-6 sm:p-8">
+          {page.whoThisIsFor?.length ? (
+            <div className="mb-6 rounded-[8px] border border-[#111111]/10 bg-white p-5">
+              <h2 className="font-heading text-2xl font-semibold text-[#111111]">Who this is for</h2>
+              <ul className="mt-4 grid gap-3 text-sm text-[#3d4147] sm:grid-cols-2">
+                {page.whoThisIsFor.map((item) => (
+                  <li key={item} className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {page.whoThisIsNotFor?.length ? (
+            <div className="mb-6 rounded-[8px] border border-[#111111]/10 bg-white p-5">
+              <h2 className="font-heading text-2xl font-semibold text-[#111111]">Who this is not for</h2>
+              <ul className="mt-4 grid gap-3 text-sm text-[#3d4147] sm:grid-cols-2">
+                {page.whoThisIsNotFor.map((item) => (
+                  <li key={item} className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <h2 className="font-heading text-2xl font-semibold text-[#111111] sm:text-3xl">
             Owner Benefits
           </h2>
@@ -205,11 +258,11 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
               {page.ctaBody}
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/contact" className="cta-button">
-                Book a Free Demo <ArrowRight className="h-4 w-4" />
+              <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
+                Get My Free System Audit <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/demos" className="cta-secondary">
-                See Demo Systems
+              <Link href="/demos" className="cta-secondary" data-event="demo_click">
+                View Live Demo Systems
               </Link>
             </div>
           </div>

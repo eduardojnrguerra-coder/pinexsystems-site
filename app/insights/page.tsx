@@ -86,8 +86,8 @@ export default function InsightsPage() {
             system improvement should be.
           </p>
           <div className="mt-5">
-            <Link href="/contact#lead-form" className="cta-button">
-              Book A Free Demo Call
+            <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
+              Get My Free System Audit
             </Link>
           </div>
         </article>
@@ -101,8 +101,8 @@ export default function InsightsPage() {
             across industries and operations.
           </p>
           <div className="mt-5">
-            <Link href="/demos" className="cta-secondary">
-              View Demo Concepts
+            <Link href="/demos" className="cta-secondary" data-event="demo_click">
+              View Live Demo Systems
             </Link>
           </div>
         </article>

@@ -10,6 +10,9 @@ interface LeadFormProps {
   id?: string;
   title?: string;
   subtitle?: string;
+  buttonLabel?: string;
+  leadOffer?: string;
+  submitEvent?: string;
   compact?: boolean;
   tone?: "dark" | "light";
 }
@@ -40,13 +43,17 @@ const initialState: FormState = {
 
 export function LeadForm({
   id = "lead-form",
-  title = "Get A Free System Demo For Your Business",
-  subtitle = "Tell us what is slowing your business down. We'll show you what a custom system could look like.",
+  title = "Get a Free System Audit for Your Business",
+  subtitle = "Tell us where your business is losing time, leads, control or visibility. We'll review it and send back practical system ideas.",
+  buttonLabel = "Get My Free System Audit",
+  leadOffer = "Free Business System Audit",
+  submitEvent = "free_audit_click",
   compact = false,
   tone = "dark",
 }: LeadFormProps) {
   const [form, setForm] = useState<FormState>(initialState);
   const [status, setStatus] = useState<string>("");
+  const [submitting, setSubmitting] = useState(false);
   const isLight = tone === "light";
 
   const isValid = useMemo(() => {
@@ -61,22 +68,7 @@ export function LeadForm({
     );
   }, [form]);
 
-  const message = useMemo(() => {
-    return [
-      "Pine X Systems Demo Request",
-      "",
-      `Name: ${form.name}`,
-      `Business name: ${form.businessName}`,
-      `Phone: ${form.phone}`,
-      `Email: ${form.email}`,
-      `Industry: ${form.industry}`,
-      `Biggest problem: ${form.biggestProblem}`,
-      `System needed: ${form.systemNeeded}`,
-      `Preferred contact method: ${form.preferredContact}`,
-    ].join("\n");
-  }, [form]);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!isValid) {
@@ -84,34 +76,55 @@ export function LeadForm({
       return;
     }
 
-    const whatsappUrl = `https://wa.me/${siteConfig.phonePlain.replace(
-      "+",
-      "",
-    )}?text=${encodeURIComponent(message)}`;
-    const mailtoUrl = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-      "Pine X Systems Demo Request",
-    )}&body=${encodeURIComponent(message)}`;
+    setSubmitting(true);
+    setStatus("");
 
-    const popup = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    try {
+      const payload = {
+        ...form,
+        lead_offer: leadOffer,
+        submittedAt: new Date().toISOString(),
+        source: "contact_form",
+      };
 
-    if (!popup) {
-      window.location.href = mailtoUrl;
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error(`API responded with ${res.status}`);
+      }
+
+      const { success } = await res.json();
+
+      if (!success) {
+        throw new Error("API returned failure");
+      }
+
+      trackDemoRequest({
+        location: id,
+        system: form.systemNeeded,
+      });
+      trackLeadConversion({
+        location: id,
+        method: "form",
+        preferredContact: form.preferredContact,
+      });
+
+      setStatus(
+        "Thanks for reaching out. We will review your request and get back to you within one business day. No spam, no hard sell.",
+      );
+      setForm(initialState);
+    } catch (error) {
+      console.error("Pine X Systems - Lead submission error:", error);
+      setStatus(
+        "Sorry, we could not send your message right now. Please try again, or reach us directly via WhatsApp or email.",
+      );
+    } finally {
+      setSubmitting(false);
     }
-
-    trackDemoRequest({
-      location: id,
-      system: form.systemNeeded,
-    });
-    trackLeadConversion({
-      location: id,
-      method: popup ? "whatsapp" : "email_fallback",
-      preferredContact: form.preferredContact,
-    });
-
-    setStatus(
-      "Thanks. We opened WhatsApp with your details. If WhatsApp does not open, your email app will be used as fallback. We aim to respond within one business day.",
-    );
-    setForm(initialState);
   };
 
   return (
@@ -160,6 +173,7 @@ export function LeadForm({
           onSubmit={handleSubmit}
           noValidate
         >
+          <input type="hidden" name="lead_offer" value={leadOffer} />
           <label className="flex flex-col gap-2">
             <span className={`text-sm font-medium ${isLight ? "text-[#3d4147]" : "text-neutral-300"}`}>
               Name *
@@ -294,11 +308,13 @@ export function LeadForm({
 
           <button
             type="submit"
-            className="cta-button mt-2 sm:col-span-2"
+            disabled={submitting}
+            className="cta-button mt-2 sm:col-span-2 disabled:opacity-60 disabled:cursor-not-allowed"
             aria-label="Submit demo request"
-            data-event="contact_form_submit"
+            data-event={submitEvent}
           >
-            Send My Demo Request <SendHorizontal className="h-4 w-4" />
+            {submitting ? "Sending..." : buttonLabel}{" "}
+            <SendHorizontal className={`h-4 w-4 ${submitting ? "animate-pulse" : ""}`} />
           </button>
         </form>
 
@@ -306,9 +322,37 @@ export function LeadForm({
           No spam. No hard sell. We only contact you about your demo request and the workflow problem you described.
         </p>
         {status ? (
-          <p className="mt-2 text-sm text-[var(--accent)]" role="status">
-            {status}
-          </p>
+          <div
+            className={`mt-3 rounded-[8px] p-3 text-sm leading-6 ${
+              submitting
+                ? ""
+                : status.includes("Sorry") || status.includes("Please complete")
+                ? "border border-[#f97316]/40 bg-[#FFF7ED] text-[#9a3412]"
+                : "border border-[#67E8F9]/40 bg-[#ECFDF5] text-[#065f46]"
+            }`}
+            role="status"
+          >
+            <p>{status}</p>
+            {!submitting && (status.includes("Sorry") || status.includes("could not")) && (
+              <div className="mt-3 flex flex-wrap gap-3 text-sm font-medium">
+                <a
+                  href={`https://wa.me/${siteConfig.phonePlain.replace("+", "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#25D366] px-3 py-1.5 text-white hover:bg-[#128C7E]"
+                  data-event="whatsapp_click"
+                >
+                  WhatsApp Eddy
+                </a>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex items-center gap-1.5 rounded-[6px] border border-[#111111]/20 bg-[#F7F7F2] px-3 py-1.5 text-[#111111] hover:bg-[#ECEAE4]"
+                >
+                  Email Pine X Systems
+                </a>
+              </div>
+            )}
+          </div>
         ) : null}
       </div>
     </section>

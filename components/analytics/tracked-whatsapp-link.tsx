@@ -21,7 +21,7 @@ export function TrackedWhatsAppLink({
   return (
     <a
       {...rest}
-      data-event={dataEvent ?? "click_whatsapp"}
+      data-event={dataEvent ?? "whatsapp_click"}
       onClick={(event) => {
         trackWhatsAppClick({
           location,

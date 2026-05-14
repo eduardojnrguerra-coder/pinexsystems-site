@@ -21,15 +21,15 @@ insightArticles.push({
   middleCta: {
     heading: "Want to see where your lead process leaks?",
     body: "Pine X Systems can map your enquiry channels, follow-up rules, and pipeline visibility into one practical control system.",
-    primaryLabel: "Book A Free Demo",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
-    secondaryLabel: "Open Demo Systems",
+    secondaryLabel: "View Live Demo Systems",
     secondaryHref: "/demos",
   },
   endCta: {
     heading: "Build a lead system that owners can actually trust",
     body: "Get a practical demo of how a custom lead management system and owner dashboard could work for your business.",
-    primaryLabel: "Request A Lead System Demo",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -127,15 +127,15 @@ insightArticles.push({
   middleCta: {
     heading: "Want to replace spreadsheet chaos with one live system?",
     body: "See practical demos of systems built for South African operations-heavy businesses.",
-    primaryLabel: "View Demos",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
     secondaryLabel: "Talk To Pine X Systems",
     secondaryHref: "/contact",
   },
   endCta: {
     heading: "Move from manual tracking to real operational visibility",
-    body: "Book a free demo call and map the dashboard and workflow system your business actually needs.",
-    primaryLabel: "Book A Free Demo",
+    body: "Request a free system audit and map the dashboard and workflow system your business actually needs.",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -193,7 +193,7 @@ insightArticles.push({
       heading: "Stock, jobs, and service businesses face extra spreadsheet risk",
       paragraphs: [
         "Operations-heavy sectors like dealerships, workshops, construction companies, and warehouses face additional risk when they rely on spreadsheets. Stock levels may be outdated, parts usage may be captured late, and job progress may be tracked in separate chats. The result is missed deadlines, poor customer communication, and margin erosion.",
-        "A workshop management system or dealership management system South Africa setup solves this by linking workflow stages directly to data updates. When a job card status changes, the right people are notified. When stock drops below threshold, alerts are triggered. When an owner logs in, they see live operations, not yesterday’s assumptions.",
+        "A workshop management system or dealership management system South Africa setup solves this by linking workflow stages directly to data updates. When a job card status changes, the right people are notified. When stock drops below threshold, alerts are triggered. When an owner logs in, they see live operations, not yesterdayâ€™s assumptions.",
       ],
       subSections: [
         {
@@ -245,7 +245,7 @@ insightArticles.push({
     },
   ],
   relatedLinks: [
-    { label: "Book a Demo Consultation", href: "/contact" },
+    { label: "Get My Free System Audit", href: "/contact" },
     { label: "Explore Live Demo Concepts", href: "/demos" },
     { label: "Custom Business Systems South Africa", href: "/business-systems" },
     { label: "Lead Management System Guide", href: "/lead-management-system" },
@@ -272,15 +272,15 @@ insightArticles.push({
   middleCta: {
     heading: "Want your own command dashboard layout?",
     body: "See practical dashboard structures for sales, operations, and team accountability.",
-    primaryLabel: "View Dashboard Demos",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
-    secondaryLabel: "Book A Free Call",
+    secondaryLabel: "Get My Free System Audit",
     secondaryHref: "/contact",
   },
   endCta: {
     heading: "Grow with better visibility, not more guesswork",
     body: "Build an owner dashboard that helps you make faster and more confident operational decisions.",
-    primaryLabel: "Request Your Demo",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -294,7 +294,7 @@ insightArticles.push({
     {
       heading: "What growth looks like without a dashboard",
       paragraphs: [
-        "When owners depend on delayed reports, management meetings become retrospective. Teams discuss last week’s issues while this week’s risks continue building. Lead follow-up gaps, job delays, stock pressure, and staff bottlenecks are noticed late.",
+        "When owners depend on delayed reports, management meetings become retrospective. Teams discuss last weekâ€™s issues while this weekâ€™s risks continue building. Lead follow-up gaps, job delays, stock pressure, and staff bottlenecks are noticed late.",
         "This delay creates a predictable cycle: reactive decisions, avoidable stress, and inconsistent performance. The business appears busy but not in control. Over time, that pattern limits growth quality even when revenue opportunities exist.",
       ],
       bullets: [
@@ -402,8 +402,8 @@ insightArticles.push({
     },
   ],
   relatedLinks: [
-    { label: "Book a Discovery Call", href: "/contact" },
-    { label: "See Dashboard Demos", href: "/demos" },
+    { label: "Get My Free System Audit", href: "/contact" },
+    { label: "View Live Demo Systems", href: "/demos" },
     { label: "Owner Dashboard System", href: "/owner-dashboard-system" },
     { label: "Business Systems South Africa", href: "/business-systems" },
     { label: "Industries We Serve", href: "/industries" },
@@ -429,15 +429,15 @@ insightArticles.push({
   middleCta: {
     heading: "Want to automate your highest-friction workflow first?",
     body: "See examples of practical automation for leads, jobs, and reporting.",
-    primaryLabel: "See Automation Demos",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
-    secondaryLabel: "Book Free Call",
+    secondaryLabel: "Get My Free System Audit",
     secondaryHref: "/contact",
   },
   endCta: {
     heading: "Automation should save your team time, not create complexity",
     body: "Map a practical automation plan built around your current operation.",
-    primaryLabel: "Start With Discovery",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -559,7 +559,7 @@ insightArticles.push({
     },
   ],
   relatedLinks: [
-    { label: "Book a Free Demo", href: "/contact" },
+    { label: "Get My Free System Audit", href: "/contact" },
     { label: "Explore Demo Systems", href: "/demos" },
     { label: "Business Automation South Africa", href: "/business-automation-south-africa" },
     { label: "Custom Business Systems South Africa", href: "/business-systems" },
@@ -586,15 +586,15 @@ insightArticles.push({
   middleCta: {
     heading: "Want a dealership command demo?",
     body: "See how stock, leads, and salesperson workflow can run in one connected system.",
-    primaryLabel: "View Dealership Demos",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
-    secondaryLabel: "Book Discovery Call",
+    secondaryLabel: "Get My Free System Audit",
     secondaryHref: "/contact",
   },
   endCta: {
     heading: "Build a system that connects stock and sales execution",
     body: "Get dealership-level visibility with practical lead and stock control modules.",
-    primaryLabel: "Request Free Demo",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -726,7 +726,7 @@ insightArticles.push({
     },
   ],
   relatedLinks: [
-    { label: "Book a Free Demo Call", href: "/contact" },
+    { label: "Get My Free System Audit", href: "/contact" },
     { label: "Dealership Demo Showcase", href: "/demos" },
     {
       label: "Dealership Management System South Africa",
@@ -756,15 +756,15 @@ insightArticles.push({
   middleCta: {
     heading: "Want to see a workshop control demo?",
     body: "Review a practical workshop system with booking, job cards, parts, and invoicing flow.",
-    primaryLabel: "View Workshop Demo",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
-    secondaryLabel: "Request A Demo Call",
+    secondaryLabel: "Get My Free System Audit",
     secondaryHref: "/contact",
   },
   endCta: {
     heading: "Build a workshop system your team can run daily",
     body: "Move from paper and WhatsApp coordination to one structured workflow system.",
-    primaryLabel: "Book A Free Demo",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -885,7 +885,7 @@ insightArticles.push({
     },
   ],
   relatedLinks: [
-    { label: "Book a Free Demo", href: "/contact" },
+    { label: "Get My Free System Audit", href: "/contact" },
     { label: "Workshop Demo Systems", href: "/demos" },
     { label: "Workshop Management System", href: "/workshop-management-system" },
     { label: "Industries We Build For", href: "/industries" },
@@ -912,9 +912,9 @@ insightArticles.push({
   middleCta: {
     heading: "Need help choosing the right CRM direction?",
     body: "Review a demo flow showing how custom CRM can connect lead, sales, and operations in one system.",
-    primaryLabel: "Explore CRM Demos",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
-    secondaryLabel: "Book Strategy Call",
+    secondaryLabel: "Get My Free System Audit",
     secondaryHref: "/contact",
   },
   endCta: {
@@ -1043,7 +1043,7 @@ insightArticles.push({
   ],
   relatedLinks: [
     { label: "Contact Pine X Systems", href: "/contact" },
-    { label: "See Demo Systems", href: "/demos" },
+    { label: "View Live Demo Systems", href: "/demos" },
     { label: "Custom CRM Systems South Africa", href: "/custom-crm-south-africa" },
     { label: "Lead Management System", href: "/lead-management-system" },
     { label: "Services Overview", href: "/services" },
@@ -1069,15 +1069,15 @@ insightArticles.push({
   middleCta: {
     heading: "Need a command dashboard mapped to your real operation?",
     body: "See practical owner dashboard demos for sales, jobs, staff, and stock visibility.",
-    primaryLabel: "View Dashboard Demos",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
-    secondaryLabel: "Book Discovery Call",
+    secondaryLabel: "Get My Free System Audit",
     secondaryHref: "/contact",
   },
   endCta: {
     heading: "Turn scattered data into one command view",
     body: "Build an owner dashboard system that gives you fast, reliable operational clarity every day.",
-    primaryLabel: "Start With A Free Demo",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -1192,8 +1192,8 @@ insightArticles.push({
     },
   ],
   relatedLinks: [
-    { label: "Book a Free Demo Call", href: "/contact" },
-    { label: "See Dashboard Demo Concepts", href: "/demos" },
+    { label: "Get My Free System Audit", href: "/contact" },
+    { label: "View Live Demo Systems", href: "/demos" },
     { label: "Owner Dashboard System", href: "/owner-dashboard-system" },
     { label: "Custom Business Systems South Africa", href: "/business-systems" },
     { label: "Industries Overview", href: "/industries" },
@@ -1219,9 +1219,9 @@ insightArticles.push({
   middleCta: {
     heading: "Need a lead system your team will actually use?",
     body: "See practical demo flows for lead assignment, follow-up, and pipeline visibility.",
-    primaryLabel: "See Demo Systems",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
-    secondaryLabel: "Request A Free Demo Call",
+    secondaryLabel: "Get My Free System Audit",
     secondaryHref: "/contact",
   },
   endCta: {
@@ -1352,7 +1352,7 @@ insightArticles.push({
   ],
   relatedLinks: [
     { label: "Contact Pine X Systems", href: "/contact" },
-    { label: "Request Demo Systems", href: "/demos" },
+    { label: "View Live Demo Systems", href: "/demos" },
     { label: "Lead Management System", href: "/lead-management-system" },
     { label: "Custom CRM Systems South Africa", href: "/custom-crm-south-africa" },
     { label: "Industries We Support", href: "/industries" },
@@ -1381,13 +1381,13 @@ insightArticles.push({
     body: "Use the calculator to estimate how weak process control and manual admin could be affecting your business each month.",
     primaryLabel: "Open The Calculator",
     primaryHref: "/business-loss-calculator",
-    secondaryLabel: "See Demo Systems",
+    secondaryLabel: "View Live Demo Systems",
     secondaryHref: "/demos",
   },
   endCta: {
     heading: "Build visibility before bottlenecks become expensive habits",
     body: "Pine X Systems can help map the workflow, dashboard, and alert layer your operation needs first.",
-    primaryLabel: "Book A Discovery Call",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -1499,7 +1499,7 @@ insightArticles.push({
   endCta: {
     heading: "Use the estimate to decide what system should come first",
     body: "Once you understand where the leakage is likely happening, the next step is mapping the workflow that needs visibility, ownership, and automation.",
-    primaryLabel: "Book A Discovery Call",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -1601,7 +1601,7 @@ insightArticles.push({
   middleCta: {
     heading: "Want to see what cleaner workshop flow looks like?",
     body: "Open the workshop demo and compare that flow with how jobs are currently moving through your business.",
-    primaryLabel: "View Workshop Demo",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos/workshop",
     secondaryLabel: "Workshop system page",
     secondaryHref: "/workshop-management-system",
@@ -1609,7 +1609,7 @@ insightArticles.push({
   endCta: {
     heading: "Fix the handover layer before the queue gets worse",
     body: "Pine X Systems can map the booking, job card, parts, and reporting flow your workshop needs first.",
-    primaryLabel: "Book A Discovery Call",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -1697,7 +1697,7 @@ insightArticles.push({
   middleCta: {
     heading: "Want to compare these signals with a live demo?",
     body: "The dealership demo shows how owner, manager, and salesperson views can change the operational picture meaningfully.",
-    primaryLabel: "Open Dealership Demo",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos/dealership",
     secondaryLabel: "Dealership system page",
     secondaryHref: "/dealership-management-system-south-africa",
@@ -1705,7 +1705,7 @@ insightArticles.push({
   endCta: {
     heading: "Build a dealership dashboard around the signals that matter",
     body: "Pine X Systems can map the lead, stock, finance, and owner reporting layer your dealership needs first.",
-    primaryLabel: "Book A Discovery Call",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -1795,7 +1795,7 @@ insightArticles.push({
   endCta: {
     heading: "Turn the warning signs into a practical first fix",
     body: "Once you know where the leakage is likely happening, the next step is mapping the workflow, ownership, and reporting layer around it.",
-    primaryLabel: "Book A Discovery Call",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -1876,7 +1876,7 @@ insightArticles.push({
   middleCta: {
     heading: "Want to see the modules in a real flow?",
     body: "Explore demos and keyword pages to compare how dashboards, workflows, approvals, and reporting fit different industries.",
-    primaryLabel: "Open Demo Systems",
+    primaryLabel: "View Live Demo Systems",
     primaryHref: "/demos",
     secondaryLabel: "Business systems page",
     secondaryHref: "/business-systems",
@@ -1884,7 +1884,7 @@ insightArticles.push({
   endCta: {
     heading: "Build the first control layer instead of buying more disconnected tools",
     body: "Pine X Systems can help identify the exact dashboards, workflow stages, and alerts your business should start with.",
-    primaryLabel: "Book A Discovery Call",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [
@@ -1973,7 +1973,7 @@ insightArticles.push({
   endCta: {
     heading: "Give owners the right signals, not more noise",
     body: "Pine X Systems can help define which workflow, pipeline, and exception signals leadership should actually see daily.",
-    primaryLabel: "Book A Discovery Call",
+    primaryLabel: "Get My Free System Audit",
     primaryHref: "/contact",
   },
   blocks: [

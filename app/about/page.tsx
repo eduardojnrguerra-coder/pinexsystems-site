@@ -101,11 +101,11 @@ export default function AboutPage() {
           look like for your business.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/contact#lead-form" className="cta-button">
-            Book A Free Demo
+          <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
+            Get My Free System Audit
           </Link>
-          <Link href="/demos" className="cta-secondary">
-            See Demo Concepts
+          <Link href="/demos" className="cta-secondary" data-event="demo_click">
+            View Live Demo Systems
           </Link>
         </div>
       </div>

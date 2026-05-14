@@ -17,7 +17,7 @@ function getSupportLinks(article: InsightArticle) {
     { label: "View industry hub", href: "/industries" },
     { label: "Review demo case studies", href: "/case-studies" },
     { label: "Open interactive demos", href: "/demos" },
-    { label: "Book a discovery call", href: "/contact#lead-form" },
+    { label: "Get My Free System Audit", href: "/contact#lead-form" },
   ];
 
   if (article.category.includes("Dealership")) {
@@ -49,6 +49,12 @@ function getSupportLinks(article: InsightArticle) {
     { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
     ...shared,
   ];
+}
+
+function getConversionEvent(href: string) {
+  if (href.startsWith("/contact")) return "free_audit_click";
+  if (href.startsWith("/demos")) return "demo_click";
+  return undefined;
 }
 
 export function InsightArticleView({ article }: InsightArticleProps) {
@@ -112,6 +118,7 @@ export function InsightArticleView({ article }: InsightArticleProps) {
               <Link
                 key={link.href + link.label}
                 href={link.href}
+                data-event={getConversionEvent(link.href)}
                 className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3 text-sm font-medium text-[#3d4147] transition hover:border-[#111111]/25 hover:text-[#111111]"
               >
                 {link.label}
@@ -185,10 +192,10 @@ export function InsightArticleView({ article }: InsightArticleProps) {
                     {article.middleCta.body}
                   </p>
                   <div className="mt-5 flex flex-wrap gap-3">
-                    <Link href={article.middleCta.primaryHref} className="cta-button">
+                    <Link href={article.middleCta.primaryHref} className="cta-button" data-event={getConversionEvent(article.middleCta.primaryHref)}>
                       {article.middleCta.primaryLabel}
                     </Link>
-                    <Link href={article.middleCta.secondaryHref} className="cta-secondary">
+                    <Link href={article.middleCta.secondaryHref} className="cta-secondary" data-event={getConversionEvent(article.middleCta.secondaryHref)}>
                       {article.middleCta.secondaryLabel}
                     </Link>
                   </div>
@@ -206,7 +213,7 @@ export function InsightArticleView({ article }: InsightArticleProps) {
             {article.endCta.body}
           </p>
           <div className="mt-5">
-            <Link href={article.endCta.primaryHref} className="cta-button">
+            <Link href={article.endCta.primaryHref} className="cta-button" data-event={getConversionEvent(article.endCta.primaryHref)}>
               {article.endCta.primaryLabel}
             </Link>
           </div>
@@ -221,6 +228,7 @@ export function InsightArticleView({ article }: InsightArticleProps) {
               <Link
                 key={link.href + link.label}
                 href={link.href}
+                data-event={getConversionEvent(link.href)}
                 className="rounded-[8px] border border-[#111111]/10 bg-white px-4 py-3 text-sm text-[#3d4147] transition hover:border-[#111111]/25 hover:text-[#111111]"
               >
                 {link.label}

@@ -69,6 +69,9 @@ export type DemoIconName =
   | "agency"
   | "construction"
   | "warehouse"
+  | "logistics"
   | "farm"
   | "security"
-  | "custom-business";
+  | "custom-business"
+  | "accounting"
+  | "marine";

@@ -4,8 +4,11 @@ import {
   Factory,
   Hammer,
   Leaf,
+  Calculator,
   Megaphone,
   Shield,
+  Ship,
+  Truck,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -26,9 +29,12 @@ export type DemoIconName =
   | "agency"
   | "construction"
   | "warehouse"
+  | "logistics"
   | "farm"
   | "security"
-  | "custom-business";
+  | "custom-business"
+  | "accounting"
+  | "marine";
 
 export const demoIconMap: Record<DemoIconName, LucideIcon> = {
   dealership: Car,
@@ -36,9 +42,12 @@ export const demoIconMap: Record<DemoIconName, LucideIcon> = {
   agency: Megaphone,
   construction: Hammer,
   warehouse: Factory,
+  logistics: Truck,
   farm: Leaf,
   security: Shield,
   "custom-business": BriefcaseBusiness,
+  accounting: Calculator,
+  marine: Ship,
 };
 
 export type DemoSystem = {
@@ -309,6 +318,41 @@ export const demoSystems: DemoSystem[] = [
     secondaryAction: "Create dispatch",
   },
   {
+    slug: "logistics",
+    title: "Logistics Command Centre",
+    shortTitle: "Logistics",
+    seoTitle: "Logistics Command Centre Demo South Africa | Pine X Systems",
+    seoDescription:
+      "Explore a logistics command centre demo for dispatch, fleet status, POD capture, driver views, delivery exceptions, customer updates, and owner reporting.",
+    description:
+      "A logistics command centre for South African operators that connects dispatch, vehicles, drivers, POD records, delivery updates, exceptions, and owner reporting.",
+    icon: "logistics",
+    accent: "#67E8F9",
+    modules: ["Dispatch board", "Driver views", "Fleet status", "POD capture", "Exceptions", "Owner reporting"],
+    roles: ["Owner view", "Dispatcher view", "Driver view"],
+    tabs: ["Overview", "Dispatch", "Deliveries", "Vehicles", "POD", "Drivers", "Reporting", "Activity"],
+    metricLabels: ["Active jobs", "Delayed deliveries", "POD pending", "Vehicles active", "Customer updates", "Margin at risk"],
+    metrics: [
+      { label: "Active jobs", value: "38", detail: "Across Cape routes", filter: "Assigned" },
+      { label: "Delayed deliveries", value: "5", detail: "Need dispatcher action", filter: "Delayed" },
+      { label: "POD pending", value: "7", detail: "Waiting upload or review", filter: "POD Pending" },
+      { label: "Vehicles active", value: "14", detail: "3 with alerts", filter: "Active" },
+      { label: "Customer updates", value: "9", detail: "Due before close", filter: "Update Required" },
+      { label: "Margin at risk", value: "R42k", detail: "Delay and fuel pressure", filter: "Risk" },
+    ],
+    records: [
+      { id: "LG-501", name: "Cape Town to George retail drop", category: "Linehaul", status: "Assigned", owner: "Nandi", value: "R18 900", detail: "Assigned delivery with driver app checklist ready" },
+      { id: "LG-502", name: "Somerset West pharmacy route", category: "Local delivery", status: "Delayed", owner: "Marius", value: "R7 400", detail: "Delayed route due to loading bay queue; customer update required" },
+      { id: "LG-503", name: "Paarl warehouse POD chase", category: "POD", status: "POD Pending", owner: "Driver Sipho", value: "R5 800", detail: "Proof of delivery photo still pending after completed stop" },
+      { id: "LG-504", name: "Truck CT-18 maintenance alert", category: "Fleet", status: "Maintenance Alert", owner: "Fleet admin", value: "Service due", detail: "Vehicle maintenance alert after 500km threshold" },
+      { id: "LG-505", name: "Stellenbosch client ETA update", category: "Customer update", status: "Update Required", owner: "Dispatch", value: "Today 15:30", detail: "Client needs revised ETA after delayed route" },
+    ],
+    pipeline: ["Unassigned", "Assigned", "Loaded", "In Transit", "Delivered", "POD Captured", "Closed"],
+    activity: ["Route LG-502 flagged delayed", "POD reminder sent to Sipho", "Truck CT-18 maintenance alert raised"],
+    primaryAction: "Assign job",
+    secondaryAction: "Capture POD",
+  },
+  {
     slug: "farm",
     title: "Farm Operations System",
     shortTitle: "Farm",
@@ -413,6 +457,68 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Custom system summary generated", "Client portal module selected", "Role permissions preview updated"],
     primaryAction: "Generate system summary",
     secondaryAction: "Toggle role permission",
+  },
+  {
+    slug: "accounting-os",
+    title: "Accounting Practice OS",
+    shortTitle: "Accounting OS",
+    seoTitle: "Accounting Practice OS Concept | Pine X Systems",
+    seoDescription:
+      "Explore an Accounting OS concept for recurring client work, document chasing, reviews, deadlines, onboarding, and owner dashboards.",
+    description:
+      "A practice operating system concept for accounting firms and compliance-heavy service businesses that need recurring work, review flow, document chasing, and deadline risk in one dashboard.",
+    icon: "accounting",
+    accent: "#67E8F9",
+    modules: ["Client onboarding", "Document chasing", "Review workflow", "Deadline risk", "Partner dashboard"],
+    roles: ["Partner view", "Manager view", "Staff view"],
+    tabs: ["Overview", "Clients", "Documents", "Reviews", "Deadlines", "Reports", "Activity"],
+    metricLabels: ["Recurring jobs", "Overdue documents", "Reviews waiting", "Deadline risk", "Reports due", "Partner exceptions"],
+    metrics: [
+      { label: "Recurring jobs", value: "126", detail: "Monthly and annual work", filter: "Recurring" },
+      { label: "Overdue documents", value: "18", detail: "Client follow-up required", filter: "Documents" },
+      { label: "Reviews waiting", value: "9", detail: "Manager or partner queue", filter: "Review" },
+      { label: "Deadline risk", value: "6", detail: "Needs escalation", filter: "Risk" },
+    ],
+    records: [
+      { id: "AO-101", name: "VAT return pack - Cape Retail", category: "Recurring work", status: "Documents Due", owner: "Staff", value: "25th", detail: "Bank statements and sales report outstanding" },
+      { id: "AO-102", name: "Annual financials - BuildCo", category: "Review", status: "Partner Review", owner: "Partner", value: "R18 500", detail: "Draft financials ready for final review" },
+      { id: "AO-103", name: "Payroll compliance - Security Group", category: "Deadline", status: "Deadline Risk", owner: "Manager", value: "Friday", detail: "EMP201 deadline approaching with one missing schedule" },
+    ],
+    pipeline: ["Onboarding", "Documents Requested", "In Progress", "Review", "Client Query", "Filed", "Reported"],
+    activity: ["Document chase sent to Cape Retail", "BuildCo review moved to partner", "Deadline risk surfaced for Security Group"],
+    primaryAction: "Move review forward",
+    secondaryAction: "Chase documents",
+  },
+  {
+    slug: "marine-business",
+    title: "Marine Business System",
+    shortTitle: "Marine",
+    seoTitle: "Marine Business System Concept | Pine X Systems",
+    seoDescription:
+      "Explore a marine business system concept for sales enquiries, unit availability, service bookings, parts requests, after-sales visibility, and owner dashboards.",
+    description:
+      "A hybrid sales, service, parts, and after-sales operating system concept for marine businesses that need one shared owner view across enquiries and service pressure.",
+    icon: "marine",
+    accent: "#60A5FA",
+    modules: ["Sales enquiries", "Unit availability", "Service bookings", "Parts requests", "After-sales dashboard"],
+    roles: ["Owner view", "Sales view", "Service view"],
+    tabs: ["Overview", "Sales", "Service", "Parts", "After-sales", "Reports", "Activity"],
+    metricLabels: ["Open enquiries", "Units available", "Service bookings", "Parts requests", "After-sales risks", "Owner exceptions"],
+    metrics: [
+      { label: "Open enquiries", value: "22", detail: "Across boats and accessories", filter: "Enquiry" },
+      { label: "Units available", value: "14", detail: "Ready or incoming", filter: "Available" },
+      { label: "Service bookings", value: "9", detail: "This week", filter: "Service" },
+      { label: "Parts requests", value: "7", detail: "Awaiting supplier", filter: "Parts" },
+    ],
+    records: [
+      { id: "MB-201", name: "Yamaha outboard enquiry", category: "Sales", status: "Enquiry", owner: "Sales", value: "R162 000", detail: "Customer comparing unit availability and fitment timing" },
+      { id: "MB-202", name: "SeaCat service booking", category: "Service", status: "Booked", owner: "Service advisor", value: "Friday", detail: "Annual service and trailer inspection requested" },
+      { id: "MB-203", name: "Impeller kit supplier chase", category: "Parts", status: "Supplier Pending", owner: "Parts", value: "R3 800", detail: "After-sales job waiting on supplier ETA" },
+    ],
+    pipeline: ["Enquiry", "Quoted", "Booked", "Parts Pending", "In Service", "Ready", "After-sales"],
+    activity: ["Sales enquiry linked to available unit", "Service booking created", "Parts supplier chase opened"],
+    primaryAction: "Move workflow forward",
+    secondaryAction: "Surface owner risk",
   },
 ];
 

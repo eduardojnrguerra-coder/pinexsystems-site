@@ -2173,12 +2173,12 @@ seoPages.push({
 });
 
 seoPages.push({
-  slug: "custom-business-systems-south-africa",
-  pageTitle: "Custom Business Systems South Africa",
+  slug: "best-business-systems-south-africa",
+  pageTitle: "Best Business Systems South Africa",
   metaDescription:
-    "Custom business systems South Africa guide covering dashboards, workflow apps, internal business tools, automation, paperless processes, and owner visibility for growing businesses.",
+    "Best business systems South Africa guide for owners comparing practical custom systems, dashboards, workflow apps, and operational control tools.",
   purpose:
-    "Act as the main SEO pillar page for Pine X Systems and explain what custom business systems are, who they are for, and how they replace paper, spreadsheets, and disconnected apps.",
+    "Help South African owners compare what makes a practical business system effective and when custom systems make more sense than disconnected tools.",
   targetKeywords: [
     "custom business systems South Africa",
     "business systems South Africa",
@@ -2615,6 +2615,205 @@ seoPages.push({
   ],
 });
 
+seoPages.push({
+  slug: "construction-management-system-south-africa",
+  pageTitle: "Construction Management System South Africa",
+  metaDescription:
+    "Construction management system South Africa guide for contractors and owners who need project visibility, site workflow control, and cleaner reporting.",
+  purpose:
+    "Help construction businesses compare practical project control systems with manual spreadsheet-led workflows.",
+  targetKeywords: [
+    "construction management system south africa",
+    "construction workflow software south africa",
+    "contractor dashboard south africa",
+  ],
+  heroTitle: "Construction Management System South Africa",
+  heroSummary:
+    "A construction management system gives South African contractors one operational layer for project tracking, site execution, approvals, material flow, and owner reporting.",
+  comparisonPoints: [
+    { heading: "Manual project tracking hides delays", content: "When site updates live in calls and chats, blocked tasks and budget pressure are discovered late." },
+    { heading: "Workflow visibility improves handovers", content: "Clear stage ownership and status updates reduce confusion between office, site teams, and subcontractors." },
+    { heading: "Owner dashboards support faster decisions", content: "Owners can act earlier when project risks and overdue items are visible daily." }
+  ],
+  comparisonTable: {
+    headers: ["Option", "Pros", "Limits"],
+    rows: [
+      ["Paper + WhatsApp", "Easy to start", "Weak control and delayed reporting"],
+      ["Generic PM tool", "Useful for basic task lists", "Often misses construction-specific flow"],
+      ["Custom construction system", "Fits your project and reporting process", "Requires scoping and implementation"],
+    ],
+  },
+  whoThisIsFor: [
+    "Contractors with multiple active projects",
+    "Construction teams with repeated handover delays",
+    "Owners needing clearer cost and site progress visibility",
+  ],
+  whoThisIsNotFor: [
+    "Businesses that only need a simple to-do list",
+    "Teams unwilling to standardize stage ownership",
+    "Companies looking for marketing lead generation services",
+  ],
+  practicalSections: [
+    { heading: "What to include first", paragraphs: ["Start with quote-to-project handover, milestone tracking, site task ownership, and owner-level risk reporting.", "Then add supplier, variation, and document controls as the workflow matures."], bullets: ["Project stages", "Site task ownership", "Approvals and variations", "Owner dashboard"] }
+  ],
+  ownerBenefits: ["Earlier risk detection", "Cleaner site-to-office coordination", "More reliable progress reporting"],
+  ctaHeading: "Need practical control over active projects?",
+  ctaBody: "Book a free system review and map the first construction workflow layer your business should implement.",
+  faqs: [
+    { question: "Can this work for small construction teams?", answer: "Yes. Most teams start with one project flow and expand from there." },
+    { question: "Can managers and owners have different views?", answer: "Yes. Role-based dashboards can separate daily execution and owner oversight." },
+    { question: "Can this reduce manual progress reporting?", answer: "Yes. Reporting can be generated from live stage updates." },
+  ],
+});
+
+seoPages.push({
+  slug: "workshop-job-card-system-south-africa",
+  pageTitle: "Workshop Job Card System South Africa",
+  metaDescription:
+    "Workshop job card system South Africa guide for service advisors and owners who need cleaner booking-to-invoice workflow control.",
+  purpose:
+    "Explain when workshops should move from paper job cards and chat updates to a structured digital workflow.",
+  targetKeywords: ["workshop job card system south africa", "digital job card workshop", "workshop workflow software"],
+  heroTitle: "Workshop Job Card System South Africa",
+  heroSummary:
+    "A workshop job card system tracks each vehicle from booking to invoicing with clear technician ownership, approval status, and customer communication history.",
+  comparisonPoints: [
+    { heading: "Paper cards slow the queue", content: "Paper and verbal updates make it hard to spot blocked jobs and overdue approvals in real time." },
+    { heading: "Digital stages improve throughput", content: "Each vehicle moves through visible stages so managers can rebalance work faster." },
+    { heading: "Owner reporting becomes clearer", content: "Owners can see queue pressure, invoicing readiness, and bottlenecks in one dashboard." }
+  ],
+  comparisonTable: {
+    headers: ["Approach", "Works well for", "Weakness"],
+    rows: [
+      ["Paper cards", "Very small teams", "No live visibility"],
+      ["Spreadsheet tracker", "Basic summaries", "Weak stage discipline"],
+      ["Workshop job card system", "Operational control and reporting", "Needs team onboarding"],
+    ],
+  },
+  whoThisIsFor: ["Vehicle workshops", "Service managers", "Owners needing daily queue visibility"],
+  whoThisIsNotFor: ["Teams without repeat job flow", "Businesses avoiding process consistency", "Lead generation agencies"],
+  practicalSections: [
+    { heading: "Core modules", paragraphs: ["Start with booking intake, diagnosis, customer approval, repair stages, QC, and invoice-ready status.", "Add parts allocation and SLA alerts if needed."], bullets: ["Booking intake", "Job stages", "Approvals", "Invoice-ready alerts"] }
+  ],
+  ownerBenefits: ["Fewer missed handovers", "Faster queue decisions", "Better customer update consistency"],
+  ctaHeading: "Need to modernize workshop flow?",
+  ctaBody: "Book a free system review to map your workshop job card process into a practical digital workflow.",
+  faqs: [
+    { question: "Can advisors and technicians use different views?", answer: "Yes. Role-specific views keep each team focused on its tasks." },
+    { question: "Can this include WhatsApp update triggers?", answer: "Yes. Customer updates can be tied to job stages." },
+    { question: "Can we start with one branch first?", answer: "Yes. Many workshops roll out per branch." },
+  ],
+});
+
 export const seoPageMap = Object.fromEntries(
   seoPages.map((page) => [page.slug, page]),
 ) as Record<string, SeoPage>;
+
+seoPages.push({
+  slug: "business-dashboard-for-owners",
+  pageTitle: "Business Dashboard For Owners",
+  metaDescription:
+    "Business dashboard for owners in South Africa: what to track daily across leads, operations, staff workflow, and reporting.",
+  purpose: "Help owners understand what a practical management dashboard should include and what it should avoid.",
+  targetKeywords: ["business dashboard for owners", "owner dashboard south africa", "operations dashboard for owners"],
+  heroTitle: "Business Dashboard For Owners",
+  heroSummary: "A business dashboard for owners should show action-focused signals: overdue follow-up, blocked work, conversion flow, queue pressure, and trend risk.",
+  comparisonPoints: [
+    { heading: "Action signals beat vanity metrics", content: "Owners need indicators they can act on this week, not decorative charts." },
+    { heading: "Daily and weekly views should both exist", content: "Daily views support intervention; weekly views support planning." },
+    { heading: "Role-based views reduce noise", content: "Owners and managers should not be forced into the same screen depth." }
+  ],
+  comparisonTable: { headers: ["Dashboard type", "Value", "Risk"], rows: [["Vanity dashboard", "Looks polished", "Low operational usefulness"], ["Manual weekly report", "Some visibility", "Too delayed"], ["Live owner dashboard", "Early decisions", "Needs clean workflow data"]] },
+  whoThisIsFor: ["Owner-managed SMEs", "Managers needing early warning signals", "Businesses with delayed reporting"],
+  whoThisIsNotFor: ["Teams with no recurring operations", "Businesses that only want design mockups", "Lead generation agencies"],
+  practicalSections: [{ heading: "What owners should track", paragraphs: ["Track lead response speed, stage aging, overdue tasks, throughput, and critical exception counts.", "Keep dashboard KPIs limited to what drives action."], bullets: ["Lead aging", "Overdue tasks", "Job backlog", "Trend shifts"] }],
+  ownerBenefits: ["Faster interventions", "Less status chasing", "Clearer management conversations"],
+  ctaHeading: "Want an owner dashboard built around your workflow?",
+  ctaBody: "Book a free system review and define the dashboard signals your business needs first.",
+  faqs: [
+    { question: "How many KPIs should be on one owner dashboard?", answer: "Usually a focused set of 8 to 15 operational indicators is more useful than a crowded screen." },
+    { question: "Can dashboards pull from existing tools?", answer: "In many cases yes, depending on data structure and workflow consistency." },
+    { question: "Can this work on mobile?", answer: "Yes. Owner views can be optimized for mobile and desktop." }
+  ],
+});
+
+seoPages.push({
+  slug: "whatsapp-to-business-system",
+  pageTitle: "From WhatsApp To A Business System",
+  metaDescription: "Practical guide for South African teams moving from WhatsApp-based operations to a structured business system.",
+  purpose: "Help teams transition from chat-led coordination to structured workflow control without disrupting operations.",
+  targetKeywords: ["whatsapp to business system", "replace whatsapp with workflow system", "business workflow south africa"],
+  heroTitle: "From WhatsApp To A Business System",
+  heroSummary: "If work currently runs through WhatsApp groups, a business system can keep communication useful while moving ownership, status, and reporting into a controlled workflow.",
+  comparisonPoints: [
+    { heading: "WhatsApp is fast but not auditable", content: "Critical actions get buried and accountability becomes unclear." },
+    { heading: "Systems preserve context", content: "Tasks, approvals, and updates stay linked to the right job or lead." },
+    { heading: "Transition should be phased", content: "Start with one high-friction workflow before expanding." }
+  ],
+  comparisonTable: { headers: ["Model", "Advantage", "Operational gap"], rows: [["WhatsApp-only", "Immediate communication", "No structured execution control"], ["Mixed model", "Low disruption", "Can still leak actions"], ["Workflow-first system", "Clear ownership and reporting", "Requires change management"]] },
+  whoThisIsFor: ["Teams coordinating jobs by chat", "Businesses missing follow-up", "Owners needing cleaner records"],
+  whoThisIsNotFor: ["Fully systemized teams", "Businesses with no recurring process", "Lead generation agencies"],
+  practicalSections: [{ heading: "Migration approach", paragraphs: ["Map one workflow, define ownership and stage rules, and move updates into the system while WhatsApp remains a notification layer.", "Then extend to adjacent workflows."], bullets: ["Workflow mapping", "Ownership rules", "Stage transitions", "Notification strategy"] }],
+  ownerBenefits: ["Less missed action", "Better traceability", "Cleaner operational history"],
+  ctaHeading: "Ready to move beyond chat-led operations?",
+  ctaBody: "Book a free system review and identify the first WhatsApp-heavy workflow to convert into a controlled system.",
+  faqs: [
+    { question: "Do we need to stop using WhatsApp completely?", answer: "No. Many teams keep WhatsApp for communication while execution moves into the system." },
+    { question: "How long does transition usually take?", answer: "Initial workflow rollouts are often phased over a few weeks depending on complexity." },
+    { question: "Can non-technical staff adapt?", answer: "Yes, if the system is designed around real day-to-day tasks." }
+  ],
+});
+
+seoPages.push({
+  slug: "custom-software-vs-off-the-shelf-crm",
+  pageTitle: "Custom Software vs Off-The-Shelf CRM",
+  metaDescription: "Compare custom software vs off-the-shelf CRM for South African SMEs with practical trade-offs on control, speed, and long-term fit.",
+  purpose: "Provide a clear decision framework for owners comparing generic CRM subscriptions with custom workflow systems.",
+  targetKeywords: ["custom software vs off the shelf crm", "custom crm south africa", "crm comparison for sme"],
+  heroTitle: "Custom Software vs Off-The-Shelf CRM",
+  heroSummary: "Off-the-shelf CRMs are useful for common sales patterns, while custom software is stronger when your process spans sales, operations, handovers, and role-based reporting.",
+  comparisonPoints: [
+    { heading: "Speed to start vs fit to operate", content: "Off-the-shelf tools can start quickly; custom systems often fit long-term operations better." },
+    { heading: "Subscription cost vs process leakage", content: "Cheaper monthly tools can become expensive if workflow gaps keep causing rework." },
+    { heading: "Decision depends on process complexity", content: "Simple pipelines usually fit generic CRMs; complex handovers usually need custom flow." }
+  ],
+  comparisonTable: { headers: ["Criteria", "Off-the-shelf CRM", "Custom system"], rows: [["Setup speed", "Fast", "Moderate"], ["Workflow fit", "Template-based", "Business-specific"], ["Cross-team handovers", "Often limited", "Designed to match operations"], ["Long-term control", "Depends on tool limits", "High when implemented well"]] },
+  whoThisIsFor: ["SMEs comparing CRM options", "Teams with handover friction", "Owners needing stronger control"],
+  whoThisIsNotFor: ["Businesses needing only contact storage", "Teams unwilling to define workflow stages", "Lead generation agencies"],
+  practicalSections: [{ heading: "How to decide", paragraphs: ["Document your real process from first lead to completed delivery.", "If you need structured handovers, role views, and owner reporting beyond sales stages, custom systems usually provide better fit."], bullets: ["Map current process", "List recurring bottlenecks", "Assess reporting needs", "Choose fit over hype"] }],
+  ownerBenefits: ["Clear decision criteria", "Lower risk of tool mismatch", "Better long-term process alignment"],
+  ctaHeading: "Need help choosing the right route?",
+  ctaBody: "Book a free system review and compare your CRM options against your real workflow requirements.",
+  faqs: [
+    { question: "Is custom software always better?", answer: "No. It is better when your operational complexity outgrows generic templates." },
+    { question: "Can we combine both approaches?", answer: "Yes. Some businesses keep a CRM and add custom workflow layers around it." },
+    { question: "What is the biggest mistake in CRM decisions?", answer: "Choosing based only on subscription price without evaluating process leakage costs." }
+  ],
+});
+
+seoPages.push({
+  slug: "how-much-does-a-custom-business-system-cost-south-africa",
+  pageTitle: "How Much Does A Custom Business System Cost In South Africa?",
+  metaDescription: "Cost guide for custom business systems in South Africa, including scope factors, rollout phases, and practical budgeting advice for SMEs.",
+  purpose: "Answer high-intent pricing questions with realistic factors and phased implementation logic.",
+  targetKeywords: ["how much does a custom business system cost south africa", "custom software cost south africa", "business system pricing"],
+  heroTitle: "How Much Does A Custom Business System Cost In South Africa?",
+  heroSummary: "Custom business system cost in South Africa depends on scope, workflow complexity, integrations, and rollout approach. Most SMEs reduce risk by implementing in phases.",
+  comparisonPoints: [
+    { heading: "Scope drives cost", content: "A focused first workflow costs less than a full platform rollout." },
+    { heading: "Phased rollout lowers risk", content: "Start with one bottleneck, prove value, then expand." },
+    { heading: "Total cost includes process adoption", content: "Implementation quality and team adoption affect ROI more than raw build price." }
+  ],
+  comparisonTable: { headers: ["Project shape", "Typical effort", "When it fits"], rows: [["Single workflow MVP", "Lower", "High-priority bottleneck"], ["Multi-module phase 1", "Medium", "Need connected visibility"], ["Broad platform rollout", "Higher", "Mature teams with clear process map"]] },
+  whoThisIsFor: ["Owners budgeting software improvements", "Teams with repeated operational leakage", "Businesses planning phased rollout"],
+  whoThisIsNotFor: ["Businesses seeking instant one-click setup", "Teams that do not want workflow discipline", "Lead generation agencies"],
+  practicalSections: [{ heading: "How to budget properly", paragraphs: ["Budget by business outcome, not just features. Start with the workflow that leaks the most revenue or time.", "Include discovery, build, onboarding, and refinement in your planning."], bullets: ["Discovery scope", "Module complexity", "Integration needs", "Adoption support"] }],
+  ownerBenefits: ["Clearer budgeting decisions", "Lower implementation risk", "Stronger ROI focus"],
+  ctaHeading: "Want a practical estimate for your business?",
+  ctaBody: "Book a free system review and get a scoped recommendation for the first phase of your custom system.",
+  faqs: [
+    { question: "Can we build in phases to control cost?", answer: "Yes. Phased rollouts are usually the most practical route for SMEs." },
+    { question: "Is custom always more expensive than subscriptions?", answer: "Not always over time, especially when generic tools create repeated process leakage." },
+    { question: "What should we prepare before requesting pricing?", answer: "Bring your key workflow, pain points, and visibility priorities." }
+  ],
+});

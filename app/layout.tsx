@@ -8,7 +8,12 @@ import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SchemaScript } from "@/components/ui/schema-script";
-import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/schema";
+import {
+  localBusinessSchema,
+  organizationSchema,
+  professionalServiceSchema,
+  websiteSchema,
+} from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -93,7 +98,12 @@ export default function RootLayout({
           <GoogleTracking />
         </Suspense>
         <SchemaScript
-          data={[organizationSchema(), localBusinessSchema(), websiteSchema()]}
+          data={[
+            organizationSchema(),
+            localBusinessSchema(),
+            professionalServiceSchema(),
+            websiteSchema(),
+          ]}
         />
         <div className="site-grid-overlay" aria-hidden="true" />
         <SiteHeader />

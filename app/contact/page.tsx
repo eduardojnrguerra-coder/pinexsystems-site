@@ -4,6 +4,7 @@ import { Mail, MessageCircle, Phone } from "lucide-react";
 import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { LeadForm } from "@/components/ui/lead-form";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 
@@ -67,16 +68,15 @@ export default function ContactPage() {
       <div className="section-shell py-12 sm:py-16">
       <SectionHeading
         badge="Contact"
-        title={
-          <>
-            Let&apos;s Build The{" "}
-            <span className="heading-gradient">System Your Business Needs</span>
-          </>
-        }
-        description="Choose your preferred channel or submit the form and we will get back to you quickly."
+        title="Get a Free System Audit for Your Business"
+        description="Tell us where your business is losing time, leads, control or visibility. We'll review it and send back practical system ideas before trying to sell you anything."
       />
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
+      <div className="mx-auto mt-8 max-w-3xl">
+        <ShortAuditForm id="lead-form" />
+      </div>
+
+      <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
         <div className="space-y-5">
           <article className="glass-card p-6">
             <h2 className="font-heading text-2xl font-semibold text-[#111111]">
@@ -158,8 +158,8 @@ export default function ContactPage() {
               the operation before recommending technology.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/demos" className="cta-secondary">
-                See Demos
+              <Link href="/demos" className="cta-secondary" data-event="demo_click">
+                View Live Demo Systems
               </Link>
               <Link href="/services" className="cta-secondary">
                 View Services
@@ -209,10 +209,13 @@ export default function ContactPage() {
           </article>
 
           <LeadForm
+            id="detailed-demo-request"
             compact
             tone="light"
-            title="Request Your Discovery Call Or Demo Direction"
+            title="Detailed Demo Request"
             subtitle="Tell us what is slowing the business down, what you want more control over, and how you would prefer us to contact you. We will use that context to make the first conversation practical."
+            buttonLabel="Get My Free System Audit"
+            submitEvent="free_audit_click"
           />
         </div>
       </div>

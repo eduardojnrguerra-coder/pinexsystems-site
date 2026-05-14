@@ -244,7 +244,7 @@ export const whyStats: StatItem[] = [
     description: "Build only what your business needs.",
   },
   {
-    label: "Free Demo Call",
+    label: "Free System Audit",
     value: 30,
     suffix: " min",
     description: "Practical and focused on your operation.",
@@ -265,7 +265,7 @@ export const whyBenefits = [
 export const processSteps: ProcessStep[] = [
   {
     step: "01",
-    title: "Discovery Call",
+    title: "System Audit",
     description:
       "We map your current operation, pain points, and the numbers you need to control.",
   },

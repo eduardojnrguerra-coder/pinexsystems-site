@@ -15,6 +15,7 @@ import { HeroBrandLockup } from "@/components/home/HeroBrandLockup";
 import { MiniCalculator } from "@/components/home/mini-calculator";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
+import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import { homeFaq } from "@/lib/content/core";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -152,6 +153,14 @@ const trustBlocks = [
   },
 ];
 
+const ownerTrustBullets = [
+  "Built locally for South African businesses",
+  "Designed around your actual workflow",
+  "Easy enough for non-technical staff",
+  "Demo-first approach before full commitment",
+  "Support after launch, not just handover",
+];
+
 const typicalImpact = [
   {
     title: "Lead control example",
@@ -177,9 +186,10 @@ const typicalImpact = [
 ];
 
 const strategicLinks = [
-  { label: "Custom business systems", href: "/business-systems" },
-  { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
-  { label: "Workshop management systems", href: "/workshop-management-system" },
+  { label: "Best business systems in South Africa", href: "/best-business-systems-south-africa" },
+  { label: "Custom CRM South Africa", href: "/custom-crm-south-africa" },
+  { label: "Business dashboard for owners", href: "/business-dashboard-for-owners" },
+  { label: "WhatsApp to business system", href: "/whatsapp-to-business-system" },
   {
     label: "Dealership systems in South Africa",
     href: "/dealership-management-system-south-africa",
@@ -269,27 +279,30 @@ export default function HomePage() {
               <HeroBrandLockup />
               <SectionBadge>Custom Business Systems South Africa</SectionBadge>
               <h1 className="mt-5 font-heading text-[2rem] font-semibold leading-[1.1] text-[#0b0c10] sm:text-[2.5rem] lg:text-[2.2rem] xl:text-[2.5rem]">
-                Custom Business Systems Built for South African Companies
+                Custom Business Systems for South African Companies
               </h1>
               <p className="mt-5 max-w-xl text-base leading-8 text-[#555962] sm:text-lg">
-                We build custom dashboards, internal business apps, workflow
-                systems, and automation tools for businesses that want to
-                replace paper, spreadsheets, and scattered WhatsApp processes
-                with one easy-to-use system.
+                We build simple, powerful systems that help owners replace paper,
+                spreadsheets, WhatsApp chaos and manual admin with one dashboard
+                their team can actually use.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/demos" className="cta-button" data-event="cta_view_demo_systems">
-                  View Demo Systems
-                </Link>
                 <TrackedDemoLink
                   href="/contact#lead-form"
                   location="home_hero_system_review"
-                  className="cta-secondary"
-                  data-event="cta_book_system_review"
+                  className="cta-button"
+                  data-event="free_audit_click"
                 >
-                  Book a Free System Review <ArrowRight className="h-4 w-4" />
+                  Get My Free System Audit <ArrowRight className="h-4 w-4" />
                 </TrackedDemoLink>
+                <Link href="/demos" className="cta-secondary" data-event="demo_click">
+                  View Live Demo Systems
+                </Link>
               </div>
+
+              <p className="mt-4 text-sm font-medium text-[#3d4147]">
+                Built by Eddy from Pine X Systems, based in South Africa.
+              </p>
 
               <div className="mt-6 max-w-2xl rounded-[8px] border border-[#111111]/10 bg-white p-4 shadow-[0_12px_34px_rgba(17,17,17,0.05)]">
                 <p className="text-sm leading-7 text-[#555962]">
@@ -349,6 +362,34 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[#111111]/10 bg-[#F7F7F2] py-10 sm:py-12">
+        <div className="section-shell grid gap-6 lg:grid-cols-[0.96fr_1.04fr] lg:items-start">
+          <Reveal>
+            <ShortAuditForm id="lead-form" />
+          </Reveal>
+
+          <Reveal delayMs={80}>
+            <article className="rounded-[8px] border border-[#111111]/10 bg-white p-6 shadow-[0_18px_45px_rgba(17,17,17,0.06)]">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+                <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-[8px] border border-dashed border-[#111111]/25 bg-[#F7F7F2] text-center text-xs font-medium uppercase tracking-[0.12em] text-[#6b6f76]">
+                  Founder photo
+                </div>
+                <div>
+                  <h2 className="font-heading text-2xl font-semibold text-[#111111]">
+                    Built by Eddy from Pine X Systems
+                  </h2>
+                  <p className="mt-3 text-sm leading-7 text-[#555962] sm:text-base">
+                    I work with South African business owners to turn paper,
+                    spreadsheets, WhatsApp chaos and manual admin into simple
+                    systems their teams can actually use.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </Reveal>
         </div>
       </section>
 
@@ -432,7 +473,7 @@ export default function HomePage() {
             <div className="mx-auto max-w-3xl text-center text-[#0b0c10]">
               <SectionBadge>Trust Through Structure</SectionBadge>
               <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight sm:text-4xl">
-                Pine X Systems Is Built Around Operational Control, Not Hype
+                Why Owners Trust Pine X Systems
               </h2>
               <p className="mt-4 text-base leading-8 text-[#555962] sm:text-lg">
                 We do not rely on vague transformation language. We map the
@@ -441,6 +482,18 @@ export default function HomePage() {
               </p>
             </div>
           </Reveal>
+
+          <div className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2">
+            {ownerTrustBullets.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 rounded-[8px] border border-[#111111]/10 bg-white px-4 py-3 text-sm font-medium text-[#3d4147]"
+              >
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0891b2]" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
 
           <div className="mt-10 grid gap-4 lg:grid-cols-3">
             {trustBlocks.map((block, index) => {
@@ -570,12 +623,16 @@ export default function HomePage() {
           </Reveal>
 
           <div className="mt-10">
-            <DemoCardGrid tone="light" compact />
+            <DemoCardGrid
+              tone="light"
+              compact
+              slugs={["workshop", "dealership", "logistics"]}
+            />
           </div>
 
           <div className="mt-8 text-center">
-            <Link href="/demos" className="cta-button">
-              Browse All Demos <ArrowRight className="h-4 w-4" />
+            <Link href="/demos" className="cta-button" data-event="demo_click">
+              View Live Demo Systems <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -597,21 +654,17 @@ export default function HomePage() {
           </Reveal>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/business-loss-calculator"
-              className="cta-button"
-              data-event="cta_open_business_loss_calculator"
-            >
-              Use The Business Loss Calculator
-            </Link>
             <TrackedDemoLink
               href="/contact#lead-form"
               location="home_calculator_system_review"
-              className="cta-secondary"
-              data-event="cta_book_system_review"
+              className="cta-button"
+              data-event="free_audit_click"
             >
-              Book a Free System Review
+              Get My Free System Audit
             </TrackedDemoLink>
+            <Link href="/demos" className="cta-secondary" data-event="demo_click">
+              View Live Demo Systems
+            </Link>
           </div>
         </div>
       </section>
@@ -670,20 +723,17 @@ export default function HomePage() {
               workflow layer built around their real process.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/demos" className="cta-button" data-event="cta_view_demo_systems">
-                View Demo Systems
+              <Link href="/demos" className="cta-button" data-event="demo_click">
+                View Live Demo Systems
               </Link>
               <TrackedDemoLink
                 href="/contact#lead-form"
                 location="home_final_system_review"
                 className="cta-secondary"
-                data-event="cta_book_system_review"
+                data-event="free_audit_click"
               >
-                Book a Free System Review
+                Get My Free System Audit
               </TrackedDemoLink>
-              <Link href="/business-loss-calculator" className="cta-secondary" data-event="cta_open_business_loss_calculator">
-                Try The Loss Calculator
-              </Link>
             </div>
           </div>
         </div>

@@ -34,6 +34,20 @@ export function localBusinessSchema() {
   };
 }
 
+export function professionalServiceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${siteConfig.domain}/#professionalservice`,
+    name: siteConfig.name,
+    url: siteConfig.domain,
+    areaServed: "South Africa",
+    telephone: siteConfig.phonePlain,
+    email: siteConfig.email,
+    description: siteConfig.description,
+  };
+}
+
 export function websiteSchema() {
   return {
     "@context": "https://schema.org",
@@ -87,7 +101,7 @@ export function faqSchema(faqs: FaqItem[]) {
 export function blogPostingSchema(article: InsightArticle) {
   return {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "Article",
     headline: article.title,
     description: article.description,
     keywords: article.keywords.join(", "),

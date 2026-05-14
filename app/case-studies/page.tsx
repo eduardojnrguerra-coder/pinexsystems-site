@@ -197,8 +197,8 @@ export default function CaseStudiesPage() {
                 <Link href={item.href} className="cta-button" data-event={item.event}>
                   {item.cta}
                 </Link>
-                <Link href="/contact#lead-form" className="cta-secondary" data-event="cta_book_system_review">
-                  Book a Free System Review
+                <Link href="/contact#lead-form" className="cta-secondary" data-event="free_audit_click">
+                  Get My Free System Audit
                 </Link>
               </div>
             </article>

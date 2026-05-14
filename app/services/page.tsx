@@ -62,8 +62,11 @@ const fitCards = [
 ];
 
 const serviceTrustLinks = [
-  { label: "Business systems guide", href: "/business-systems" },
-  { label: "Owner dashboard systems", href: "/owner-dashboard-system" },
+  { label: "Best business systems South Africa", href: "/best-business-systems-south-africa" },
+  { label: "Custom CRM South Africa", href: "/custom-crm-south-africa" },
+  { label: "Business dashboard for owners", href: "/business-dashboard-for-owners" },
+  { label: "Workshop job card system", href: "/workshop-job-card-system-south-africa" },
+  { label: "Construction management system", href: "/construction-management-system-south-africa" },
   { label: "Business loss calculator", href: "/business-loss-calculator" },
   { label: "Interactive demos", href: "/demos" },
 ];
@@ -367,8 +370,8 @@ export default function ServicesPage() {
               </>
             ) : null}
             <div className="mt-6">
-              <Link className="inline-link inline-flex items-center gap-2" href="/contact#lead-form">
-                Book a Free Demo <ArrowRight className="h-4 w-4" />
+              <Link className="inline-link inline-flex items-center gap-2" href="/contact#lead-form" data-event="free_audit_click">
+                Get My Free System Audit <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </article>
@@ -483,11 +486,11 @@ export default function ServicesPage() {
           managers, staff, and operations in one place.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/contact#lead-form" className="cta-button">
-            Book A Free Demo
+          <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
+            Get My Free System Audit
           </Link>
-          <Link href="/demos" className="cta-secondary">
-            View Demo Systems
+          <Link href="/demos" className="cta-secondary" data-event="demo_click">
+            View Live Demo Systems
           </Link>
         </div>
       </div>

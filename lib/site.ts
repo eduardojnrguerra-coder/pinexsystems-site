@@ -23,7 +23,7 @@ export const navLinks = [
 ] as const;
 
 export const primaryCta = {
-  label: "Book a Free Demo",
+  label: "Get My Free System Audit",
   href: "/contact#lead-form",
 };
 

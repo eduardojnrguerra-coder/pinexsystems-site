@@ -266,11 +266,11 @@ export default function BusinessLossCalculatorPage() {
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/contact#lead-form" className="cta-button">
-                Book A Free Demo
+              <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
+                Get My Free System Audit
               </Link>
-              <Link href="/demos" className="cta-secondary">
-                View System Demos
+              <Link href="/demos" className="cta-secondary" data-event="demo_click">
+                View Live Demo Systems
               </Link>
             </div>
           </div>
@@ -368,12 +368,12 @@ export default function BusinessLossCalculatorPage() {
             Ready To Close The Leakage Gaps?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#555962] sm:text-base">
-            A free discovery call helps identify the exact control layers your
+            A free system audit helps identify the exact control layers your
             business needs to reduce missed leads, admin waste, and operational blind spots.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link href="/contact#lead-form" className="cta-button">
-              Book Your Free Discovery Call <ArrowRight className="h-4 w-4" />
+            <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
+              Get My Free System Audit <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

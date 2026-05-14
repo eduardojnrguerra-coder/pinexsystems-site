@@ -1346,6 +1346,189 @@ export const customBusinessSections: DemoSection[] = [
   },
 ];
 
+export const logisticsSections: DemoSection[] = [
+  {
+    id: "overview",
+    label: "Overview",
+    subtitle: "Live exceptions view for dispatch, fleet, POD, and delivery profit",
+    metrics: [
+      { label: "Active jobs", value: "38", detail: "Across current routes", accent: "#67E8F9" },
+      { label: "Delayed", value: "5", detail: "Need dispatcher action", accent: "#F5D36C" },
+      { label: "POD pending", value: "7", detail: "Waiting upload or review", accent: "#60A5FA" },
+      { label: "Margin risk", value: "R42k", detail: "Delay and fuel pressure", accent: "#f97316" },
+    ],
+    actions: [
+      { id: "assign-job", label: "Assign job", primary: true },
+      { id: "capture-pod", label: "Capture POD", primary: false },
+    ],
+    alerts: [
+      { type: "warning", message: "5 delayed deliveries need customer updates" },
+      { type: "warning", message: "Truck CT-18 has a maintenance alert" },
+    ],
+    activity: [
+      "Route LG-502 flagged delayed",
+      "POD reminder sent to Sipho",
+      "Truck CT-18 maintenance alert raised",
+    ],
+  },
+  {
+    id: "dispatch",
+    label: "Dispatch",
+    subtitle: "Assign jobs, routes, and driver responsibility",
+    metrics: [
+      { label: "Unassigned", value: "6", detail: "Ready to allocate", accent: "#F5D36C" },
+      { label: "Assigned", value: "22", detail: "Driver accepted", accent: "#67E8F9" },
+      { label: "Customer updates", value: "9", detail: "Due today", accent: "#60A5FA" },
+    ],
+    actions: [{ id: "assign-job", label: "Assign delivery", primary: true }],
+    alerts: [{ type: "warning", message: "Somerset West route needs revised ETA" }],
+    records: [
+      { id: "LG-501", name: "Cape Town to George retail drop", category: "Linehaul", status: "Assigned", owner: "Nandi", value: "R18 900", detail: "Assigned delivery with driver app checklist ready", stage: "Assigned", priority: "High" },
+      { id: "LG-502", name: "Somerset West pharmacy route", category: "Local delivery", status: "Delayed", owner: "Marius", value: "R7 400", detail: "Delayed route due to loading bay queue; customer update required", stage: "Delayed", priority: "High" },
+      { id: "LG-505", name: "Stellenbosch client ETA update", category: "Customer update", status: "Update Required", owner: "Dispatch", value: "Today 15:30", detail: "Client needs revised ETA after delayed route", stage: "Update Required", priority: "High" },
+    ],
+    activity: ["Job assigned to Nandi", "ETA update queued for Stellenbosch client"],
+  },
+  {
+    id: "deliveries",
+    label: "Deliveries",
+    subtitle: "Live route progress and delivery exceptions",
+    metrics: [
+      { label: "In transit", value: "14", detail: "Live now", accent: "#67E8F9" },
+      { label: "Delayed", value: "5", detail: "Exception queue", accent: "#F5D36C" },
+      { label: "Delivered", value: "31", detail: "Today", accent: "#60A5FA" },
+    ],
+    actions: [{ id: "surface-delay", label: "Surface delays", primary: true }],
+    alerts: [{ type: "warning", message: "5 delayed deliveries should stay visible to owner view" }],
+    records: [
+      { id: "DLV-210", name: "Paarl cold-chain delivery", category: "Delivery", status: "In Transit", owner: "Driver Lerato", value: "R12 600", detail: "Temperature checklist complete", stage: "In Transit", priority: "Medium" },
+      { id: "DLV-211", name: "Airport freight collection", category: "Collection", status: "Delayed", owner: "Driver Sipho", value: "R9 100", detail: "Awaiting warehouse release note", stage: "Delayed", priority: "High" },
+    ],
+    activity: ["Airport freight collection delayed", "Cold-chain checklist completed"],
+  },
+  {
+    id: "vehicles",
+    label: "Vehicles",
+    subtitle: "Fleet readiness and maintenance pressure",
+    metrics: [
+      { label: "Active", value: "14", detail: "On route", accent: "#67E8F9" },
+      { label: "Maintenance", value: "3", detail: "Attention needed", accent: "#F5D36C" },
+      { label: "Available", value: "4", detail: "Can be assigned", accent: "#60A5FA" },
+    ],
+    actions: [{ id: "log-maintenance", label: "Log maintenance", primary: true }],
+    alerts: [{ type: "warning", message: "Truck CT-18 service threshold reached" }],
+    records: [
+      { id: "VH-18", name: "Truck CT-18", category: "8-ton curtain side", status: "Maintenance Alert", owner: "Fleet admin", value: "Service due", detail: "Vehicle maintenance alert after 500km threshold", stage: "Maintenance Alert", priority: "High" },
+    ],
+    activity: ["Vehicle maintenance alert raised for CT-18"],
+  },
+  {
+    id: "pod",
+    label: "POD",
+    subtitle: "Proof of delivery capture and review",
+    metrics: [
+      { label: "Captured", value: "31", detail: "Today", accent: "#67E8F9" },
+      { label: "Pending", value: "7", detail: "Needs upload", accent: "#F5D36C" },
+      { label: "Rejected", value: "2", detail: "Needs correction", accent: "#f97316" },
+    ],
+    actions: [{ id: "capture-pod", label: "Capture POD", primary: true }],
+    alerts: [{ type: "warning", message: "7 POD records still pending" }],
+    records: [
+      { id: "POD-330", name: "Paarl warehouse POD chase", category: "POD", status: "POD Pending", owner: "Driver Sipho", value: "R5 800", detail: "Proof of delivery photo still pending after completed stop", stage: "POD Pending", priority: "High" },
+    ],
+    activity: ["POD reminder sent to Sipho"],
+  },
+  {
+    id: "drivers",
+    label: "Drivers",
+    subtitle: "Driver workload, checklists, and accountability",
+    metrics: [
+      { label: "On route", value: "12", detail: "Live drivers", accent: "#67E8F9" },
+      { label: "Need update", value: "4", detail: "Dispatcher should follow up", accent: "#F5D36C" },
+    ],
+    actions: [],
+    alerts: [],
+    activity: ["Driver Nandi accepted route", "Driver Sipho received POD reminder"],
+  },
+  {
+    id: "reporting",
+    label: "Reporting",
+    subtitle: "Owner reporting for delivery profit and exception trends",
+    metrics: [
+      { label: "Profit at risk", value: "R42k", detail: "Open exceptions", accent: "#F5D36C" },
+      { label: "On-time rate", value: "91%", detail: "This week", accent: "#67E8F9" },
+    ],
+    actions: [],
+    alerts: [],
+    activity: ["Daily exception report generated", "Margin pressure surfaced to owner"],
+  },
+  {
+    id: "activity",
+    label: "Activity",
+    subtitle: "Recent logistics movement",
+    metrics: [],
+    actions: [],
+    alerts: [],
+    activity: ["Route LG-502 flagged delayed", "POD reminder sent to Sipho", "Truck CT-18 maintenance alert raised"],
+  },
+];
+
+export const accountingOsSections: DemoSection[] = [
+  {
+    id: "overview",
+    label: "Overview",
+    subtitle: "Practice owner view for recurring work, documents, reviews, and deadlines",
+    metrics: [
+      { label: "Recurring jobs", value: "126", detail: "Active client work", accent: "#67E8F9" },
+      { label: "Overdue docs", value: "18", detail: "Client chase needed", accent: "#F5D36C" },
+      { label: "Reviews", value: "9", detail: "Manager or partner queue", accent: "#60A5FA" },
+      { label: "Deadline risk", value: "6", detail: "Needs escalation", accent: "#f97316" },
+    ],
+    actions: [{ id: "select-workflow", label: "Select workflow", primary: true }],
+    alerts: [{ type: "warning", message: "6 compliance deadlines need owner visibility" }],
+    records: [
+      { id: "AO-101", name: "VAT return pack - Cape Retail", category: "Recurring work", status: "Documents Due", owner: "Staff", value: "25th", detail: "Bank statements and sales report outstanding", priority: "High" },
+      { id: "AO-102", name: "Annual financials - BuildCo", category: "Review", status: "Partner Review", owner: "Partner", value: "R18 500", detail: "Draft financials ready for final review", priority: "Medium" },
+      { id: "AO-103", name: "Payroll compliance - Security Group", category: "Deadline", status: "Deadline Risk", owner: "Manager", value: "Friday", detail: "EMP201 deadline approaching with one missing schedule", priority: "High" },
+    ],
+    activity: ["Document chase sent", "Partner review opened", "Deadline risk escalated"],
+  },
+  { id: "clients", label: "Clients", subtitle: "Client onboarding and responsibility", metrics: [], actions: [], records: [], activity: ["New client onboarding checklist created"] },
+  { id: "documents", label: "Documents", subtitle: "Document requests and chase status", metrics: [], actions: [], records: [], activity: ["Document request reminder sent"] },
+  { id: "reviews", label: "Reviews", subtitle: "Manager and partner review flow", metrics: [], actions: [], records: [], activity: ["Review moved to partner"] },
+  { id: "deadlines", label: "Deadlines", subtitle: "Deadline risk and compliance pressure", metrics: [], actions: [], records: [], activity: ["Deadline risk surfaced"] },
+  { id: "reports", label: "Reports", subtitle: "Practice owner reporting", metrics: [], actions: [], records: [], activity: ["Practice summary generated"] },
+  { id: "activity", label: "Activity", subtitle: "Recent practice activity", metrics: [], actions: [], records: [], activity: ["Document chase sent", "Deadline risk escalated"] },
+];
+
+export const marineBusinessSections: DemoSection[] = [
+  {
+    id: "overview",
+    label: "Overview",
+    subtitle: "Hybrid sales, service, parts, and after-sales owner view",
+    metrics: [
+      { label: "Enquiries", value: "22", detail: "Open sales conversations", accent: "#67E8F9" },
+      { label: "Units", value: "14", detail: "Available or incoming", accent: "#60A5FA" },
+      { label: "Service bookings", value: "9", detail: "This week", accent: "#F5D36C" },
+      { label: "Parts requests", value: "7", detail: "Supplier pending", accent: "#f97316" },
+    ],
+    actions: [{ id: "hybrid-interest", label: "Open hybrid workflow", primary: true }],
+    alerts: [{ type: "warning", message: "7 parts requests are affecting after-sales visibility" }],
+    records: [
+      { id: "MB-201", name: "Yamaha outboard enquiry", category: "Sales", status: "Enquiry", owner: "Sales", value: "R162 000", detail: "Customer comparing unit availability and fitment timing", priority: "High" },
+      { id: "MB-202", name: "SeaCat service booking", category: "Service", status: "Booked", owner: "Service advisor", value: "Friday", detail: "Annual service and trailer inspection requested", priority: "Medium" },
+      { id: "MB-203", name: "Impeller kit supplier chase", category: "Parts", status: "Supplier Pending", owner: "Parts", value: "R3 800", detail: "After-sales job waiting on supplier ETA", priority: "High" },
+    ],
+    activity: ["Sales enquiry linked to available unit", "Service booking created", "Parts supplier chase opened"],
+  },
+  { id: "sales", label: "Sales", subtitle: "Enquiries and unit availability", metrics: [], actions: [], records: [], activity: ["Sales enquiry qualified"] },
+  { id: "service", label: "Service", subtitle: "Service bookings and workshop pressure", metrics: [], actions: [], records: [], activity: ["Service booking confirmed"] },
+  { id: "parts", label: "Parts", subtitle: "Parts requests and supplier status", metrics: [], actions: [], records: [], activity: ["Supplier ETA requested"] },
+  { id: "after-sales", label: "After-sales", subtitle: "After-sales owner visibility", metrics: [], actions: [], records: [], activity: ["After-sales pressure surfaced"] },
+  { id: "reports", label: "Reports", subtitle: "Owner reports across sales and service", metrics: [], actions: [], records: [], activity: ["Hybrid report generated"] },
+  { id: "activity", label: "Activity", subtitle: "Recent marine business movement", metrics: [], actions: [], records: [], activity: ["Sales enquiry linked", "Service booking created"] },
+];
+
 export function getDemoSections(slug: string): DemoSection[] {
   switch (slug) {
     case "dealership":
@@ -1358,12 +1541,18 @@ export function getDemoSections(slug: string): DemoSection[] {
       return constructionSections;
     case "warehouse":
       return warehouseSections;
+    case "logistics":
+      return logisticsSections;
     case "farm":
       return farmSections;
     case "security":
       return securitySections;
     case "custom-business":
       return customBusinessSections;
+    case "accounting-os":
+      return accountingOsSections;
+    case "marine-business":
+      return marineBusinessSections;
     default:
       return dealershipSections;
   }

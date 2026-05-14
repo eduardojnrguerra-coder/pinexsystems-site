@@ -26,7 +26,7 @@ export function TrackedDemoLink({
   return (
     <Link
       {...rest}
-      data-event={dataEvent ?? "cta_book_system_review"}
+      data-event={dataEvent ?? "free_audit_click"}
       onClick={(event) => {
         trackDemoRequest({ location, system });
         onClick?.(event);

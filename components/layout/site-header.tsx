@@ -55,7 +55,7 @@ export function SiteHeader() {
             location="header_desktop"
             className="cta-primary"
           >
-            Book Demo
+            {primaryCta.label}
           </TrackedDemoLink>
         </div>
 
@@ -104,7 +104,7 @@ export function SiteHeader() {
               location="header_mobile"
               className="cta-primary flex-1 text-center"
             >
-              Book Demo
+              {primaryCta.label}
             </TrackedDemoLink>
           </div>
         </div>

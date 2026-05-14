@@ -48,6 +48,16 @@ export function DemoDashboard({
   onAddRecord,
   onDetailAction,
 }: DemoDashboardProps) {
+  const isWorkshopDemo = system.slug === "workshop";
+  const contactHref = isWorkshopDemo
+    ? "/contact?demo_slug=workshop&industry_slug=workshops&lead_intent=demo_page#lead-form"
+    : "/contact#lead-form";
+  const whatsappHref = isWorkshopDemo
+    ? `${whatsappCta.href}?text=${encodeURIComponent(
+        "Hi Eddy, I saw the Workshop Control System demo and want to talk about my workshop flow.",
+      )}`
+    : whatsappCta.href;
+
   return (
     <div className="min-w-0 space-y-5">
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -69,7 +79,7 @@ export function DemoDashboard({
               <div>
                 <h2 className="font-heading text-xl font-semibold text-white">System Records</h2>
                 <p className="mt-1 text-sm text-[#a8a8a2]">
-                  Search, filter, select, and move sample records in this frontend-only demo.
+                  Search, filter, select, and move sample records in this interactive concept preview.
                 </p>
               </div>
               <input
@@ -149,7 +159,7 @@ export function DemoDashboard({
           <div className="rounded-[8px] border border-white/10 bg-white/[0.035] p-4">
             <h2 className="font-heading text-lg font-semibold text-white">Demo Actions</h2>
             <p className="mt-2 text-sm leading-6 text-[#d8d8d2]">
-              These buttons update the sample dashboard and activity feed using local React state.
+              These example workflow actions update the sample dashboard and activity feed.
             </p>
             <div className="mt-4 grid gap-2">
               <button type="button" onClick={onPrimaryAction} className="cta-button justify-center">
@@ -188,26 +198,33 @@ export function DemoDashboard({
               Want this shaped around your workflow?
             </h2>
             <p className="mt-2 text-sm leading-6 text-[#d8d8d2]">
-              Request this system demo and we will map the first owner dashboard,
+              Request a free system audit and we will map the first owner dashboard,
               staff workflow, and automation layer for your business.
             </p>
             <div className="mt-4 grid gap-2">
               <TrackedDemoLink
-                href="/contact#lead-form"
+                href={contactHref}
                 location="demo_dashboard_request_system"
                 system={system.title}
                 className="cta-button justify-center"
+                data-event="demo_cta_click"
+                data-demo-slug={system.slug}
+                data-industry-slug={isWorkshopDemo ? "workshops" : undefined}
+                data-lead-intent={isWorkshopDemo ? "demo_page" : undefined}
               >
-                Request This System Demo <ArrowRight className="h-4 w-4" />
+                {isWorkshopDemo ? "Get My Workshop Control Audit" : "Map This Workflow With Pine X"} <ArrowRight className="h-4 w-4" />
               </TrackedDemoLink>
               <TrackedWhatsAppLink
-                href={whatsappCta.href}
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 location="demo_dashboard_whatsapp"
                 className="cta-secondary justify-center"
+                data-event="demo_whatsapp_click"
+                data-demo-slug={system.slug}
               >
-                <MessageCircle className="h-4 w-4" /> WhatsApp Pine X Systems
+                <MessageCircle className="h-4 w-4" />
+                {isWorkshopDemo ? "WhatsApp Eddy About My Workshop Flow" : "WhatsApp Eddy About This Demo"}
               </TrackedWhatsAppLink>
             </div>
           </div>

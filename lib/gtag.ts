@@ -37,6 +37,7 @@ export function trackPageView(url: string) {
     page_location: parsed.toString(),
     page_path: `${parsed.pathname}${parsed.search}`,
     page_title: document.title,
+    page_referrer: document.referrer || undefined,
   });
 }
 
@@ -79,5 +80,15 @@ export function trackDemoRequest(details?: {
     event_category: "engagement",
     event_label: details?.location ?? "demo_request",
     system: details?.system,
+  });
+}
+
+export function trackCustomEvent(
+  eventName: string,
+  params?: GtagParams,
+) {
+  dispatch("event", eventName, {
+    send_to: GA_MEASUREMENT_ID,
+    ...params,
   });
 }

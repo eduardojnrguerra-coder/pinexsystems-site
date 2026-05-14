@@ -344,11 +344,11 @@ export function DemoSelector() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href={activeDemo.href} className="cta-button premium-glow w-full sm:w-fit">
-              Open System Demo <ArrowRight className="h-4 w-4" />
+            <Link href={activeDemo.href} className="cta-button premium-glow w-full sm:w-fit" data-event="demo_click">
+              View Live Demo Systems <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/contact#lead-form" className="cta-secondary w-full justify-center sm:w-fit">
-              Request This Demo
+            <Link href="/contact#lead-form" className="cta-secondary w-full justify-center sm:w-fit" data-event="demo_cta_click">
+              Map This Demo Around My Business
             </Link>
           </div>
         </div>

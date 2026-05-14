@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { DealershipDemo } from "@/components/demos/DealershipDemo";
 import { DemoShell } from "@/components/demos/DemoShell";
 import { HuttonServiceDemo } from "@/components/demos/hutton/HuttonServiceDemo";
 import { SchemaScript } from "@/components/ui/schema-script";
@@ -68,6 +69,29 @@ export default async function DemoPage({ params }: DemoPageProps) {
           ])}
         />
         <HuttonServiceDemo />
+      </>
+    );
+  }
+
+  if (slug === "dealership") {
+    return (
+      <>
+        <SchemaScript
+          data={softwareApplicationSchema({
+            name: system.title,
+            description: system.seoDescription,
+            path: `/demos/${system.slug}`,
+            category: "BusinessApplication",
+          })}
+        />
+        <SchemaScript
+          data={breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Demos", path: "/demos" },
+            { name: system.title, path: `/demos/${system.slug}` },
+          ])}
+        />
+        <DealershipDemo />
       </>
     );
   }
