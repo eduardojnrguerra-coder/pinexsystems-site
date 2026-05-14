@@ -85,6 +85,129 @@ const workshopGuidedTasks = [
   },
 ];
 
+const demoOwnerSummaries: Record<string, string> = {
+  dealership:
+    "Control every lead, vehicle, finance stage, test drive and sales handover from one owner dashboard.",
+  workshop:
+    "Track bookings, job cards, technicians, parts delays, approvals and invoice-ready work from one live workshop board.",
+  "hutton-motors-service-centre":
+    "Keep reception, job cards, workshop movement, parts, transport and WhatsApp updates connected in one service centre flow.",
+  agency:
+    "Track clients, campaigns, approvals, reports, tasks and delivery pressure from one agency operations dashboard.",
+  construction:
+    "Control projects, site tasks, subcontractors, materials, variations, deadlines and client reporting from one project command centre.",
+  warehouse:
+    "Track stock movement, receiving, dispatch, low-stock alerts, supplier orders and warehouse zones from one live stock control system.",
+  logistics:
+    "Control dispatch, fleet status, driver updates, POD capture, delivery exceptions and owner reporting from one logistics command centre.",
+  farm:
+    "Manage field tasks, labour teams, equipment, inputs, harvest workflows and dispatch visibility from one farm operations dashboard.",
+  security:
+    "Track sites, shifts, guards, patrols, missed check-ins, incidents, equipment and reporting from one operations command centre.",
+  "custom-business":
+    "Show how an owner dashboard, staff workflow, approvals, client portal, documents and automation can be shaped around any business.",
+  "accounting-os":
+    "Control recurring client work, document chasing, reviews, deadlines and partner reporting from one practice operating system.",
+  "marine-business":
+    "Unify enquiries, unit availability, service bookings, parts requests and after-sales visibility from one marine business system.",
+};
+
+const demoControlItems: Record<string, string[]> = {
+  workshop: [
+    "Paper job cards, advisor notes and technician movement",
+    "Waiting parts, supplier ETA and work stuck in the bay",
+    "Approval follow-ups before customers start chasing",
+    "Invoice-ready work and ready-for-collection jobs",
+    "Owner visibility across bookings, pressure and daily output",
+  ],
+  logistics: [
+    "Assigned deliveries, dispatch pressure and delayed routes",
+    "Vehicle status, driver updates and maintenance alerts",
+    "POD pending items and customer update requirements",
+    "Route exceptions before reporting becomes stale",
+    "Owner-level delivery profit and performance reporting",
+  ],
+  warehouse: [
+    "Receiving queues, stock movement and warehouse zone pressure",
+    "Dispatch exceptions before customers or branches chase",
+    "Low-stock alerts and reorder decisions",
+    "Supplier orders, ETA follow-up and stock confidence",
+    "Owner and warehouse-manager visibility from one live dashboard",
+  ],
+  construction: [
+    "Site tasks, milestone risk and delayed project stages",
+    "Material pressure, procurement delays and supplier ETA",
+    "Subcontractor accountability and overdue work",
+    "Variation, weather and client-reporting pressure",
+    "Owner visibility without waiting for end-of-day updates",
+  ],
+  agency: [
+    "Campaign delivery, content status and open approvals",
+    "Client response pending items and overdue reports",
+    "Account-manager workload and blocked production tasks",
+    "Monthly reporting progress and owner visibility",
+    "Delivery pressure before clients start chasing",
+  ],
+  security: [
+    "Sites, shifts, guards and roster coverage",
+    "Missed patrols, missed check-ins and urgent exceptions",
+    "Open incidents, escalation status and client reporting",
+    "Equipment issues and operational accountability",
+    "Management visibility before clients notice gaps",
+  ],
+  farm: [
+    "Field tasks, labour teams and blocked seasonal work",
+    "Low-input alerts, supplier pressure and spray/fertiliser readiness",
+    "Equipment maintenance, downtime and operator visibility",
+    "Harvest progress, dispatch movement and owner reporting",
+    "Daily operational pressure across fields and teams",
+  ],
+  "custom-business": [
+    "Owner dashboards shaped around the numbers that matter",
+    "Staff workflows, approvals and recurring operational tasks",
+    "Client portal activity, documents and request status",
+    "Automation steps that reduce repeated admin",
+    "Permissions, role views and reporting in one custom system",
+  ],
+  "accounting-os": [
+    "Recurring client work, document chasing and review queues",
+    "Deadline risk, overdue tasks and partner visibility",
+    "Onboarding, reporting and compliance-heavy workflows",
+    "Staff workload and handoff accountability",
+    "Practice-level control without scattered reminders",
+  ],
+  "marine-business": [
+    "Sales enquiries, unit availability and after-sales pressure",
+    "Service bookings, parts requests and supplier follow-up",
+    "Owner dashboards across sales and service",
+    "Client updates, handover status and disconnected task risk",
+    "A phased operating system for hybrid marine workflows",
+  ],
+};
+
+const demoBestFit: Record<string, string> = {
+  workshop:
+    "Best fit for workshops still using paper job cards, WhatsApp updates, manual bookings, and disconnected parts tracking.",
+  logistics:
+    "Best fit for logistics teams that need dispatch, vehicles, drivers, POD, customer updates and owner reporting in one place.",
+  warehouse:
+    "Best fit for warehouses that need cleaner receiving, stock movement, dispatch, supplier ordering and low-stock control before adding fleet and POD.",
+  construction:
+    "Best fit for construction teams that need earlier visibility across site tasks, materials, subcontractors, deadlines and client reporting.",
+  agency:
+    "Best fit for agencies where campaign delivery, approvals, reports and client updates are still split across chat, spreadsheets and memory.",
+  security:
+    "Best fit for security operations that need site accountability, patrol visibility, incident handling, roster control and exception reporting.",
+  farm:
+    "Best fit for farms that need field tasks, labour, equipment, inputs, harvest and dispatch reporting in a season-aware operating layer.",
+  "custom-business":
+    "Best fit for non-standard businesses that need a practical mix of dashboards, approvals, portals, documents, automation and staff workflow.",
+  "accounting-os":
+    "Best fit for accounting practices and compliance-heavy service teams managing recurring work, document requests, reviews and deadlines.",
+  "marine-business":
+    "Best fit for marine businesses that need sales, service bookings, parts and after-sales pressure connected in one operating view.",
+};
+
 type DemoConversionConfig = {
   headline: string;
   bullets: string[];
@@ -113,7 +236,7 @@ const demoConversion: Record<string, DemoConversionConfig> = {
       "Give owners a live exceptions dashboard instead of delayed reporting",
     ],
     primaryCta: "Show Me My Logistics Command Centre",
-    secondaryCta: "WhatsApp Eddy About My Logistics Flow",
+    secondaryCta: "WhatsApp Eddy",
     industrySlug: "logistics",
     proof: [
       "Jobs, fleet, POD, and reporting in one system",
@@ -179,7 +302,7 @@ const demoConversion: Record<string, DemoConversionConfig> = {
       "Replace scattered updates with one live project control layer",
     ],
     primaryCta: "Map My Construction Control Layer",
-    secondaryCta: "WhatsApp Eddy About My Project Workflow",
+    secondaryCta: "WhatsApp Eddy",
     industrySlug: "construction",
     proof: ["Milestone risk visible early", "Materials and procurement pressure surfaced", "Owner, site manager, and client views", "Reporting built around live project status"],
     frames: ["Milestone board", "Material risk", "Weather delay", "Client report"],
@@ -202,7 +325,7 @@ const demoConversion: Record<string, DemoConversionConfig> = {
       "Give owners and account managers cleaner visibility",
     ],
     primaryCta: "Map My Agency Delivery System",
-    secondaryCta: "WhatsApp Eddy About My Approval Flow",
+    secondaryCta: "WhatsApp Eddy",
     industrySlug: "agencies",
     proof: ["Approvals, delivery, and reports in one workflow", "Built for owner and account-manager visibility", "Clear status for blocked work", "Useful before clients start chasing"],
     frames: ["Client approvals", "Campaign delivery", "Monthly reports", "Owner queue"],
@@ -225,7 +348,7 @@ const demoConversion: Record<string, DemoConversionConfig> = {
       "Give management one live exception view",
     ],
     primaryCta: "Map My Security Operations System",
-    secondaryCta: "WhatsApp Eddy About My Incident Flow",
+    secondaryCta: "WhatsApp Eddy",
     industrySlug: "security",
     proof: ["Incidents, patrols, rosters, and reports in one view", "Built for security owners and ops managers", "Exception visibility before clients chase", "Supports phased site rollout"],
     frames: ["Missed check-ins", "Incident queue", "Roster gaps", "Client reporting"],
@@ -248,7 +371,7 @@ const demoConversion: Record<string, DemoConversionConfig> = {
       "Give owners clearer harvest and dispatch reporting",
     ],
     primaryCta: "Map My Farm Operations System",
-    secondaryCta: "WhatsApp Eddy About My Field Workflow",
+    secondaryCta: "WhatsApp Eddy",
     industrySlug: "farms",
     proof: ["Field tasks, inputs, equipment, and dispatch in one system", "Season-aware owner visibility", "Farm manager and worker views", "Phased rollout around the season"],
     frames: ["Field tasks", "Low inputs", "Equipment maintenance", "Harvest dispatch"],
@@ -290,7 +413,7 @@ const demoConversion: Record<string, DemoConversionConfig> = {
     headline: "Control Recurring Client Work, Document Chasing, Reviews, and Deadlines in One Practice OS",
     bullets: ["Track onboarding, document requests, review flow, and reporting", "Surface overdue work and deadline risk early", "Give partners one owner dashboard instead of scattered reminders"],
     primaryCta: "Map My Practice Operating System",
-    secondaryCta: "WhatsApp Eddy About My Review Workflow",
+    secondaryCta: "WhatsApp Eddy",
     industrySlug: "accounting",
     proof: ["Recurring work and deadlines in one view", "Built for partners, managers, and staff", "Document chasing and reviews connected", "Useful for compliance-heavy service teams"],
     frames: ["Problem summary", "System modules", "Review queue", "Deadline dashboard"],
@@ -309,7 +432,7 @@ const demoConversion: Record<string, DemoConversionConfig> = {
     headline: "Unify Sales, Service Bookings, Parts, and After-Sales Visibility in One Marine System",
     bullets: ["Track enquiries, unit availability, service bookings, and parts requests", "Give sales and service one shared owner view", "Stop after-sales pressure from living in disconnected tools"],
     primaryCta: "Show Me My Marine Business System",
-    secondaryCta: "WhatsApp Eddy About My Marine Workflow",
+    secondaryCta: "WhatsApp Eddy",
     industrySlug: "marine",
     proof: ["Sales, service, parts, and after-sales in one view", "Built for hybrid marine operations", "Owner, sales, and service views", "Supports phased rollout"],
     frames: ["Sales enquiries", "Service bookings", "Parts requests", "Owner dashboard"],
@@ -408,7 +531,7 @@ function makeMetrics(records: DemoRecord[], section: DemoSection, roleKind: Role
 }
 
 function summaryText(system: DemoSystem, roleKind: RoleKind, nouns: Nouns) {
-  if (roleKind === "owner") return `Strategic control view for ${system.shortTitle}: keep margin, risk, and delivery pressure visible.`;
+  if (roleKind === "owner") return demoOwnerSummaries[system.slug] ?? `Owner control view for ${system.shortTitle}: keep active work, risk, follow-up and reporting visible.`;
   if (roleKind === "manager") return `Operational queue view for ${system.shortTitle}: keep the ${nouns.queue} flowing and blockers moving.`;
   return `Execution view for ${system.shortTitle}: show assigned work, the next step, and what is blocked.`;
 }
@@ -468,6 +591,8 @@ export function DemoShell({ system }: { system: DemoSystem }) {
   const metrics = useMemo(() => makeMetrics(records, section ?? orderedSections[0], roleKind, nouns), [nouns, orderedSections, records, roleKind, section]);
   const actions = actionLabels(roleKind, nouns);
   const roleSummary = summaryText(system, roleKind, nouns);
+  const controlItems = demoControlItems[system.slug] ?? system.modules.slice(0, 5).map((module) => `${module} visibility and workflow control`);
+  const bestFit = demoBestFit[system.slug] ?? `Best fit for ${system.shortTitle.toLowerCase()} teams still using paper, spreadsheets, WhatsApp updates, and disconnected tools.`;
 
   const activity = useMemo(
     () => [notice ?? `${activeRole} view opened.`, ...(section?.activity ?? []), ...feed].slice(0, 8),
@@ -669,12 +794,12 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                     location="workshop_demo_hero_audit"
                     system="workshop"
                     className="cta-button"
-                    data-event="demo_cta_click"
+                    data-event="free_audit_click"
                     data-demo-slug="workshop"
                     data-industry-slug="workshops"
                     data-lead-intent="demo_page"
                   >
-                    Get My Workshop Control Audit
+                    Get My Free System Audit
                   </TrackedDemoLink>
                   <TrackedWhatsAppLink
                     href={workshopWhatsAppHref}
@@ -682,11 +807,11 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                     rel="noopener noreferrer"
                     location="workshop_demo_hero_whatsapp"
                     className="cta-secondary"
-                    data-event="demo_whatsapp_click"
+                    data-event="whatsapp_click"
                     data-demo-slug="workshop"
                   >
                     <MessageCircle className="h-4 w-4" />
-                    WhatsApp Eddy About My Workshop Flow
+                    WhatsApp Eddy
                   </TrackedWhatsAppLink>
                 </div>
               </div>
@@ -747,7 +872,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                     location={`${system.slug}_demo_hero_cta`}
                     system={system.slug}
                     className="cta-button"
-                    data-event="demo_cta_click"
+                    data-event="free_audit_click"
                     data-demo-slug={system.slug}
                     data-industry-slug={conversion.industrySlug}
                     data-lead-intent="demo_page"
@@ -759,7 +884,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                       })
                     }
                   >
-                    {conversion.primaryCta}
+                    Get My Free System Audit
                   </TrackedDemoLink>
                   {conversion.secondaryHref ? (
                     <Link
@@ -775,7 +900,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                         })
                       }
                     >
-                      {conversion.secondaryCta}
+                      View Live Demo Systems
                     </Link>
                   ) : (
                     <TrackedWhatsAppLink
@@ -784,11 +909,11 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                       rel="noopener noreferrer"
                       location={`${system.slug}_demo_hero_whatsapp`}
                       className="cta-secondary"
-                      data-event="demo_whatsapp_click"
+                      data-event="whatsapp_click"
                       data-demo-slug={system.slug}
                     >
                       <MessageCircle className="h-4 w-4" />
-                      {conversion.secondaryCta}
+                      WhatsApp Eddy
                     </TrackedWhatsAppLink>
                   )}
                 </div>
@@ -821,6 +946,56 @@ export function DemoShell({ system }: { system: DemoSystem }) {
           </>
         ) : null}
 
+        <section
+          className="my-6 grid gap-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-5 lg:grid-cols-[1.2fr_0.8fr]"
+          aria-labelledby={`${system.slug}-control-section`}
+        >
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+              What this system helps you control
+            </p>
+            <h2 id={`${system.slug}-control-section`} className="mt-2 font-heading text-2xl font-semibold text-white">
+              The operational pressure points this demo is built around
+            </h2>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {controlItems.slice(0, 5).map((item) => (
+                <div key={item} className="flex gap-3 rounded-[8px] border border-white/10 bg-black/20 p-3 text-sm leading-6 text-[#f7f7f2]">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#67E8F9]" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-[8px] border border-[#67E8F9]/20 bg-[#67E8F9]/10 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+              Best fit for
+            </p>
+            <p className="mt-3 text-sm leading-7 text-[#f7f7f2]">{bestFit}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <TrackedDemoLink
+                href={contactHref}
+                location={`${system.slug}_best_fit_audit`}
+                system={system.slug}
+                className="cta-button"
+                data-event="free_audit_click"
+                data-demo-slug={system.slug}
+                data-industry-slug={conversion?.industrySlug}
+                data-lead-intent="demo_page"
+              >
+                Get My Free System Audit
+              </TrackedDemoLink>
+              <Link
+                href="/demos"
+                className="cta-secondary"
+                data-event="demo_open"
+                data-demo-slug={system.slug}
+              >
+                Back to all demos
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <Link href="/demos" className={`inline-flex items-center gap-2 text-sm font-semibold text-[#d8d8d2] hover:text-white ${isWorkshopDemo || conversion ? "sr-only" : ""}`}>
             <ArrowLeft className="h-4 w-4" /> Back to demos
@@ -832,23 +1007,23 @@ export function DemoShell({ system }: { system: DemoSystem }) {
               rel="noopener noreferrer"
               location={`demo_shell_${system.slug}`}
               className="cta-secondary"
-              data-event={isWorkshopDemo || conversion ? "demo_whatsapp_click" : undefined}
+              data-event="whatsapp_click"
               data-demo-slug={system.slug}
             >
               <MessageCircle className="h-4 w-4" />
-              {isWorkshopDemo ? "WhatsApp Eddy About My Workshop Flow" : conversion ? "WhatsApp Eddy About This Demo" : "WhatsApp"}
+              WhatsApp Eddy
             </TrackedWhatsAppLink>
             <TrackedDemoLink
               href={contactHref}
               location="demo_shell_request_system"
               system={system.slug}
               className="cta-button"
-              data-event={isWorkshopDemo || conversion ? "demo_cta_click" : "request_my_version_click"}
+              data-event="free_audit_click"
               data-demo-slug={system.slug}
               data-industry-slug={conversion?.industrySlug}
               data-lead-intent="demo_page"
             >
-              {isWorkshopDemo ? "Get My Workshop Control Audit" : conversion ? conversion.primaryCta : "Map This Demo Around My Business"}
+              Get My Free System Audit
             </TrackedDemoLink>
           </div>
         </div>
@@ -1060,11 +1235,11 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                 rel="noopener noreferrer"
                 location="workshop_demo_close_whatsapp"
                 className="cta-secondary mt-5"
-                data-event="demo_whatsapp_click"
+                data-event="whatsapp_click"
                 data-demo-slug="workshop"
               >
                 <MessageCircle className="h-4 w-4" />
-                WhatsApp Eddy About My Workshop Flow
+                WhatsApp Eddy
               </TrackedWhatsAppLink>
             </div>
 
@@ -1074,12 +1249,13 @@ export function DemoShell({ system }: { system: DemoSystem }) {
               subtitle="Send the messy part of your workshop flow and Eddy will reply with practical system ideas for job cards, parts, technicians, or owner visibility."
               problemLabel="Biggest workshop bottleneck"
               problemPlaceholder="Waiting parts, paper job cards, customer updates, invoice-ready work..."
-              buttonLabel="Get My Workshop Control Audit"
+              buttonLabel="Get My Free System Audit"
               leadOffer="Workshop Control Audit"
               source="workshop_demo_close_form"
               demoSlug="workshop"
               industrySlug="workshops"
               leadIntent="demo_page"
+              startEvent="demo_form_start"
               submitEvent="demo_form_submit"
             />
           </section>
@@ -1127,11 +1303,11 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                 rel="noopener noreferrer"
                 location={`${system.slug}_demo_close_whatsapp`}
                 className="cta-secondary mt-5"
-                data-event="demo_whatsapp_click"
+              data-event="whatsapp_click"
                 data-demo-slug={system.slug}
               >
                 <MessageCircle className="h-4 w-4" />
-                WhatsApp Eddy About This Demo
+                WhatsApp Eddy
               </TrackedWhatsAppLink>
             </div>
 
@@ -1141,16 +1317,43 @@ export function DemoShell({ system }: { system: DemoSystem }) {
               subtitle="Send the messy part of your operation and Eddy will reply with practical system ideas for the first control layer."
               problemLabel={conversion.problemLabel}
               problemPlaceholder={conversion.problemPlaceholder}
-              buttonLabel={conversion.primaryCta}
+              buttonLabel="Get My Free System Audit"
               leadOffer={`${system.shortTitle} Demo Audit`}
               source={`${system.slug}_demo_close_form`}
               demoSlug={system.slug}
               industrySlug={conversion.industrySlug}
               leadIntent="demo_page"
+              startEvent="demo_form_start"
               submitEvent="demo_form_submit"
             />
           </section>
         ) : null}
+
+        <div className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-[1fr_auto] gap-2 rounded-[10px] border border-white/15 bg-[#071126]/95 p-2 shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur lg:hidden">
+          <TrackedDemoLink
+            href={contactHref}
+            location={`${system.slug}_mobile_sticky_audit`}
+            system={system.slug}
+            className="cta-button justify-center px-3 py-3 text-sm"
+            data-event="free_audit_click"
+            data-demo-slug={system.slug}
+            data-industry-slug={conversion?.industrySlug}
+            data-lead-intent="demo_page"
+          >
+            Get My Free System Audit
+          </TrackedDemoLink>
+          <TrackedWhatsAppLink
+            href={isWorkshopDemo ? workshopWhatsAppHref : whatsAppHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            location={`${system.slug}_mobile_sticky_whatsapp`}
+            className="cta-secondary justify-center px-3 py-3 text-sm"
+            data-event="whatsapp_click"
+            data-demo-slug={system.slug}
+          >
+            WhatsApp
+          </TrackedWhatsAppLink>
+        </div>
       </div>
     </div>
   );

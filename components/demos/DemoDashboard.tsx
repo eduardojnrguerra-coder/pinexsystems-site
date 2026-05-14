@@ -207,12 +207,12 @@ export function DemoDashboard({
                 location="demo_dashboard_request_system"
                 system={system.title}
                 className="cta-button justify-center"
-                data-event="demo_cta_click"
+                data-event="free_audit_click"
                 data-demo-slug={system.slug}
                 data-industry-slug={isWorkshopDemo ? "workshops" : undefined}
                 data-lead-intent={isWorkshopDemo ? "demo_page" : undefined}
               >
-                {isWorkshopDemo ? "Get My Workshop Control Audit" : "Map This Workflow With Pine X"} <ArrowRight className="h-4 w-4" />
+                Get My Free System Audit <ArrowRight className="h-4 w-4" />
               </TrackedDemoLink>
               <TrackedWhatsAppLink
                 href={whatsappHref}
@@ -220,11 +220,11 @@ export function DemoDashboard({
                 rel="noopener noreferrer"
                 location="demo_dashboard_whatsapp"
                 className="cta-secondary justify-center"
-                data-event="demo_whatsapp_click"
+                data-event="whatsapp_click"
                 data-demo-slug={system.slug}
               >
                 <MessageCircle className="h-4 w-4" />
-                {isWorkshopDemo ? "WhatsApp Eddy About My Workshop Flow" : "WhatsApp Eddy About This Demo"}
+                WhatsApp Eddy
               </TrackedWhatsAppLink>
             </div>
           </div>

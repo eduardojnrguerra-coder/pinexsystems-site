@@ -3,7 +3,7 @@
 import { SendHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 
-import { trackDemoRequest, trackLeadConversion } from "@/lib/gtag";
+import { trackCustomEvent, trackDemoRequest, trackLeadConversion } from "@/lib/gtag";
 import { siteConfig } from "@/lib/site";
 
 interface LeadFormProps {
@@ -112,6 +112,10 @@ export function LeadForm({
         method: "form",
         preferredContact: form.preferredContact,
       });
+      trackCustomEvent(submitEvent, {
+        location: id,
+        preferred_contact: form.preferredContact,
+      });
 
       setStatus(
         "Thanks for reaching out. We will review your request and get back to you within one business day. No spam, no hard sell.",
@@ -171,6 +175,7 @@ export function LeadForm({
         <form
           className="mt-6 grid gap-4 sm:grid-cols-2"
           onSubmit={handleSubmit}
+          data-event="contact_form_start"
           noValidate
         >
           <input type="hidden" name="lead_offer" value={leadOffer} />
@@ -186,6 +191,7 @@ export function LeadForm({
               }
               className={`form-input ${isLight ? "form-input-light" : ""}`}
               placeholder="Your name"
+              data-event="contact_form_start"
             />
           </label>
           <label className="flex flex-col gap-2">
@@ -203,6 +209,7 @@ export function LeadForm({
               }
               className={`form-input ${isLight ? "form-input-light" : ""}`}
               placeholder="Business name"
+              data-event="contact_form_start"
             />
           </label>
 
@@ -218,6 +225,7 @@ export function LeadForm({
               }
               className={`form-input ${isLight ? "form-input-light" : ""}`}
               placeholder="WhatsApp / phone"
+              data-event="contact_form_start"
             />
           </label>
           <label className="flex flex-col gap-2">
@@ -233,6 +241,7 @@ export function LeadForm({
               }
               className={`form-input ${isLight ? "form-input-light" : ""}`}
               placeholder="you@company.com"
+              data-event="contact_form_start"
             />
           </label>
 
@@ -248,6 +257,7 @@ export function LeadForm({
               }
               className={`form-input ${isLight ? "form-input-light" : ""}`}
               placeholder="Dealership, workshop, agency, construction, etc."
+              data-event="contact_form_start"
             />
           </label>
 
@@ -266,6 +276,7 @@ export function LeadForm({
               }
               className={`form-input min-h-24 resize-y ${isLight ? "form-input-light" : ""}`}
               placeholder="What is slowing the business down?"
+              data-event="contact_form_start"
             />
           </label>
 
@@ -281,6 +292,7 @@ export function LeadForm({
               }
               className={`form-input min-h-24 resize-y ${isLight ? "form-input-light" : ""}`}
               placeholder="Owner dashboard, lead system, job cards, portal, etc."
+              data-event="contact_form_start"
             />
           </label>
 
@@ -297,6 +309,7 @@ export function LeadForm({
                 }))
               }
               className={`form-input ${isLight ? "form-input-light" : ""}`}
+              data-event="contact_form_start"
             >
               {contactMethods.map((method) => (
                 <option key={method} value={method}>
@@ -310,7 +323,7 @@ export function LeadForm({
             type="submit"
             disabled={submitting}
             className="cta-button mt-2 sm:col-span-2 disabled:opacity-60 disabled:cursor-not-allowed"
-            aria-label="Submit demo request"
+            aria-label="Submit system audit request"
             data-event={submitEvent}
           >
             {submitting ? "Sending..." : buttonLabel}{" "}

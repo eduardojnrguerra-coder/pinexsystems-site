@@ -73,7 +73,7 @@ export default function ContactPage() {
       />
 
       <div className="mx-auto mt-8 max-w-3xl">
-        <ShortAuditForm id="lead-form" />
+        <ShortAuditForm id="lead-form" submitEvent="contact_form_submit" />
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
@@ -214,8 +214,8 @@ export default function ContactPage() {
             tone="light"
             title="Detailed Demo Request"
             subtitle="Tell us what is slowing the business down, what you want more control over, and how you would prefer us to contact you. We will use that context to make the first conversation practical."
-            buttonLabel="Get My Free System Audit"
-            submitEvent="free_audit_click"
+            buttonLabel="Send My Request"
+            submitEvent="contact_form_submit"
           />
         </div>
       </div>

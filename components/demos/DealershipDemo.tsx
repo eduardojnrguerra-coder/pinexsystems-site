@@ -170,6 +170,14 @@ const proofCards = [
   "Supports staged rollout instead of all-at-once disruption",
 ];
 
+const controlItems = [
+  "Website, Cars.co.za, walk-in and WhatsApp leads before they leak",
+  "Vehicle stock age, recon status and publishing readiness",
+  "Finance applications, missing documents and payout blockers",
+  "Test drives, follow-ups and delivery handover risk",
+  "Owner visibility across salesperson, finance and stock performance",
+];
+
 const previewFrames = [
   {
     title: "Owner dashboard",
@@ -1637,12 +1645,12 @@ export function DealershipDemo() {
                 location="dealership_demo_hero_audit"
                 system="dealership"
                 className="cta-button"
-                data-event="demo_cta_click"
+                data-event="free_audit_click"
                 data-demo-slug="dealership"
                 data-industry-slug="dealerships"
-                onClick={() => trackDealershipEvent("demo_cta_click", { location: "hero" })}
+                onClick={() => trackDealershipEvent("free_audit_click", { location: "hero" })}
               >
-                Map My Dealership System
+                Get My Free System Audit
               </TrackedDemoLink>
               <TrackedWhatsAppLink
                 href={whatsappHref}
@@ -1650,7 +1658,7 @@ export function DealershipDemo() {
                 rel="noopener noreferrer"
                 location="dealership_demo_hero_whatsapp"
                 className="cta-secondary"
-                data-event="demo_whatsapp_click"
+                data-event="whatsapp_click"
                 data-demo-slug="dealership"
                 aria-label="WhatsApp Eddy about my dealership flow"
                 onClick={() =>
@@ -1658,7 +1666,7 @@ export function DealershipDemo() {
                 }
               >
                 <MessageCircle className="h-4 w-4" />
-                WhatsApp Eddy About My Dealership Flow
+                WhatsApp Eddy
               </TrackedWhatsAppLink>
             </div>
           </div>
@@ -1691,6 +1699,52 @@ export function DealershipDemo() {
               {item}
             </div>
           ))}
+        </section>
+
+        <section
+          className="mt-5 grid gap-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-5 lg:grid-cols-[1.2fr_0.8fr]"
+          aria-labelledby="dealership-control-points"
+        >
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+              What this system helps you control
+            </p>
+            <h2 id="dealership-control-points" className="mt-2 font-heading text-2xl font-semibold text-white">
+              The dealership pressure points this demo is built around
+            </h2>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {controlItems.map((item) => (
+                <div key={item} className="flex gap-3 rounded-[8px] border border-white/10 bg-black/20 p-3 text-sm leading-6 text-[#f7f7f2]">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#67E8F9]" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-[8px] border border-[#67E8F9]/20 bg-[#67E8F9]/10 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#67E8F9]">
+              Best fit for
+            </p>
+            <p className="mt-3 text-sm leading-7 text-[#f7f7f2]">
+              Best fit for dealerships still losing follow-up, stock readiness, finance status and delivery handover detail across separate tools.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <TrackedDemoLink
+                href={contactHref}
+                location="dealership_best_fit_audit"
+                system="dealership"
+                className="cta-button"
+                data-event="free_audit_click"
+                data-demo-slug="dealership"
+                data-industry-slug="dealerships"
+              >
+                Get My Free System Audit
+              </TrackedDemoLink>
+              <Link href="/demos" className="cta-secondary" data-event="demo_open" data-demo-slug="dealership">
+                Back to all demos
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section
@@ -1851,14 +1905,14 @@ export function DealershipDemo() {
                     location="dealership_demo_main_cta"
                     system="dealership"
                     className="cta-button"
-                    data-event="demo_cta_click"
+                    data-event="free_audit_click"
                     data-demo-slug="dealership"
                     data-industry-slug="dealerships"
                     onClick={() =>
-                      trackDealershipEvent("demo_cta_click", { location: "canvas" })
+                      trackDealershipEvent("free_audit_click", { location: "canvas" })
                     }
                   >
-                    Map My Dealership System <ArrowRight className="h-4 w-4" />
+                    Get My Free System Audit <ArrowRight className="h-4 w-4" />
                   </TrackedDemoLink>
                 </div>
               </div>
@@ -1915,7 +1969,7 @@ export function DealershipDemo() {
               rel="noopener noreferrer"
               location="dealership_demo_close_whatsapp"
               className="cta-secondary mt-5"
-              data-event="demo_whatsapp_click"
+              data-event="whatsapp_click"
               data-demo-slug="dealership"
               aria-label="WhatsApp Eddy about my dealership flow"
               onClick={() =>
@@ -1923,7 +1977,7 @@ export function DealershipDemo() {
               }
             >
               <MessageCircle className="h-4 w-4" />
-              WhatsApp Eddy About My Dealership Flow
+              WhatsApp Eddy
             </TrackedWhatsAppLink>
           </div>
 
@@ -1933,12 +1987,13 @@ export function DealershipDemo() {
             subtitle="Send the messy part of your dealership flow and Eddy will reply with practical system ideas for leads, stock, finance, and owner visibility."
             problemLabel="Biggest dealership bottleneck"
             problemPlaceholder="Lead leakage, stock publishing, finance delays, delivery blockers..."
-            buttonLabel="Map My Dealership System"
+            buttonLabel="Get My Free System Audit"
             leadOffer="Dealership System Audit"
             source="dealership_demo_close_form"
             demoSlug="dealership"
             industrySlug="dealerships"
             leadIntent="demo_page"
+            startEvent="demo_form_start"
             submitEvent="demo_form_submit"
           />
         </section>

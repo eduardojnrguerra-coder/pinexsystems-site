@@ -31,6 +31,7 @@ type ShortAuditFormProps = {
   demoSlug?: string;
   industrySlug?: string;
   leadIntent?: string;
+  startEvent?: string;
   submitEvent?: string;
 };
 
@@ -46,6 +47,7 @@ export function ShortAuditForm({
   demoSlug,
   industrySlug,
   leadIntent,
+  startEvent = "contact_form_start",
   submitEvent = "short_form_submit",
 }: ShortAuditFormProps) {
   const [form, setForm] = useState(initialState);
@@ -160,7 +162,7 @@ export function ShortAuditForm({
       <form
         className="mt-5 grid gap-4 sm:grid-cols-2"
         onSubmit={handleSubmit}
-        data-event="short_form_start"
+        data-event={startEvent}
         noValidate
       >
         <input type="hidden" name="lead_offer" value={leadOffer} />
@@ -177,7 +179,7 @@ export function ShortAuditForm({
             }
             className="form-input form-input-light"
             placeholder="Your name"
-            data-event="short_form_start"
+            data-event={startEvent}
           />
         </label>
         <label className="flex flex-col gap-2">
@@ -190,7 +192,7 @@ export function ShortAuditForm({
             }
             className="form-input form-input-light"
             placeholder="Business name"
-            data-event="short_form_start"
+            data-event={startEvent}
           />
         </label>
         <label className="flex flex-col gap-2 sm:col-span-2">
@@ -203,7 +205,7 @@ export function ShortAuditForm({
             }
             className="form-input form-input-light"
             placeholder="Your WhatsApp number"
-            data-event="short_form_start"
+            data-event={startEvent}
           />
         </label>
         <label className="flex flex-col gap-2 sm:col-span-2">
@@ -218,7 +220,7 @@ export function ShortAuditForm({
             }
             className="form-input form-input-light min-h-24 resize-y"
             placeholder={problemPlaceholder}
-            data-event="short_form_start"
+            data-event={startEvent}
           />
         </label>
 

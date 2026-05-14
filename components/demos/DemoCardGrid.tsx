@@ -31,7 +31,7 @@ export function DemoCardGrid({ tone = "dark", compact = false, slugs }: DemoCard
                 : "border-white/10 bg-white/[0.035] text-white shadow-[0_20px_60px_rgba(0,0,0,0.22)] hover:border-[#67E8F9]/45"
             }`}
           >
-            <Link href={`/demos/${demo.slug}`} data-event="demo_card_click" data-demo-slug={demo.slug} className="block">
+            <Link href={`/demos/${demo.slug}`} data-event="demo_open" data-demo-slug={demo.slug} className="block">
               <div className="flex items-start justify-between gap-3">
                 <span
                   className={`inline-flex h-12 w-12 items-center justify-center rounded-[8px] border ${
@@ -118,7 +118,7 @@ export function DemoCardGrid({ tone = "dark", compact = false, slugs }: DemoCard
             <div className="mt-5 flex flex-col gap-3">
               <Link
                 href={`/demos/${demo.slug}`}
-                data-event="demo_card_click"
+                data-event="demo_open"
                 data-demo-slug={demo.slug}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#0891b2]"
               >
@@ -130,11 +130,11 @@ export function DemoCardGrid({ tone = "dark", compact = false, slugs }: DemoCard
                 </p>
                 <Link
                   href={`/contact?demo_slug=${demo.slug}&lead_intent=demo_page#lead-form`}
-                  data-event="demo_cta_click"
+                  data-event="free_audit_click"
                   data-demo-slug={demo.slug}
                   className="cta-button mt-3 w-full justify-center"
                 >
-                  Map This Demo Around My Business
+                  Get My Free System Audit
                 </Link>
               </div>
             </div>

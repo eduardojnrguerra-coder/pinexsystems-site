@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Building2,
   CalendarDays,
@@ -95,6 +96,14 @@ const proofCards = [
   "Bookings, approvals, parts, shuttle, and communication connected",
   "Manager-friendly and meeting-friendly",
   "Built for phased rollout and refinement",
+];
+
+const controlItems = [
+  "Reception pressure, booking intake and client arrival flow",
+  "Live job cards, workshop movement and work waiting for approval",
+  "Parts requests, supplier ETA and jobs stuck waiting for stock",
+  "Transport, shuttle tasks and WhatsApp client updates",
+  "Owner visibility across today's blocked jobs and service-centre pressure",
 ];
 
 const previewFrames = [
@@ -1843,13 +1852,13 @@ export function HuttonServiceDemo() {
                 location="hutton_demo_sticky_cta"
                 system={huttonDemoSlug}
                 className="cta-button"
-                data-event="demo_sticky_cta_click"
+                data-event="free_audit_click"
                 data-demo-slug={huttonDemoSlug}
                 onClick={() =>
                   trackHuttonEvent("demo_sticky_cta_click", { location: "sticky_bar" })
                 }
               >
-                Map My Service Centre Workflow
+                Get My Free System Audit
               </TrackedDemoLink>
               <TrackedWhatsAppLink
                 href={whatsappHref}
@@ -1857,11 +1866,12 @@ export function HuttonServiceDemo() {
                 rel="noopener noreferrer"
                 location="hutton_demo_sticky_whatsapp"
                 className="cta-secondary"
+                data-event="whatsapp_click"
                 data-demo-slug={huttonDemoSlug}
                 aria-label="WhatsApp Eddy about my service centre"
               >
                 <MessageCircleMore className="h-4 w-4" />
-                WhatsApp Eddy About My Service Centre
+                WhatsApp Eddy
               </TrackedWhatsAppLink>
             </div>
           </div>
@@ -1900,7 +1910,7 @@ export function HuttonServiceDemo() {
                   className="cta-button"
                   data-demo-slug={huttonDemoSlug}
                 >
-                  Map My Service Centre Workflow
+                  Get My Free System Audit
                 </TrackedDemoLink>
                 <TrackedWhatsAppLink
                   href={whatsappHref}
@@ -1908,11 +1918,12 @@ export function HuttonServiceDemo() {
                   rel="noopener noreferrer"
                   location="hutton_demo_hero_whatsapp"
                   className="cta-secondary"
+                  data-event="whatsapp_click"
                   data-demo-slug={huttonDemoSlug}
                   aria-label="WhatsApp Eddy about my service centre"
                 >
                   <MessageCircleMore className="h-4 w-4" />
-                  WhatsApp Eddy About My Service Centre
+                  WhatsApp Eddy
                 </TrackedWhatsAppLink>
               </div>
             </div>
@@ -1988,6 +1999,51 @@ export function HuttonServiceDemo() {
               {item}
             </div>
           ))}
+        </section>
+
+        <section
+          className="mt-6 grid gap-4 rounded-[16px] border border-[#111111]/10 bg-white/85 p-5 shadow-[0_20px_50px_rgba(17,17,17,0.06)] lg:grid-cols-[1.2fr_0.8fr]"
+          aria-labelledby="hutton-control-points"
+        >
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0891b2]">
+              What this system helps you control
+            </p>
+            <h2 id="hutton-control-points" className="mt-2 font-heading text-2xl font-semibold text-[#111111]">
+              The service-centre pressure points this demo is built around
+            </h2>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {controlItems.map((item) => (
+                <div key={item} className="flex gap-3 rounded-[10px] border border-[#111111]/10 bg-[#f7f7f2] p-3 text-sm leading-6 text-[#30343a]">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[#0891b2]" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-[12px] border border-[#67E8F9]/30 bg-[#ECFEFF] p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0891b2]">
+              Best fit for
+            </p>
+            <p className="mt-3 text-sm leading-7 text-[#30343a]">
+              Best fit for busy service centres that need reception, job cards, workshop movement, parts, transport and client updates connected in one operating flow.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <TrackedDemoLink
+                href={contactHref}
+                location="hutton_best_fit_audit"
+                system={huttonDemoSlug}
+                className="cta-button"
+                data-event="free_audit_click"
+                data-demo-slug={huttonDemoSlug}
+              >
+                Get My Free System Audit
+              </TrackedDemoLink>
+              <Link href="/demos" className="cta-secondary" data-event="demo_open" data-demo-slug={huttonDemoSlug}>
+                Back to all demos
+              </Link>
+            </div>
+          </div>
         </section>
 
         <div className="mt-5 grid gap-5 xl:grid-cols-[18rem_minmax(0,1fr)]">
@@ -2299,11 +2355,12 @@ export function HuttonServiceDemo() {
                   rel="noopener noreferrer"
                   location="hutton_demo_close_whatsapp"
                   className="cta-secondary mt-5"
+                  data-event="whatsapp_click"
                   data-demo-slug={huttonDemoSlug}
                   aria-label="WhatsApp Eddy about my service centre"
                 >
                   <MessageCircleMore className="h-4 w-4" />
-                  WhatsApp Eddy About My Service Centre
+                  WhatsApp Eddy
                 </TrackedWhatsAppLink>
               </div>
 
@@ -2313,11 +2370,12 @@ export function HuttonServiceDemo() {
                 subtitle="Send the part of your workshop day that feels messy and Pine X Systems will reply with practical ideas for bookings, job cards, parts, transport, and client updates."
                 problemLabel="Biggest service-centre bottleneck"
                 problemPlaceholder="Reception pressure, approvals, parts delays, shuttle coordination, WhatsApp follow-up..."
-                buttonLabel="Map My Service Centre Workflow"
+                buttonLabel="Get My Free System Audit"
                 leadOffer="Service Centre Workflow Audit"
                 source="hutton_service_centre_demo_close_form"
                 demoSlug={huttonDemoSlug}
                 leadIntent="demo_page"
+                startEvent="demo_form_start"
                 submitEvent="demo_form_submit"
               />
             </section>
