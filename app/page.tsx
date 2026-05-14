@@ -5,8 +5,11 @@ import {
   ChevronRight,
   ClipboardList,
   Gauge,
+  LifeBuoy,
+  SlidersHorizontal,
   Target,
   TrendingUp,
+  Users,
 } from "lucide-react";
 
 import { DemoCardGrid } from "@/components/demos/DemoCardGrid";
@@ -15,7 +18,6 @@ import { HeroBrandLockup } from "@/components/home/HeroBrandLockup";
 import { MiniCalculator } from "@/components/home/mini-calculator";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
-import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import { homeFaq } from "@/lib/content/core";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -154,11 +156,45 @@ const trustBlocks = [
 ];
 
 const ownerTrustBullets = [
-  "Built locally for South African businesses",
-  "Designed around your actual workflow",
-  "Easy enough for non-technical staff",
-  "Demo-first approach before full commitment",
-  "Support after launch, not just handover",
+  {
+    icon: CheckCircle2,
+    text: "Capture leads and track follow-up so nothing goes cold",
+  },
+  {
+    icon: CheckCircle2,
+    text: "Replace WhatsApp chaos with assigned task ownership",
+  },
+  {
+    icon: CheckCircle2,
+    text: "Give owners a live dashboard without manual reporting",
+  },
+];
+
+const trustCards = [
+  {
+    icon: SlidersHorizontal,
+    title: "Operations Control",
+    description:
+      "Track jobs, leads, staff, stock and workflows from one dashboard.",
+  },
+  {
+    icon: Users,
+    title: "Easy for Teams",
+    description:
+      "Built to be simple enough for non-technical staff to use daily.",
+  },
+  {
+    icon: Gauge,
+    title: "Designed Around Your Business",
+    description:
+      "Every system is customised around your workflow and business structure.",
+  },
+  {
+    icon: LifeBuoy,
+    title: "Ongoing Support",
+    description:
+      "We improve and refine systems as your business grows.",
+  },
 ];
 
 const typicalImpact = [
@@ -365,31 +401,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-[#111111]/10 bg-[#F7F7F2] py-10 sm:py-12">
-        <div className="section-shell grid gap-6 lg:grid-cols-[0.96fr_1.04fr] lg:items-start">
+      <section className="border-b border-[#111111]/10 bg-[linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)] py-16 sm:py-20">
+        <div className="section-shell">
           <Reveal>
-            <ShortAuditForm id="lead-form" />
+            <h2 className="font-heading text-3xl font-semibold text-[#111111] sm:text-4xl">
+              Built for <span className="heading-gradient">Real Business Operations</span>
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#555962] sm:text-base">
+              Pine X Systems helps South African businesses replace paper, spreadsheets,
+              scattered WhatsApp communication and manual admin with systems built around
+              how their business actually works.
+            </p>
           </Reveal>
 
-          <Reveal delayMs={80}>
-            <article className="rounded-[8px] border border-[#111111]/10 bg-white p-6 shadow-[0_18px_45px_rgba(17,17,17,0.06)]">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-                <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-[8px] border border-dashed border-[#111111]/25 bg-[#F7F7F2] text-center text-xs font-medium uppercase tracking-[0.12em] text-[#6b6f76]">
-                  Founder photo
-                </div>
-                <div>
-                  <h2 className="font-heading text-2xl font-semibold text-[#111111]">
-                    Built by Eddy from Pine X Systems
-                  </h2>
-                  <p className="mt-3 text-sm leading-7 text-[#555962] sm:text-base">
-                    I work with South African business owners to turn paper,
-                    spreadsheets, WhatsApp chaos and manual admin into simple
-                    systems their teams can actually use.
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {trustCards.map((card, idx) => (
+              <Reveal key={card.title} delayMs={idx * 60}>
+                <article className="group relative overflow-hidden rounded-[8px] border border-[#111111]/10 bg-white p-5 shadow-[0_12px_34px_rgba(17,17,17,0.05)] transition-all hover:-translate-y-1 hover:border-[#67E8F9]/40 hover:shadow-[0_20px_50px_rgba(17,17,17,0.1)]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#111111] text-white">
+                    <card.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-heading text-lg font-semibold text-[#111111]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[#555962]">
+                    {card.description}
                   </p>
-                </div>
-              </div>
-            </article>
-          </Reveal>
+                  <div className="mt-4 h-px w-0 bg-gradient-to-r from-[#67E8F9] to-transparent transition-all duration-300 group-hover:w-full" />
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -486,11 +528,11 @@ export default function HomePage() {
           <div className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2">
             {ownerTrustBullets.map((item) => (
               <div
-                key={item}
+                key={item.text}
                 className="flex items-center gap-3 rounded-[8px] border border-[#111111]/10 bg-white px-4 py-3 text-sm font-medium text-[#3d4147]"
               >
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0891b2]" />
-                <span>{item}</span>
+                <span>{item.text}</span>
               </div>
             ))}
           </div>
