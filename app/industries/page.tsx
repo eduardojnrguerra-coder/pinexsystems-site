@@ -54,7 +54,7 @@ const industryCards = [
     solution:
       "A logistics management system can connect jobs, vehicles, drivers, delivery proof, and management reporting.",
     pageHref: "/logistics-management-system-south-africa",
-    demoHref: "/case-studies",
+    demoHref: "/demos/logistics",
     event: "click_logistics_demo",
   },
   {
@@ -76,7 +76,7 @@ const industryCards = [
     solution:
       "A practice operating system can support recurring workflow, approvals, client communication, and owner visibility.",
     pageHref: "/custom-business-apps-south-africa",
-    demoHref: "/case-studies",
+    demoHref: "/demos/accounting-os",
     event: "click_accounting_demo",
   },
   {
@@ -98,8 +98,19 @@ const industryCards = [
     solution:
       "A custom marine business system can combine dealership-style visibility with service-centre and parts workflow control.",
     pageHref: "/custom-business-systems-south-africa",
-    demoHref: "/case-studies",
+    demoHref: "/demos/marine-business",
     event: "click_marine_demo",
+  },
+  {
+    title: "Schools & Education Businesses",
+    subtitle: "Enquiries, admin workflows, documents, and owner reporting",
+    problem:
+      "Education businesses often rely on forms, spreadsheets, WhatsApp updates, and manual reminders across admin, parents, staff, and owners.",
+    solution:
+      "A custom education workflow system can connect enquiries, student or client records, documents, reminders, task ownership, and reporting.",
+    pageHref: "/custom-business-systems-south-africa",
+    demoHref: "/demos/custom-business",
+    event: "click_education_demo",
   },
 ];
 
@@ -197,8 +208,8 @@ export default function IndustriesPage() {
             >
               Get My Free System Audit
             </TrackedDemoLink>
-            <Link href="/case-studies" className="cta-secondary">
-              View Case Studies
+                <Link href="/demos" className="cta-secondary" data-event="demo_click">
+              View Live Demo Systems
             </Link>
           </div>
         </div>

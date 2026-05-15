@@ -555,6 +555,16 @@ export function LeakEstimator() {
           lead_offer: "Free Business System Audit",
           preferredContact: "WhatsApp",
           industry: activePreset !== "Custom" ? activePreset : "Not specified",
+          calculator_results: {
+            monthlyLeakage: Math.round(result.monthlyLeakage),
+            yearlyLeakage: Math.round(result.yearlyLeakage),
+            monthlyRevenueRisk: Math.round(result.monthlyRevenueRisk),
+            monthlyGrossProfitRisk: Math.round(result.monthlyGrossProfitRisk),
+            monthlyAdminWaste: Math.round(result.monthlyAdminWaste),
+            industryPreset: activePreset,
+            biggestLeakageCategory: biggestCategory,
+            riskBand: result.risk.label,
+          },
           biggestProblem: [
             "Calculator results from Business Loss Calculator:",
             `- Monthly leakage: R${Math.round(result.monthlyLeakage).toLocaleString("en-ZA")}`,
@@ -727,7 +737,7 @@ export function LeakEstimator() {
                 </span>
               </div>
 
-              <div className="rounded-[8px] border border-[#d9d9d1] bg-[linear-gradient(180deg,#ffffff_0%,#f7f7f2_100%)] p-5 shadow-[0_20px_60px_rgba(17,24,39,0.08)]">
+              <div className="rounded-[8px] border border-[#d9d9d1] bg-[linear-gradient(180deg,#ffffff_0%,#f7f7f2_100%)] p-5 shadow-[0_20px_60px_rgba(17,24,39,0.08)]" data-event="calculator_result_view">
                 <p className="text-sm text-[#5b5f66]">
                   Estimated monthly leakage
                 </p>
@@ -820,7 +830,7 @@ export function LeakEstimator() {
                 data-event="calculator_submit"
                 className="cta-button premium-glow mt-5 w-full sm:w-fit"
               >
-                Find The Gaps In My Business <ArrowRight className="h-4 w-4" />
+                Get My Free System Audit <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -934,7 +944,7 @@ export function LeakEstimator() {
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="inline-flex items-center gap-1.5 rounded-[6px] border border-[#111111]/20 bg-[#F7F7F2] px-3 py-1.5 text-[#111111] hover:bg-[#ECEAE4]"
-                  data-event="calculator_lead_error"
+                  data-event="email_click"
                 >
                   Email Pine X Systems
                 </a>

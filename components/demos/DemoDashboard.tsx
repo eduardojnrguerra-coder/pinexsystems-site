@@ -7,7 +7,7 @@ import { DemoActivityFeed } from "@/components/demos/DemoActivityFeed";
 import { DemoMetricCard } from "@/components/demos/DemoMetricCard";
 import { DemoPipeline } from "@/components/demos/DemoPipeline";
 import { DemoTable } from "@/components/demos/DemoTable";
-import { whatsappCta } from "@/lib/site";
+import { waUrl } from "@/lib/site";
 
 interface DemoDashboardProps {
   system: DemoSystem;
@@ -53,10 +53,10 @@ export function DemoDashboard({
     ? "/contact?demo_slug=workshop&industry_slug=workshops&lead_intent=demo_page#lead-form"
     : "/contact#lead-form";
   const whatsappHref = isWorkshopDemo
-    ? `${whatsappCta.href}?text=${encodeURIComponent(
+    ? waUrl(
         "Hi Eddy, I saw the Workshop Control System demo and want to talk about my workshop flow.",
-      )}`
-    : whatsappCta.href;
+      )
+    : waUrl();
 
   return (
     <div className="min-w-0 space-y-5">
@@ -212,7 +212,7 @@ export function DemoDashboard({
                 data-industry-slug={isWorkshopDemo ? "workshops" : undefined}
                 data-lead-intent={isWorkshopDemo ? "demo_page" : undefined}
               >
-                Get My Free System Audit <ArrowRight className="h-4 w-4" />
+                Request This For My Business <ArrowRight className="h-4 w-4" />
               </TrackedDemoLink>
               <TrackedWhatsAppLink
                 href={whatsappHref}

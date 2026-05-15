@@ -73,7 +73,7 @@ seoPages.push({
   ],
   ctaHeading: "Ready to map your own custom business system?",
   ctaBody:
-    "Book a discovery call and we will map the exact control layer your operation needs.",
+    "Get a free system audit and we will map the exact control layer your operation needs.",
   faqs: [
     {
       question: "Is a custom business system too advanced for a small team?",
@@ -163,7 +163,7 @@ seoPages.push({
   ],
   ctaHeading: "Need better control over projects, teams, and materials?",
   ctaBody:
-    "Book a discovery session and we will map your construction workflow into one practical system.",
+    "Get a free system audit and we will map your construction workflow into one practical system.",
   faqs: [
     {
       question: "Can this support multiple active projects?",
@@ -343,7 +343,7 @@ seoPages.push({
   ],
   ctaHeading: "Ready to stop losing leads quietly?",
   ctaBody:
-    "Book a demo call and we will map your lead workflow into a practical, trackable system.",
+    "Get a free system audit and we will map your lead workflow into a practical, trackable system.",
   faqs: [
     {
       question: "Can this work for WhatsApp and phone leads?",
@@ -614,7 +614,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a workshop system built around your service flow?",
   ctaBody:
-    "Book a demo request and we will map your booking, job card, and reporting workflow.",
+    "Get a free system audit and we will map your booking, job card, and reporting workflow.",
   faqs: [
     {
       question: "Can this work for independent workshops?",
@@ -884,7 +884,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a CRM that fits your real sales process?",
   ctaBody:
-    "Book a free demo conversation and we will map a custom CRM flow built around your team.",
+    "Get a free system audit and we will map a custom CRM flow built around your team.",
   faqs: [
     {
       question: "Can a custom CRM still integrate with existing tools?",
@@ -975,7 +975,7 @@ seoPages.push(
     ],
     ctaHeading: "Want a system designed around your actual operation?",
     ctaBody:
-      "Book a discovery call and Pine X Systems will map the first control layers your business needs.",
+      "Get a free system audit and Pine X Systems will map the first control layers your business needs.",
     faqs: [
       {
         question: "Is a custom business system only for large companies?",
@@ -1156,7 +1156,7 @@ seoPages.push(
     ],
     ctaHeading: "Need clearer stock control across your warehouse?",
     ctaBody:
-      "Book a demo and we will map the stock visibility layer your operation needs.",
+      "Get a free system audit and we will map the stock visibility layer your operation needs.",
     faqs: [
       {
         question: "Can this track stock by zone or shelf?",
@@ -1246,7 +1246,7 @@ seoPages.push(
     ],
     ctaHeading: "Want to see where your leads are leaking?",
     ctaBody:
-      "Use the Money Leak Estimator or book a demo and we will map your lead capture and follow-up process.",
+      "Use the Money Leak Estimator or Get a free system audit and we will map your lead capture and follow-up process.",
     faqs: [
       {
         question: "Should I advertise more before fixing follow-up?",
@@ -1427,7 +1427,7 @@ seoPages.push(
     ],
     ctaHeading: "Want follow-up that does not depend on memory?",
     ctaBody:
-      "Book a demo and we will map a practical follow-up control system for your business.",
+      "Get a free system audit and we will map a practical follow-up control system for your business.",
     faqs: [
       {
         question: "Can follow-up reminders be automated?",
@@ -1519,7 +1519,7 @@ seoPages.push(
     ],
     ctaHeading: "Want to find your biggest admin leaks?",
     ctaBody:
-      "Use the calculator or book a workflow mapping call with Pine X Systems.",
+      "Use the calculator or request a free system audit with Pine X Systems.",
     faqs: [
       {
         question: "Can admin be reduced without changing the whole business?",
@@ -1608,7 +1608,7 @@ seoPages.push(
     ],
     ctaHeading: "Need a staff workflow system your team will actually use?",
     ctaBody:
-      "Book a demo and we will show how role-based task views could work for your operation.",
+      "Get a free system audit and we will show how role-based task views could work for your operation.",
     faqs: [
       {
         question: "Is staff tracking the same as micromanagement?",
@@ -1791,7 +1791,7 @@ seoPages.push(
     ],
     ctaHeading: "Want an owner dashboard built around your growth goals?",
     ctaBody:
-      "Book a demo and we will map the dashboard signals your business should see first.",
+      "Get a free system audit and we will map the dashboard signals your business should see first.",
     faqs: [
       {
         question: "Can an owner dashboard replace manual reports?",
@@ -1882,7 +1882,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a farm dashboard built around your real operation?",
   ctaBody:
-    "Book a discovery call and we will map the first visibility and workflow layers your farm would benefit from most.",
+    "Get a free system audit and we will map the first visibility and workflow layers your farm would benefit from most.",
   faqs: [
     {
       question: "Can this work for different farm sizes?",
@@ -1972,7 +1972,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a service workflow system built around how your team actually works?",
   ctaBody:
-    "Request a discovery call and we will map the job tracking, approvals, and dashboard layers your service operation needs first.",
+    "Request a free system audit and we will map the job tracking, approvals, and dashboard layers your service operation needs first.",
   faqs: [
     {
       question: "Can this work for small service teams?",
@@ -2062,7 +2062,7 @@ seoPages.push({
   ],
   ctaHeading: "Need an operations dashboard built around your business reality?",
   ctaBody:
-    "Book a discovery call and we will map the live signals your owner and management team should be seeing first.",
+    "Get a free system audit and we will map the live signals your owner and management team should be seeing first.",
   faqs: [
     {
       question: "Is this different from a normal KPI dashboard?",
@@ -2152,7 +2152,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a job card system designed around your service flow?",
   ctaBody:
-    "Request a discovery call and we will map the booking, job, parts, and reporting stages your team needs first.",
+    "Request a free system audit and we will map the booking, job, parts, and reporting stages your team needs first.",
   faqs: [
     {
       question: "Can small workshops use a digital job card system?",
@@ -2297,7 +2297,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a custom business system built around how your business actually works?",
   ctaBody:
-    "Book a free system review and we will map the dashboards, workflow apps, and practical automation layers your business should start with.",
+    "Get a free system audit and we will map the dashboards, workflow apps, and practical automation layers your business should start with.",
   faqs: [
     {
       question: "Is a custom system only for large companies?",
@@ -2414,7 +2414,7 @@ seoPages.push({
   ],
   ctaHeading: "Need an internal business app built around your operation?",
   ctaBody:
-    "Book a free system review and we will map the app, dashboard, or workflow tool your business should build first.",
+    "Get a free system audit and we will map the app, dashboard, or workflow tool your business should build first.",
   faqs: [
     {
       question: "Can custom business apps work on mobile?",
@@ -2505,7 +2505,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a custom system for your business in the Western Cape?",
   ctaBody:
-    "Book a free system review and we will map the workflow, dashboard, or internal app that should come first.",
+    "Get a free system audit and we will map the workflow, dashboard, or internal app that should come first.",
   faqs: [
     {
       question: "Do you only work with Cape Town businesses?",
@@ -2521,6 +2521,183 @@ seoPages.push({
       question: "Can this work for small businesses too?",
       answer:
         "Yes. Small and medium businesses often gain the fastest relief from clearer workflow control and owner reporting.",
+    },
+  ],
+});
+
+seoPages.push({
+  slug: "business-systems-cape-town",
+  pageTitle: "Business Systems Cape Town",
+  metaDescription:
+    "Business systems Cape Town guide for SMEs that need custom dashboards, workflow apps, job tracking, stock visibility, and owner reporting.",
+  purpose:
+    "Support Cape Town businesses looking for practical local custom business systems without creating a thin doorway page.",
+  targetKeywords: [
+    "business systems Cape Town",
+    "custom business systems Cape Town",
+    "workflow systems Cape Town",
+    "owner dashboard Cape Town",
+  ],
+  heroTitle: "Business Systems Cape Town",
+  heroSummary:
+    "Pine X Systems builds custom business systems for Cape Town companies that need to replace paper, spreadsheets, WhatsApp handovers, and manual reporting with one clearer operating layer.",
+  comparisonPoints: [
+    {
+      heading: "Cape Town teams often need one operational source of truth",
+      content:
+        "Service businesses, dealerships, warehouses, and growing SMEs can lose control when work moves across too many chats, spreadsheets, and manual handovers.",
+    },
+    {
+      heading: "Remote builds can still be highly practical",
+      content:
+        "A system can be scoped, reviewed, and refined remotely while still being shaped around the business's real workflow and local operating pressure.",
+    },
+    {
+      heading: "The first build should solve a visible workflow problem",
+      content:
+        "The strongest starting point is usually missed follow-up, job tracking, stock visibility, staff accountability, or owner reporting.",
+    },
+  ],
+  practicalSections: [
+    {
+      heading: "Useful first systems for Cape Town businesses",
+      paragraphs: [
+        "A Cape Town business may start with a lead and follow-up system, a job tracking board, a stock visibility layer, or an owner dashboard. The right first module depends on where the business is losing time, leads, control, or reporting confidence.",
+        "Pine X Systems keeps the first build focused so staff can adopt it without a disruptive all-at-once rollout.",
+      ],
+      bullets: [
+        "Lead and follow-up workflow",
+        "Job or task tracking",
+        "Stock and dispatch visibility",
+        "Owner dashboard and reporting",
+        "Practical automation for repeated admin",
+      ],
+    },
+    {
+      heading: "What this looks like in a local business",
+      paragraphs: [
+        "A Cape Town service team using WhatsApp and spreadsheets can move enquiries, approvals, job status, and reporting into one system. Staff see their daily queue, managers see blocked work, and owners see the signals that need attention.",
+      ],
+      bullets: [
+        "Cleaner ownership",
+        "Less manual chasing",
+        "Earlier visibility into bottlenecks",
+      ],
+    },
+  ],
+  ownerBenefits: [
+    "Cleaner visibility across leads, jobs, staff, and stock",
+    "Less dependence on manual spreadsheets and WhatsApp threads",
+    "A practical first system that can expand over time",
+    "Remote implementation available nationwide from South Africa",
+  ],
+  ctaHeading: "Want this mapped to your business?",
+  ctaBody:
+    "Get a free system audit and we will map the first Cape Town business workflow your team should control properly.",
+  faqs: [
+    {
+      question: "Does Pine X Systems work with Cape Town businesses remotely?",
+      answer:
+        "Yes. Pine X Systems can scope, build, and refine systems remotely for Cape Town and South African businesses.",
+    },
+    {
+      question: "What should a Cape Town business system include first?",
+      answer:
+        "Most businesses should start with the workflow causing the most repeated friction, such as lead follow-up, job tracking, stock visibility, or reporting.",
+    },
+    {
+      question: "Is this a website design service?",
+      answer:
+        "No. Pine X Systems focuses on operational systems, dashboards, workflow apps, internal tools, and automation.",
+    },
+  ],
+});
+
+seoPages.push({
+  slug: "business-systems-hermanus",
+  pageTitle: "Business Systems Hermanus",
+  metaDescription:
+    "Business systems Hermanus guide for Overstrand SMEs needing custom dashboards, workflow control, job tracking, and practical automation.",
+  purpose:
+    "Support Hermanus and Overstrand businesses with useful local content for custom operational systems.",
+  targetKeywords: [
+    "business systems Hermanus",
+    "custom business systems Hermanus",
+    "business systems Overstrand",
+    "workflow systems Hermanus",
+  ],
+  heroTitle: "Business Systems Hermanus",
+  heroSummary:
+    "Pine X Systems helps Hermanus and Overstrand businesses build practical internal systems for jobs, enquiries, stock, staff accountability, reporting, and owner visibility.",
+  comparisonPoints: [
+    {
+      heading: "Regional businesses still need strong operational control",
+      content:
+        "Smaller teams often feel process gaps more sharply because every missed lead, delayed job, or stock issue has a direct effect on the owner.",
+    },
+    {
+      heading: "The system should fit the way the business actually runs",
+      content:
+        "A local service, trade, school, warehouse, or workshop business may need a simple control layer rather than a heavy enterprise platform.",
+    },
+    {
+      heading: "Remote delivery keeps the project practical",
+      content:
+        "Workflow mapping, demo reviews, launch support, and refinement can happen remotely while still staying close to the team's daily reality.",
+    },
+  ],
+  practicalSections: [
+    {
+      heading: "What Hermanus businesses usually need first",
+      paragraphs: [
+        "The best starting point is usually the workflow currently living in paper, WhatsApp, or a spreadsheet. That may be enquiries, job status, bookings, staff tasks, stock movement, or management reporting.",
+        "The first system should make that workflow visible, assign clear ownership, and give the owner a simple dashboard before more modules are added.",
+      ],
+      bullets: [
+        "Enquiry and follow-up tracking",
+        "Job, booking, or task control",
+        "Stock and supplier visibility",
+        "Owner dashboard reporting",
+        "Automated reminders for repeated admin",
+      ],
+    },
+    {
+      heading: "Useful for Overstrand and Western Cape operations",
+      paragraphs: [
+        "Businesses in Hermanus, Onrus, Kleinmond, Gansbaai, and the wider Overstrand can use the same system approach as larger metro teams: start with the workflow causing the most friction, then expand as the business gains confidence.",
+      ],
+      bullets: [
+        "Workshops and service businesses",
+        "Schools and education businesses",
+        "Warehouses and stock-based teams",
+        "General SMEs with manual admin pressure",
+      ],
+    },
+  ],
+  ownerBenefits: [
+    "A clearer view of daily work without chasing staff",
+    "Less admin pressure from spreadsheets and repeated messages",
+    "A practical first system shaped around a local business workflow",
+    "Support after launch as the business refines the process",
+  ],
+  ctaHeading: "Want this mapped to your business?",
+  ctaBody:
+    "Get a free system audit and we will map the first Hermanus or Overstrand workflow your business should control better.",
+  faqs: [
+    {
+      question: "Can Pine X Systems support businesses in Hermanus?",
+      answer:
+        "Yes. Pine X Systems supports Hermanus, Overstrand, Western Cape, and South African businesses remotely.",
+    },
+    {
+      question: "Is a custom system practical for a small local team?",
+      answer:
+        "Yes. Small teams often benefit quickly when the first build focuses on one painful workflow instead of trying to replace everything.",
+    },
+    {
+      question: "Can the system expand later?",
+      answer:
+        "Yes. A first workflow can later connect to dashboards, automation, documents, stock, or customer-facing views.",
     },
   ],
 });
@@ -2595,7 +2772,7 @@ seoPages.push({
   ],
   ctaHeading: "Need a logistics dashboard or transport workflow system built around your operation?",
   ctaBody:
-    "Book a free system review and we will map the jobs, vehicle views, customer updates, and reporting layers your logistics business should start with.",
+    "Get a free system audit and we will map the jobs, vehicle views, customer updates, and reporting layers your logistics business should start with.",
   faqs: [
     {
       question: "Can the system support live tracking integrations later?",
@@ -2658,7 +2835,7 @@ seoPages.push({
   ],
   ownerBenefits: ["Earlier risk detection", "Cleaner site-to-office coordination", "More reliable progress reporting"],
   ctaHeading: "Need practical control over active projects?",
-  ctaBody: "Book a free system review and map the first construction workflow layer your business should implement.",
+  ctaBody: "Get a free system audit and map the first construction workflow layer your business should implement.",
   faqs: [
     { question: "Can this work for small construction teams?", answer: "Yes. Most teams start with one project flow and expand from there." },
     { question: "Can managers and owners have different views?", answer: "Yes. Role-based dashboards can separate daily execution and owner oversight." },
@@ -2697,7 +2874,7 @@ seoPages.push({
   ],
   ownerBenefits: ["Fewer missed handovers", "Faster queue decisions", "Better customer update consistency"],
   ctaHeading: "Need to modernize workshop flow?",
-  ctaBody: "Book a free system review to map your workshop job card process into a practical digital workflow.",
+  ctaBody: "Get a free system audit to map your workshop job card process into a practical digital workflow.",
   faqs: [
     { question: "Can advisors and technicians use different views?", answer: "Yes. Role-specific views keep each team focused on its tasks." },
     { question: "Can this include WhatsApp update triggers?", answer: "Yes. Customer updates can be tied to job stages." },
@@ -2729,7 +2906,7 @@ seoPages.push({
   practicalSections: [{ heading: "What owners should track", paragraphs: ["Track lead response speed, stage aging, overdue tasks, throughput, and critical exception counts.", "Keep dashboard KPIs limited to what drives action."], bullets: ["Lead aging", "Overdue tasks", "Job backlog", "Trend shifts"] }],
   ownerBenefits: ["Faster interventions", "Less status chasing", "Clearer management conversations"],
   ctaHeading: "Want an owner dashboard built around your workflow?",
-  ctaBody: "Book a free system review and define the dashboard signals your business needs first.",
+  ctaBody: "Get a free system audit and define the dashboard signals your business needs first.",
   faqs: [
     { question: "How many KPIs should be on one owner dashboard?", answer: "Usually a focused set of 8 to 15 operational indicators is more useful than a crowded screen." },
     { question: "Can dashboards pull from existing tools?", answer: "In many cases yes, depending on data structure and workflow consistency." },
@@ -2756,7 +2933,7 @@ seoPages.push({
   practicalSections: [{ heading: "Migration approach", paragraphs: ["Map one workflow, define ownership and stage rules, and move updates into the system while WhatsApp remains a notification layer.", "Then extend to adjacent workflows."], bullets: ["Workflow mapping", "Ownership rules", "Stage transitions", "Notification strategy"] }],
   ownerBenefits: ["Less missed action", "Better traceability", "Cleaner operational history"],
   ctaHeading: "Ready to move beyond chat-led operations?",
-  ctaBody: "Book a free system review and identify the first WhatsApp-heavy workflow to convert into a controlled system.",
+  ctaBody: "Get a free system audit and identify the first WhatsApp-heavy workflow to convert into a controlled system.",
   faqs: [
     { question: "Do we need to stop using WhatsApp completely?", answer: "No. Many teams keep WhatsApp for communication while execution moves into the system." },
     { question: "How long does transition usually take?", answer: "Initial workflow rollouts are often phased over a few weeks depending on complexity." },
@@ -2783,7 +2960,7 @@ seoPages.push({
   practicalSections: [{ heading: "How to decide", paragraphs: ["Document your real process from first lead to completed delivery.", "If you need structured handovers, role views, and owner reporting beyond sales stages, custom systems usually provide better fit."], bullets: ["Map current process", "List recurring bottlenecks", "Assess reporting needs", "Choose fit over hype"] }],
   ownerBenefits: ["Clear decision criteria", "Lower risk of tool mismatch", "Better long-term process alignment"],
   ctaHeading: "Need help choosing the right route?",
-  ctaBody: "Book a free system review and compare your CRM options against your real workflow requirements.",
+  ctaBody: "Get a free system audit and compare your CRM options against your real workflow requirements.",
   faqs: [
     { question: "Is custom software always better?", answer: "No. It is better when your operational complexity outgrows generic templates." },
     { question: "Can we combine both approaches?", answer: "Yes. Some businesses keep a CRM and add custom workflow layers around it." },
@@ -2810,7 +2987,7 @@ seoPages.push({
   practicalSections: [{ heading: "How to budget properly", paragraphs: ["Budget by business outcome, not just features. Start with the workflow that leaks the most revenue or time.", "Include discovery, build, onboarding, and refinement in your planning."], bullets: ["Discovery scope", "Module complexity", "Integration needs", "Adoption support"] }],
   ownerBenefits: ["Clearer budgeting decisions", "Lower implementation risk", "Stronger ROI focus"],
   ctaHeading: "Want a practical estimate for your business?",
-  ctaBody: "Book a free system review and get a scoped recommendation for the first phase of your custom system.",
+  ctaBody: "Get a free system audit and get a scoped recommendation for the first phase of your custom system.",
   faqs: [
     { question: "Can we build in phases to control cost?", answer: "Yes. Phased rollouts are usually the most practical route for SMEs." },
     { question: "Is custom always more expensive than subscriptions?", answer: "Not always over time, especially when generic tools create repeated process leakage." },

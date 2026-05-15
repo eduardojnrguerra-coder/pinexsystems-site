@@ -15,20 +15,28 @@ interface ContactBody {
   demo_slug?: string;
   industry_slug?: string;
   lead_intent?: string;
+  calculator_results?: string | Record<string, unknown>;
 }
 
-const requiredFields: (keyof ContactBody)[] = [
+const requiredFields = [
   "name",
   "businessName",
   "phone",
   "biggestProblem",
-];
+] as const;
 
 function valueOrFallback(value: string | undefined, fallback: string) {
   return value?.trim() ? value : fallback;
 }
 
 function buildEmailHtml(body: ContactBody): string {
+  const calculatorResults =
+    typeof body.calculator_results === "string"
+      ? body.calculator_results
+      : body.calculator_results
+        ? JSON.stringify(body.calculator_results, null, 2)
+        : undefined;
+
   const rows = [
     ["Name", body.name],
     ["Business Name", body.businessName],
@@ -43,6 +51,7 @@ function buildEmailHtml(body: ContactBody): string {
     ["Demo Slug", valueOrFallback(body.demo_slug, "Not supplied")],
     ["Industry Slug", valueOrFallback(body.industry_slug, "Not supplied")],
     ["Lead Intent", valueOrFallback(body.lead_intent, "Not supplied")],
+    ["Calculator Results", valueOrFallback(calculatorResults, "Not supplied")],
   ];
 
   const trs = rows
@@ -128,6 +137,13 @@ export async function POST(request: NextRequest) {
         `Demo slug: ${valueOrFallback(body.demo_slug, "Not supplied")}`,
         `Industry slug: ${valueOrFallback(body.industry_slug, "Not supplied")}`,
         `Lead intent: ${valueOrFallback(body.lead_intent, "Not supplied")}`,
+        `Calculator results: ${
+          typeof body.calculator_results === "string"
+            ? body.calculator_results
+            : body.calculator_results
+              ? JSON.stringify(body.calculator_results, null, 2)
+              : "Not supplied"
+        }`,
       ].join("\n"),
       html: buildEmailHtml(body),
     });

@@ -30,6 +30,24 @@ type FormState = {
   preferredContact: string;
 };
 
+function getQueryContext() {
+  if (typeof window === "undefined") {
+    return {
+      demoSlug: undefined,
+      industrySlug: undefined,
+      leadIntent: undefined,
+    };
+  }
+
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    demoSlug: params.get("demo_slug") ?? undefined,
+    industrySlug: params.get("industry_slug") ?? undefined,
+    leadIntent: params.get("lead_intent") ?? undefined,
+  };
+}
+
 const initialState: FormState = {
   name: "",
   businessName: "",
@@ -73,6 +91,10 @@ export function LeadForm({
 
     if (!isValid) {
       setStatus("Please complete all required fields before submitting.");
+      trackCustomEvent("contact_form_error", {
+        location: id,
+        reason: "validation",
+      });
       return;
     }
 
@@ -80,11 +102,15 @@ export function LeadForm({
     setStatus("");
 
     try {
+      const queryContext = getQueryContext();
       const payload = {
         ...form,
         lead_offer: leadOffer,
         submittedAt: new Date().toISOString(),
         source: "contact_form",
+        demo_slug: queryContext.demoSlug,
+        industry_slug: queryContext.industrySlug,
+        lead_intent: queryContext.leadIntent,
       };
 
       const res = await fetch("/api/contact", {
@@ -123,6 +149,10 @@ export function LeadForm({
       setForm(initialState);
     } catch (error) {
       console.error("Pine X Systems - Lead submission error:", error);
+      trackCustomEvent("contact_form_error", {
+        location: id,
+        reason: "api",
+      });
       setStatus(
         "Sorry, we could not send your message right now. Please try again, or reach us directly via WhatsApp or email.",
       );
@@ -344,6 +374,11 @@ export function LeadForm({
                 : "border border-[#67E8F9]/40 bg-[#ECFDF5] text-[#065f46]"
             }`}
             role="status"
+            data-event={
+              status.includes("Sorry") || status.includes("Please complete")
+                ? "contact_form_error"
+                : undefined
+            }
           >
             <p>{status}</p>
             {!submitting && (status.includes("Sorry") || status.includes("could not")) && (
@@ -360,6 +395,7 @@ export function LeadForm({
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="inline-flex items-center gap-1.5 rounded-[6px] border border-[#111111]/20 bg-[#F7F7F2] px-3 py-1.5 text-[#111111] hover:bg-[#ECEAE4]"
+                  data-event="email_click"
                 >
                   Email Pine X Systems
                 </a>

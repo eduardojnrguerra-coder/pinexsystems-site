@@ -33,7 +33,7 @@ const caseStudies = [
     ownerBenefit:
       "Owners can see pipeline pressure, aged stock, and blocked deals before month-end reporting.",
     href: "/demos/dealership",
-    cta: "Open dealer demo",
+    cta: "Open System Demo",
     event: "click_dealer_demo",
   },
   {
@@ -48,7 +48,7 @@ const caseStudies = [
     ownerBenefit:
       "Managers and owners can spot blocked jobs, parts delays, and invoice-ready work much earlier.",
     href: "/demos/workshop",
-    cta: "Open workshop demo",
+    cta: "Open System Demo",
     event: "click_workshop_demo",
   },
   {
@@ -62,8 +62,8 @@ const caseStudies = [
       "Job assignment, delivery progress, vehicle records, POD capture, customer updates, and profitability reporting.",
     ownerBenefit:
       "Owners can see which deliveries, vehicles, or reporting delays are putting service quality at risk.",
-    href: "/logistics-management-system-south-africa",
-    cta: "View logistics page",
+    href: "/demos/logistics",
+    cta: "Open System Demo",
     event: "click_logistics_demo",
   },
   {
@@ -77,8 +77,8 @@ const caseStudies = [
       "Client onboarding, document chasing, review stages, recurring deadlines, and reporting visibility.",
     ownerBenefit:
       "Practice owners get cleaner control over overdue work, team load, and client-facing deadlines.",
-    href: "/custom-business-apps-south-africa",
-    cta: "View business apps page",
+    href: "/demos/accounting-os",
+    cta: "Open System Demo",
     event: "click_accounting_demo",
   },
   {
@@ -93,7 +93,7 @@ const caseStudies = [
     ownerBenefit:
       "Construction owners can respond earlier to delays, cost pressure, and reporting gaps across active sites.",
     href: "/demos/construction",
-    cta: "Open construction demo",
+    cta: "Open System Demo",
     event: "click_construction_demo",
   },
   {
@@ -107,8 +107,8 @@ const caseStudies = [
       "Sales enquiries, unit availability, service bookings, parts requests, technician flow, and owner reporting.",
     ownerBenefit:
       "Leadership gains one view of sales, service, and after-sales pressure instead of juggling several disconnected tools.",
-    href: "/custom-business-systems-south-africa",
-    cta: "View systems page",
+    href: "/demos/marine-business",
+    cta: "Open System Demo",
     event: "click_marine_demo",
   },
 ];

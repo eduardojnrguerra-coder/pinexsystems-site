@@ -1154,7 +1154,7 @@ insightArticles.push({
         {
           heading: "Implementation sequence",
           paragraphs: [
-            "Start with a discovery call to map your decision priorities. Build one dashboard view for the owner and one for the operations manager. Connect reminders and escalation rules behind the metrics. Review weekly and refine definitions.",
+            "Start with a free system audit to map your decision priorities. Build one dashboard view for the owner and one for the operations manager. Connect reminders and escalation rules behind the metrics. Review weekly and refine definitions.",
             "This sequence aligns the dashboard with real management behavior instead of making it a passive reporting screen.",
           ],
           bullets: [
@@ -1553,7 +1553,7 @@ insightArticles.push({
         "Validate which side of the estimate feels closest to reality",
         "Identify the exact workflow that creates that pressure",
         "Map the dashboard, alerts, and ownership that should support it",
-        "Use a demo or discovery call to shape the first control layer",
+        "Use a demo or free system audit to shape the first control layer",
       ],
     },
   ],

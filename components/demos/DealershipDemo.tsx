@@ -22,7 +22,7 @@ import { TrackedDemoLink } from "@/components/analytics/tracked-demo-link";
 import { TrackedWhatsAppLink } from "@/components/analytics/tracked-whatsapp-link";
 import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import { trackCustomEvent } from "@/lib/gtag";
-import { whatsappCta } from "@/lib/site";
+import { waUrl } from "@/lib/site";
 
 type Role = "Owner view" | "Salesperson view" | "Finance/admin view";
 type Section = "Overview" | "Leads" | "Vehicle stock" | "Finance" | "Activity";
@@ -555,9 +555,9 @@ export function DealershipDemo() {
 
   const contactHref =
     "/contact?demo_slug=dealership&industry_slug=dealerships&lead_intent=demo_page#lead-form";
-  const whatsappHref = `${whatsappCta.href}?text=${encodeURIComponent(
+  const whatsappHref = waUrl(
     "Hi Eddy, I saw the Dealership Command System demo and want help mapping my dealership flow.",
-  )}`;
+  );
 
   const trackDealershipEvent = (
     eventName: string,
@@ -1650,7 +1650,7 @@ export function DealershipDemo() {
                 data-industry-slug="dealerships"
                 onClick={() => trackDealershipEvent("free_audit_click", { location: "hero" })}
               >
-                Get My Free System Audit
+                Request This For My Business
               </TrackedDemoLink>
               <TrackedWhatsAppLink
                 href={whatsappHref}
@@ -1738,7 +1738,7 @@ export function DealershipDemo() {
                 data-demo-slug="dealership"
                 data-industry-slug="dealerships"
               >
-                Get My Free System Audit
+                Request This For My Business
               </TrackedDemoLink>
               <Link href="/demos" className="cta-secondary" data-event="demo_open" data-demo-slug="dealership">
                 Back to all demos
@@ -1912,7 +1912,7 @@ export function DealershipDemo() {
                       trackDealershipEvent("free_audit_click", { location: "canvas" })
                     }
                   >
-                    Get My Free System Audit <ArrowRight className="h-4 w-4" />
+                    Request This For My Business <ArrowRight className="h-4 w-4" />
                   </TrackedDemoLink>
                 </div>
               </div>
@@ -1987,7 +1987,7 @@ export function DealershipDemo() {
             subtitle="Send the messy part of your dealership flow and Eddy will reply with practical system ideas for leads, stock, finance, and owner visibility."
             problemLabel="Biggest dealership bottleneck"
             problemPlaceholder="Lead leakage, stock publishing, finance delays, delivery blockers..."
-            buttonLabel="Get My Free System Audit"
+            buttonLabel="Request This For My Business"
             leadOffer="Dealership System Audit"
             source="dealership_demo_close_form"
             demoSlug="dealership"

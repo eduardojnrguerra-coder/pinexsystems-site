@@ -34,6 +34,7 @@ type ShortAuditFormProps = {
   leadIntent?: string;
   startEvent?: string;
   submitEvent?: string;
+  errorEvent?: string;
 };
 
 export function ShortAuditForm({
@@ -50,6 +51,7 @@ export function ShortAuditForm({
   leadIntent,
   startEvent = "short_form_start",
   submitEvent = "short_form_submit",
+  errorEvent = "contact_form_error",
 }: ShortAuditFormProps) {
   const [form, setForm] = useState(initialState);
   const [status, setStatus] = useState("");
@@ -84,6 +86,13 @@ export function ShortAuditForm({
 
     if (!isValid) {
       setStatus("Please complete the short form so we know where to start.");
+      trackCustomEvent(errorEvent, {
+        location: id,
+        reason: "validation",
+        demo_slug: demoSlug,
+        industry_slug: industrySlug,
+        lead_intent: leadIntent,
+      });
       return;
     }
 
@@ -140,6 +149,13 @@ export function ShortAuditForm({
       setForm(initialState);
     } catch (error) {
       console.error("Pine X Systems - Short audit form error:", error);
+      trackCustomEvent(errorEvent, {
+        location: id,
+        reason: "api",
+        demo_slug: demoSlug,
+        industry_slug: industrySlug,
+        lead_intent: leadIntent,
+      });
       setStatus(
         "Sorry, we could not send your request right now. Please try again in a moment.",
       );
@@ -244,6 +260,7 @@ export function ShortAuditForm({
           <div
             className="mt-3 rounded-[8px] border border-[#f97316]/40 bg-[#FFF7ED] p-3 text-sm leading-6 text-[#9a3412]"
             role="status"
+            data-event={errorEvent}
           >
             <p>{status}</p>
             <div className="mt-3 flex flex-wrap gap-3 text-sm font-medium">
@@ -259,6 +276,7 @@ export function ShortAuditForm({
               <a
                 href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-1.5 rounded-[6px] border border-[#111111]/20 bg-[#F7F7F2] px-3 py-1.5 text-[#111111] hover:bg-[#ECEAE4]"
+                data-event="email_click"
               >
                 Email Pine X Systems
               </a>

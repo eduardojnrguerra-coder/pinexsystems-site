@@ -72,13 +72,13 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-4 text-sm text-[#555962]">
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-[#6b6f76]" />
-              <a href={`tel:${siteConfig.phonePlain}`} className="hover:text-[#111111]">
+              <a href={`tel:${siteConfig.phonePlain}`} className="hover:text-[#111111]" data-event="phone_click">
                 {siteConfig.phoneDisplay}
               </a>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-[#6b6f76]" />
-              <a href={`mailto:${siteConfig.email}`} className="hover:text-[#111111]">
+              <a href={`mailto:${siteConfig.email}`} className="hover:text-[#111111]" data-event="email_click">
                 {siteConfig.email}
               </a>
             </li>

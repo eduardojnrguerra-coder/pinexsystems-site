@@ -103,7 +103,7 @@ const leakageCauses = [
 const nextSteps = [
   "Review which part of the estimate feels most believable: missed leads, weak reporting, or manual admin pressure.",
   "Map the workflow where that leakage starts so you can see what should be tracked, automated, or escalated.",
-  "Use a demo or discovery call to turn the estimate into a practical control-layer plan for your business.",
+  "Use a demo or free system audit to turn the estimate into a practical control-layer plan for your business.",
 ];
 
 const industryLinks = [
@@ -160,7 +160,7 @@ export default function BusinessLossCalculatorPage() {
               Plain-language explanation
             </p>
             <h2 className="mt-3 font-heading text-2xl font-semibold text-[#111111] sm:text-3xl">
-              What “operational leakage” actually means
+              What "operational leakage" actually means
             </h2>
             <div className="mt-4 space-y-4 text-sm leading-7 text-[#555962] sm:text-base">
               <p>

@@ -35,7 +35,7 @@ import { WhatsAppCommunicationCentre } from "@/components/demos/hutton/WhatsAppC
 import { WorkshopBoard } from "@/components/demos/hutton/WorkshopBoard";
 import { trackCustomEvent } from "@/lib/gtag";
 import { huttonServiceData } from "@/lib/hutton-service-data";
-import { whatsappCta } from "@/lib/site";
+import { waUrl } from "@/lib/site";
 import type {
   HuttonBookingForm,
   HuttonCalendarEvent,
@@ -81,9 +81,9 @@ const sections = [
 
 const huttonDemoSlug = "hutton-service-centre";
 const contactHref = `/contact?demo_slug=${huttonDemoSlug}&lead_intent=demo_page#lead-form`;
-const whatsappHref = `${whatsappCta.href}?text=${encodeURIComponent(
+const whatsappHref = waUrl(
   "Hi Eddy, I saw the Hutton Motors Service Centre demo and want to map my service-centre workflow.",
-)}`;
+);
 
 const heroBullets = [
   "See today's bookings, blocked jobs, and pressure in one operating view",
@@ -1858,7 +1858,7 @@ export function HuttonServiceDemo() {
                   trackHuttonEvent("demo_sticky_cta_click", { location: "sticky_bar" })
                 }
               >
-                Get My Free System Audit
+                Request This For My Business
               </TrackedDemoLink>
               <TrackedWhatsAppLink
                 href={whatsappHref}
@@ -1910,7 +1910,7 @@ export function HuttonServiceDemo() {
                   className="cta-button"
                   data-demo-slug={huttonDemoSlug}
                 >
-                  Get My Free System Audit
+                  Request This For My Business
                 </TrackedDemoLink>
                 <TrackedWhatsAppLink
                   href={whatsappHref}
@@ -2037,7 +2037,7 @@ export function HuttonServiceDemo() {
                 data-event="free_audit_click"
                 data-demo-slug={huttonDemoSlug}
               >
-                Get My Free System Audit
+                Request This For My Business
               </TrackedDemoLink>
               <Link href="/demos" className="cta-secondary" data-event="demo_open" data-demo-slug={huttonDemoSlug}>
                 Back to all demos
@@ -2370,7 +2370,7 @@ export function HuttonServiceDemo() {
                 subtitle="Send the part of your workshop day that feels messy and Pine X Systems will reply with practical ideas for bookings, job cards, parts, transport, and client updates."
                 problemLabel="Biggest service-centre bottleneck"
                 problemPlaceholder="Reception pressure, approvals, parts delays, shuttle coordination, WhatsApp follow-up..."
-                buttonLabel="Get My Free System Audit"
+                buttonLabel="Request This For My Business"
                 leadOffer="Service Centre Workflow Audit"
                 source="hutton_service_centre_demo_close_form"
                 demoSlug={huttonDemoSlug}

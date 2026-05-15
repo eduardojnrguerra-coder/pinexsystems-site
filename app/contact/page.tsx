@@ -73,7 +73,11 @@ export default function ContactPage() {
       />
 
       <div className="mx-auto mt-8 max-w-3xl">
-        <ShortAuditForm id="lead-form" submitEvent="contact_form_submit" />
+        <ShortAuditForm
+          id="lead-form"
+          startEvent="contact_form_start"
+          submitEvent="contact_form_submit"
+        />
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
@@ -96,6 +100,7 @@ export default function ContactPage() {
               <a
                 href={`mailto:${siteConfig.email}`}
                 className="flex items-center gap-3 rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3 text-[#2a2a2a]"
+                data-event="email_click"
               >
                 <Mail className="h-5 w-5" />
                 {siteConfig.email}
@@ -103,6 +108,7 @@ export default function ContactPage() {
               <a
                 href={`tel:${siteConfig.phonePlain}`}
                 className="flex items-center gap-3 rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] px-4 py-3 text-[#2a2a2a]"
+                data-event="phone_click"
               >
                 <Phone className="h-5 w-5 text-[#6b6c70]" />
                 {siteConfig.phoneDisplay}

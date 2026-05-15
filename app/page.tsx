@@ -50,10 +50,36 @@ const quickValue = [
 ];
 
 const problemSignals = [
-  "Leads and updates still move through WhatsApp and memory instead of one workflow",
-  "Reports are delayed because someone still needs to clean spreadsheets manually",
-  "Jobs, staff, customers, and stock live in disconnected tools",
-  "Owners cannot see the real bottlenecks early enough to make fast decisions",
+  {
+    title: "Missed leads",
+    description:
+      "Enquiries arrive through calls, forms, WhatsApp, and walk-ins, but ownership and follow-up are not visible enough.",
+  },
+  {
+    title: "Paper job cards",
+    description:
+      "Jobs move through handwritten notes, loose instructions, and manual handovers that make blocked work hard to spot.",
+  },
+  {
+    title: "Spreadsheet chaos",
+    description:
+      "Important business data lives in files that are hard to trust, hard to update, and disconnected from daily action.",
+  },
+  {
+    title: "Manual reporting",
+    description:
+      "Owners wait for someone to compile updates instead of seeing live operational signals as the day changes.",
+  },
+  {
+    title: "Staff accountability",
+    description:
+      "Managers cannot easily see who owns the next step, what is overdue, and which work needs escalation.",
+  },
+  {
+    title: "Scattered WhatsApp updates",
+    description:
+      "Operational decisions get buried in chats instead of being tied to a lead, job, stock item, or customer record.",
+  },
 ];
 
 const serviceCards = [
@@ -232,6 +258,41 @@ const strategicLinks = [
   {
     label: "Dealership systems in South Africa",
     href: "/dealership-management-system-south-africa",
+  },
+];
+
+const bestStartingSystems = [
+  {
+    title: "Workshop Control System",
+    pain: "Paper job cards, waiting parts, and customer update pressure make the workshop hard to manage in real time.",
+    controls:
+      "Bookings, job cards, technician movement, parts delays, approvals, and invoice-ready work.",
+    firstModule: "Digital job cards with a live workshop board",
+    href: "/demos/workshop",
+  },
+  {
+    title: "Dealership Command System",
+    pain: "Leads, stock, finance, and delivery handovers often sit with different people and different tools.",
+    controls:
+      "Lead ownership, vehicle stock, test drives, finance stages, delivery risk, and owner reporting.",
+    firstModule: "Lead pipeline and stock visibility",
+    href: "/demos/dealership",
+  },
+  {
+    title: "Logistics Operations System",
+    pain: "Dispatch, driver updates, POD records, and exceptions can fall behind the real delivery day.",
+    controls:
+      "Jobs, fleet status, driver tasks, delayed deliveries, POD capture, customer updates, and reporting.",
+    firstModule: "Dispatch board with POD tracking",
+    href: "/demos/logistics",
+  },
+  {
+    title: "Custom Business System",
+    pain: "Non-standard businesses often need approvals, dashboards, staff workflows, documents, and portals to work together.",
+    controls:
+      "Owner dashboard, staff workflow, approvals, client portal, documents, recurring tasks, and automation.",
+    firstModule: "Workflow map with owner dashboard",
+    href: "/demos/custom-business",
   },
 ];
 
@@ -479,12 +540,80 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {problemSignals.map((item, index) => (
-              <Reveal key={item} delayMs={index * 45}>
-                <div className="light-panel rounded-[8px] p-5 text-sm leading-7 text-[#555962]">
-                  {item}
+              <Reveal key={item.title} delayMs={index * 45}>
+                <div className="light-panel rounded-[8px] p-5">
+                  <h3 className="font-heading text-lg font-semibold text-[#111111]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-[#555962]">
+                    {item.description}
+                  </p>
                 </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[#111111]/10 bg-[#F7F7F2] py-16 sm:py-20">
+        <div className="section-shell">
+          <Reveal>
+            <div className="mx-auto max-w-3xl text-center text-[#0b0c10]">
+              <SectionBadge>Best Starting Systems</SectionBadge>
+              <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight sm:text-4xl">
+                Start with the system that removes the most friction first
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#555962] sm:text-lg">
+                A good first build does not try to digitise everything at once.
+                It starts with the workflow where better control will create the
+                clearest relief for owners, managers, and staff.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {bestStartingSystems.map((system, index) => (
+              <Reveal key={system.title} delayMs={index * 45}>
+                <article className="rounded-[8px] border border-[#111111]/10 bg-white p-6 shadow-[0_18px_50px_rgba(17,17,17,0.06)]">
+                  <h3 className="font-heading text-2xl font-semibold text-[#111111]">
+                    {system.title}
+                  </h3>
+                  <div className="mt-5 grid gap-3">
+                    <div className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7b7e86]">
+                        The pain
+                      </p>
+                      <p className="mt-2 text-sm leading-7 text-[#555962]">
+                        {system.pain}
+                      </p>
+                    </div>
+                    <div className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7b7e86]">
+                        What the system controls
+                      </p>
+                      <p className="mt-2 text-sm leading-7 text-[#555962]">
+                        {system.controls}
+                      </p>
+                    </div>
+                    <div className="rounded-[8px] border border-[#111111]/10 bg-[#F7F7F2] p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7b7e86]">
+                        Best first module
+                      </p>
+                      <p className="mt-2 text-sm leading-7 text-[#555962]">
+                        {system.firstModule}
+                      </p>
+                    </div>
+                  </div>
+                  <Link
+                    href={system.href}
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#111111]"
+                    data-event="open_demo_click"
+                  >
+                    Open System Demo <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </article>
               </Reveal>
             ))}
           </div>

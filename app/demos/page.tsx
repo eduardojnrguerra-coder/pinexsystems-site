@@ -68,8 +68,8 @@ export default function DemosPage() {
             <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
               Get My Free System Audit
             </Link>
-            <Link href="/case-studies" className="cta-secondary" data-event="case_studies_click">
-              Demo Case Studies
+            <Link href="#demo-systems" className="cta-secondary" data-event="demo_click">
+              View Live Demo Systems
             </Link>
           </div>
         </div>

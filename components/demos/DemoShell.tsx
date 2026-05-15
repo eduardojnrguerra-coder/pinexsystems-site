@@ -24,7 +24,7 @@ import { getDemoSections } from "@/lib/demo-data";
 import { trackCustomEvent } from "@/lib/gtag";
 import type { DemoSystem } from "@/lib/demo-systems";
 import { demoIconMap } from "@/lib/demo-systems";
-import { whatsappCta } from "@/lib/site";
+import { waUrl } from "@/lib/site";
 
 type RoleKind = "owner" | "manager" | "staff";
 type Nouns = { singular: string; plural: string; queue: string; detail: string; ownerSection: string; managerSection: string; staffSection: string };
@@ -740,14 +740,14 @@ export function DemoShell({ system }: { system: DemoSystem }) {
 
   const Icon = demoIconMap[system.icon];
   const contactHref = `/contact?demo_slug=${system.slug}${conversion?.industrySlug ? `&industry_slug=${conversion.industrySlug}` : ""}&lead_intent=demo_page#lead-form`;
-  const workshopWhatsAppHref = `${whatsappCta.href}?text=${encodeURIComponent(
+  const workshopWhatsAppHref = waUrl(
     "Hi Eddy, I saw the Workshop Control System demo and want to talk about my workshop flow.",
-  )}`;
+  );
   const whatsAppHref = isWorkshopDemo
     ? workshopWhatsAppHref
-    : `${whatsappCta.href}?text=${encodeURIComponent(
+    : waUrl(
         `Hi Eddy, I saw the ${system.title} demo and want to talk about my workflow.`,
-      )}`;
+      );
   const viewSystem = useMemo(
     () => ({
       ...system,
@@ -799,7 +799,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                     data-industry-slug="workshops"
                     data-lead-intent="demo_page"
                   >
-                    Get My Free System Audit
+                    Request This For My Business
                   </TrackedDemoLink>
                   <TrackedWhatsAppLink
                     href={workshopWhatsAppHref}
@@ -884,7 +884,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                       })
                     }
                   >
-                    Get My Free System Audit
+                    Request This For My Business
                   </TrackedDemoLink>
                   {conversion.secondaryHref ? (
                     <Link
@@ -982,7 +982,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
                 data-industry-slug={conversion?.industrySlug}
                 data-lead-intent="demo_page"
               >
-                Get My Free System Audit
+                Request This For My Business
               </TrackedDemoLink>
               <Link
                 href="/demos"
@@ -1023,7 +1023,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
               data-industry-slug={conversion?.industrySlug}
               data-lead-intent="demo_page"
             >
-              Get My Free System Audit
+              Request This For My Business
             </TrackedDemoLink>
           </div>
         </div>
@@ -1249,7 +1249,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
               subtitle="Send the messy part of your workshop flow and Eddy will reply with practical system ideas for job cards, parts, technicians, or owner visibility."
               problemLabel="Biggest workshop bottleneck"
               problemPlaceholder="Waiting parts, paper job cards, customer updates, invoice-ready work..."
-              buttonLabel="Get My Free System Audit"
+              buttonLabel="Request This For My Business"
               leadOffer="Workshop Control Audit"
               source="workshop_demo_close_form"
               demoSlug="workshop"
@@ -1317,7 +1317,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
               subtitle="Send the messy part of your operation and Eddy will reply with practical system ideas for the first control layer."
               problemLabel={conversion.problemLabel}
               problemPlaceholder={conversion.problemPlaceholder}
-              buttonLabel="Get My Free System Audit"
+              buttonLabel="Request This For My Business"
               leadOffer={`${system.shortTitle} Demo Audit`}
               source={`${system.slug}_demo_close_form`}
               demoSlug={system.slug}
@@ -1340,7 +1340,7 @@ export function DemoShell({ system }: { system: DemoSystem }) {
             data-industry-slug={conversion?.industrySlug}
             data-lead-intent="demo_page"
           >
-            Get My Free System Audit
+            Request This For My Business
           </TrackedDemoLink>
           <TrackedWhatsAppLink
             href={isWorkshopDemo ? workshopWhatsAppHref : whatsAppHref}
