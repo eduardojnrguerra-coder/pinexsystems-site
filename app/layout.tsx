@@ -107,7 +107,7 @@ export default function RootLayout({
         />
         <div className="site-grid-overlay" aria-hidden="true" />
         <SiteHeader />
-        <main>{children}</main>
+        <main className="pb-20 md:pb-0">{children}</main>
         <SiteFooter />
         <MobileStickyCta />
         <FloatingWhatsApp />

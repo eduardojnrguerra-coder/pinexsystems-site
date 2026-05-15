@@ -1,3 +1,5 @@
+const defaultWhatsAppMessage = "Hi Eddy, I'd like to discuss a custom business system for my business.";
+
 export const siteConfig = {
   name: "Pine X Systems",
   shortName: "Pine X",
@@ -9,6 +11,7 @@ export const siteConfig = {
   description:
     "Pine X Systems builds custom business dashboards, automation platforms, lead systems, staff workflows, and operational tools for South African businesses.",
   ogImage: "/og-pinexsystems.svg",
+  whatsappMessage: defaultWhatsAppMessage,
 };
 
 export const navLinks = [
@@ -27,7 +30,15 @@ export const primaryCta = {
   href: "/contact#lead-form",
 };
 
+function waUrl(message?: string) {
+  const base = `https://wa.me/${siteConfig.phonePlain.replace("+", "")}`;
+  const text = message ?? siteConfig.whatsappMessage;
+  return `${base}?text=${encodeURIComponent(text)}`;
+}
+
 export const whatsappCta = {
   label: "WhatsApp",
-  href: `https://wa.me/${siteConfig.phonePlain.replace("+", "")}`,
+  href: waUrl(),
 };
+
+export { waUrl };

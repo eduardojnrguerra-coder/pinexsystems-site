@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { demoSystemSlugs } from "@/lib/demo-systems";
 import { insightArticles } from "@/lib/content/insights";
 import { seoPages } from "@/lib/content/seo-pages";
 import { siteConfig } from "@/lib/site";
@@ -40,5 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.72,
   }));
 
-  return [...staticEntries, ...seoEntries, ...insightEntries];
+  const demoEntries: MetadataRoute.Sitemap = demoSystemSlugs.map((slug) => ({
+    url: `${siteConfig.domain}/demos/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.76,
+  }));
+
+  return [...staticEntries, ...seoEntries, ...insightEntries, ...demoEntries];
 }

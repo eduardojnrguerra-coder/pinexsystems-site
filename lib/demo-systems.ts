@@ -69,6 +69,10 @@ export type DemoSystem = {
   activity: string[];
   primaryAction: string;
   secondaryAction: string;
+  problemSolved: string;
+  ownerSees: string;
+  teamUsesDaily: string;
+  bestFor: string;
 };
 
 export const demoSystems: DemoSystem[] = [
@@ -106,6 +110,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Cars.co.za lead routed to Andre", "Hyundai Tucson moved to finance", "BMW 320i marked ready to publish"],
     primaryAction: "Move lead to next stage",
     secondaryAction: "Mark follow-up complete",
+    problemSolved: "Vehicle stock, lead follow-ups, and finance tracking live in separate spreadsheets and WhatsApp threads with no owner view.",
+    ownerSees: "A single dashboard showing every lead stage, vehicles ready to publish, finance pipeline, and revenue at risk.",
+    teamUsesDaily: "Salespeople log leads, schedule test drives, mark finance stages; admin publishes stock and manages trade-ins.",
+    bestFor: "Independent dealerships and dealer groups that need one shared system for sales, stock, finance, and owner oversight.",
   },
   {
     slug: "workshop",
@@ -141,6 +149,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["JC-048 customer updated", "JC-050 flagged waiting on brake pads", "Invoice-ready summary generated"],
     primaryAction: "Move job status",
     secondaryAction: "Generate invoice summary",
+    problemSolved: "Job cards on paper, parts ordered via phone, and customer updates lost in WhatsApp — no manager visibility.",
+    ownerSees: "Live jobs, bay status, mechanic workload, waiting parts, and invoice-ready jobs all on one screen.",
+    teamUsesDaily: "Technicians update job progress, managers assign work, parts team tracks supplier orders.",
+    bestFor: "Service centres, repair shops, and multi-bay workshops that need digital job cards and live workshop tracking.",
   },
   {
     slug: "hutton-motors-service-centre",
@@ -210,6 +222,10 @@ export const demoSystems: DemoSystem[] = [
     ],
     primaryAction: "Advance service stage",
     secondaryAction: "Send customer update",
+    problemSolved: "Dealership service centres juggle reception intake, workshop bays, parts memory, shuttle coordination, and customer WhatsApp all separately.",
+    ownerSees: "Full reception-to-collection flow with approval bottlenecks, parts ETA delays, and shuttle tasks surfaced.",
+    teamUsesDaily: "Reception checks in vehicles, workshop manager assigns bays, parts team links memory items, shuttle coordinator plans transport.",
+    bestFor: "Premium dealership service centres running multi-stage customer journeys with parts, approvals, and transport coordination.",
   },
   {
     slug: "agency",
@@ -245,6 +261,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Monthly report generated for Silverton", "Build It approval request sent", "Campaign milestone moved to scheduled"],
     primaryAction: "Move content stage",
     secondaryAction: "Mark report generated",
+    problemSolved: "Client work, campaign calendars, content approvals, and monthly reports are spread across different tools with no owner visibility.",
+    ownerSees: "Every active client dashboard, campaign status, content approval queue, and reporting deadline in one place.",
+    teamUsesDaily: "Content team moves work through draft-to-post pipeline, account managers review deliverables and send client updates.",
+    bestFor: "Marketing agencies, creative studios, and media shops that need to connect campaign delivery, client reporting, and team workflow.",
   },
   {
     slug: "construction",
@@ -280,6 +300,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Material delivery risk flagged", "Client progress report generated", "Boundary wall milestone escalated"],
     primaryAction: "Move project stage",
     secondaryAction: "Generate progress report",
+    problemSolved: "Site tasks, material deliveries, subcontractors, and change orders are tracked on paper and WhatsApp with no risk view.",
+    ownerSees: "Active projects, delayed milestones, material alerts, subcontractor activity, and approved change orders.",
+    teamUsesDaily: "Site managers update tasks and flag delays, procurement tracks materials, owner reviews progress reports.",
+    bestFor: "Building contractors, renovation companies, and project-based construction businesses managing multiple active sites.",
   },
   {
     slug: "warehouse",
@@ -316,6 +340,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Brake pads reorder triggered", "Dispatch queue updated", "Solar bulbs marked pending receiving"],
     primaryAction: "Trigger reorder",
     secondaryAction: "Create dispatch",
+    problemSolved: "Stock levels, supplier orders, receiving, and dispatch are tracked across spreadsheets with no reorder intelligence.",
+    ownerSees: "Live inventory levels, low stock alerts, dispatch queue, pending receiving, and total stock value.",
+    teamUsesDaily: "Warehouse staff log receiving and pick items, managers trigger reorders, dispatchers manage outbound loads.",
+    bestFor: "Wholesale warehouses, stock-intensive operations, and distribution centres that need live inventory and reorder alerts.",
   },
   {
     slug: "logistics",
@@ -351,6 +379,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Route LG-502 flagged delayed", "POD reminder sent to Sipho", "Truck CT-18 maintenance alert raised"],
     primaryAction: "Assign job",
     secondaryAction: "Capture POD",
+    problemSolved: "Dispatch, driver routes, PODs, and customer updates live across calls, WhatsApp, and paper — no command view.",
+    ownerSees: "Active jobs, delayed deliveries, POD gaps, vehicle alerts, and margin risk aggregated in one operations centre.",
+    teamUsesDaily: "Dispatchers assign routes, drivers receive jobs on mobile and capture PODs, fleet admin tracks maintenance.",
+    bestFor: "Logistics operators, courier companies, and fleet-based businesses managing deliveries, drivers, and proof of delivery at scale.",
   },
   {
     slug: "farm",
@@ -386,6 +418,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Fertiliser stock flagged low", "Harvest batch quality recorded", "Daily farm summary generated"],
     primaryAction: "Mark task complete",
     secondaryAction: "Generate daily summary",
+    problemSolved: "Field tasks, labour teams, equipment maintenance, input stock, and harvest batches tracked by memory and paper.",
+    ownerSees: "Field tasks by block, labour teams active, equipment alerts, input shortages, and harvest dispatch schedule.",
+    teamUsesDaily: "Farm managers assign field tasks and check stock, workers log progress, logistics plans buyer dispatches.",
+    bestFor: "Crop farms, mixed-use agricultural operations, and agri-businesses that need structured field-to-dispatch task management.",
   },
   {
     slug: "security",
@@ -421,6 +457,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Missed check-in escalated", "Incident report generated", "Guard assigned to warehouse patrol"],
     primaryAction: "Mark patrol complete",
     secondaryAction: "Add sample incident",
+    problemSolved: "Shift rosters, guard patrols, incident reports, equipment logs, and check-ins managed across separate WhatsApp groups.",
+    ownerSees: "All active sites, guards on duty, patrols completed, open incidents, equipment issues, and missed check-ins.",
+    teamUsesDaily: "Ops managers assign shifts and review incidents, guards complete patrol routes and log check-ins.",
+    bestFor: "Security companies, guarding operations, and site-based security teams managing multiple contracts and shift workers.",
   },
   {
     slug: "custom-business",
@@ -457,6 +497,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Custom system summary generated", "Client portal module selected", "Role permissions preview updated"],
     primaryAction: "Generate system summary",
     secondaryAction: "Toggle role permission",
+    problemSolved: "Your business has unique processes that no off-the-shelf software fits — leaving you with spreadsheets, workarounds, and no owner view.",
+    ownerSees: "A dashboard purpose-built for your operation with the workflows, approvals, reports, and alerts your business actually needs.",
+    teamUsesDaily: "Staff follow structured workflows, submit approvals, update client portals, and get automated reminders — all customised to your process.",
+    bestFor: "Any business that has outgrown generic software and needs a system built around their exact process, team structure, and reporting needs.",
   },
   {
     slug: "accounting-os",
@@ -488,6 +532,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Document chase sent to Cape Retail", "BuildCo review moved to partner", "Deadline risk surfaced for Security Group"],
     primaryAction: "Move review forward",
     secondaryAction: "Chase documents",
+    problemSolved: "Recurring client work, document chasing, review queues, and deadline risk are tracked across staff inboxes and memory.",
+    ownerSees: "Recurring job pipeline, overdue documents, review queue, deadline risks, and partner exceptions by client.",
+    teamUsesDaily: "Staff chase documents and prepare packs, managers review work and manage deadlines, partners review exceptions.",
+    bestFor: "Accounting firms, tax compliance practices, and service businesses with recurring client work, document flow, and deadline pressure.",
   },
   {
     slug: "marine-business",
@@ -519,6 +567,10 @@ export const demoSystems: DemoSystem[] = [
     activity: ["Sales enquiry linked to available unit", "Service booking created", "Parts supplier chase opened"],
     primaryAction: "Move workflow forward",
     secondaryAction: "Surface owner risk",
+    problemSolved: "Sales enquiries, unit availability, service bookings, parts requests, and after-sales risk live in separate silos.",
+    ownerSees: "Connected sales-to-after-sales view with open enquiries, unit availability, service bay pressure, and parts delays.",
+    teamUsesDaily: "Sales team manage enquiries and showroom books, service advisors book jobs, parts team track supplier orders.",
+    bestFor: "Marine dealerships, boat service centres, and marine retail businesses that need one shared view across sales, service, and parts.",
   },
 ];
 

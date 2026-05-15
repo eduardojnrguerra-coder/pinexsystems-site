@@ -18,8 +18,11 @@ import { HeroBrandLockup } from "@/components/home/HeroBrandLockup";
 import { MiniCalculator } from "@/components/home/mini-calculator";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
+import { SchemaScript } from "@/components/ui/schema-script";
+import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import { homeFaq } from "@/lib/content/core";
 import { createPageMetadata } from "@/lib/metadata";
+import { faqSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title:
@@ -401,6 +404,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-[#111111]/10 bg-[#F7F7F2] py-12 sm:py-16">
+        <div className="section-shell">
+          <Reveal>
+            <ShortAuditForm
+              source="homepage_short_audit_form"
+              submitEvent="short_form_submit"
+            />
+          </Reveal>
+        </div>
+      </section>
+
       <section className="border-b border-[#111111]/10 bg-[linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)] py-16 sm:py-20">
         <div className="section-shell">
           <Reveal>
@@ -738,6 +752,7 @@ export default function HomePage() {
 
       <section className="border-t border-[#111111]/10 bg-[#F7F7F2] py-16 sm:py-20">
         <div className="section-shell">
+          <SchemaScript data={faqSchema(homeFaq)} />
           <Reveal>
             <div className="mx-auto max-w-3xl text-center text-[#111111]">
               <SectionBadge>FAQ</SectionBadge>

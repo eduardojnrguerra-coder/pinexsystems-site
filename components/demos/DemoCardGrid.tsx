@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { demoIconMap, demoSystems } from "@/lib/demo-systems";
 
@@ -7,9 +6,10 @@ interface DemoCardGridProps {
   tone?: "dark" | "light";
   compact?: boolean;
   slugs?: string[];
+  highlightSlug?: string | null;
 }
 
-export function DemoCardGrid({ tone = "dark", compact = false, slugs }: DemoCardGridProps) {
+export function DemoCardGrid({ tone = "dark", compact = false, slugs, highlightSlug }: DemoCardGridProps) {
   const isLight = tone === "light";
   const visibleDemos = slugs
     ? slugs
@@ -21,20 +21,28 @@ export function DemoCardGrid({ tone = "dark", compact = false, slugs }: DemoCard
     <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
       {visibleDemos.map((demo) => {
         const Icon = demoIconMap[demo.icon];
+        const isHighlighted = highlightSlug && (
+          demo.slug === highlightSlug ||
+          (highlightSlug === "workshop" && ["workshop", "hutton-motors-service-centre"].includes(demo.slug))
+        );
 
         return (
           <article
             key={demo.slug}
             className={`group rounded-[8px] border p-5 transition hover:-translate-y-1 ${
               isLight
-                ? "border-[#d9d9d1] bg-white text-[#0b0c10] shadow-[0_20px_55px_rgba(17,24,39,0.08)] hover:border-[#67E8F9]/55"
-                : "border-white/10 bg-white/[0.035] text-white shadow-[0_20px_60px_rgba(0,0,0,0.22)] hover:border-[#67E8F9]/45"
+                ? "border-[#d9d9d1] bg-white text-[#0b0c10] shadow-[0_20px_55px_rgba(17,24,39,0.08)]"
+                : "border-white/10 bg-white/[0.035] text-white shadow-[0_20px_60px_rgba(0,0,0,0.22)]"
+            } ${
+              isHighlighted
+                ? "ring-2 ring-[#67E8F9] shadow-[0_0_24px_rgba(103,232,249,0.25)] border-[#67E8F9]"
+                : ""
             }`}
           >
-            <Link href={`/demos/${demo.slug}`} data-event="demo_open" data-demo-slug={demo.slug} className="block">
+            <Link href={`/demos/${demo.slug}`} data-event="open_demo_click" data-demo-slug={demo.slug} className="block">
               <div className="flex items-start justify-between gap-3">
                 <span
-                  className={`inline-flex h-12 w-12 items-center justify-center rounded-[8px] border ${
+                  className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[8px] border ${
                     isLight
                       ? "border-[#d9d9d1] bg-[#0b0c10] text-white"
                       : "border-white/10 bg-white text-[#0b0c10]"
@@ -42,7 +50,7 @@ export function DemoCardGrid({ tone = "dark", compact = false, slugs }: DemoCard
                 >
                   <Icon className="h-6 w-6" />
                 </span>
-                <span className="rounded-full border border-[#67E8F9]/25 bg-[#67E8F9]/10 px-3 py-1 text-xs font-semibold text-[#0891b2]">
+                <span className="shrink-0 rounded-full border border-[#67E8F9]/25 bg-[#67E8F9]/10 px-3 py-1 text-xs font-semibold text-[#0891b2]">
                   Interactive Preview
                 </span>
               </div>
@@ -63,80 +71,85 @@ export function DemoCardGrid({ tone = "dark", compact = false, slugs }: DemoCard
               </p>
             </Link>
 
-            <div
-              className={`mt-5 rounded-[8px] border p-4 ${
-                isLight
-                  ? "border-[#d9d9d1] bg-[#f7f7f2]"
-                  : "border-white/10 bg-black/25"
-              }`}
-            >
-              <div className="grid grid-cols-3 gap-2">
-                {demo.metrics.slice(0, 3).map((metric) => (
-                  <div
-                    key={metric.label}
-                    className={`rounded-[8px] border p-2 ${
-                      isLight ? "border-[#d9d9d1] bg-white" : "border-white/10 bg-white/[0.04]"
-                    }`}
-                  >
-                    <p className={`text-sm font-semibold ${isLight ? "text-[#0b0c10]" : "text-white"}`}>
-                      {metric.value}
-                    </p>
-                    <p className={`mt-1 text-[11px] ${isLight ? "text-[#5b5f66]" : "text-[#a8a8a2]"}`}>
-                      {metric.label}
-                    </p>
-                  </div>
-                ))}
+            <div className="mt-5 space-y-4">
+              <div>
+                <p className={`text-xs font-semibold uppercase tracking-[0.08em] ${isLight ? "text-[#50545b]" : "text-[#a8a8a2]"}`}>
+                  What problem this solves
+                </p>
+                <p className={`mt-1 text-sm leading-6 ${isLight ? "text-[#3d4147]" : "text-[#d8d8d2]"}`}>
+                  {demo.problemSolved}
+                </p>
               </div>
 
-              <div className={`mt-3 rounded-[8px] border p-3 ${isLight ? "border-[#d9d9d1] bg-white" : "border-white/10 bg-white/[0.04]"}`}>
+              <div>
                 <p className={`text-xs font-semibold uppercase tracking-[0.08em] ${isLight ? "text-[#50545b]" : "text-[#a8a8a2]"}`}>
-                  Screenshot slot
+                  What the owner sees
                 </p>
-                <div className={`mt-3 grid gap-2 ${isLight ? "text-[#3d4147]" : "text-[#d8d8d2]"}`}>
-                  {demo.modules.slice(0, 3).map((module) => (
-                    <span key={module} className={`h-2 rounded-full ${isLight ? "bg-[#d9d9d1]" : "bg-white/15"}`} />
+                <p className={`mt-1 text-sm leading-6 ${isLight ? "text-[#3d4147]" : "text-[#d8d8d2]"}`}>
+                  {demo.ownerSees}
+                </p>
+              </div>
+
+              <div>
+                <p className={`text-xs font-semibold uppercase tracking-[0.08em] ${isLight ? "text-[#50545b]" : "text-[#a8a8a2]"}`}>
+                  What the team uses daily
+                </p>
+                <p className={`mt-1 text-sm leading-6 ${isLight ? "text-[#3d4147]" : "text-[#d8d8d2]"}`}>
+                  {demo.teamUsesDaily}
+                </p>
+              </div>
+
+              <div>
+                <p className={`text-xs font-semibold uppercase tracking-[0.08em] ${isLight ? "text-[#50545b]" : "text-[#a8a8a2]"}`}>
+                  Best for
+                </p>
+                <p className={`mt-1 text-sm leading-6 ${isLight ? "text-[#3d4147]" : "text-[#d8d8d2]"}`}>
+                  {demo.bestFor}
+                </p>
+              </div>
+
+              <div>
+                <p className={`text-xs font-semibold uppercase tracking-[0.08em] ${isLight ? "text-[#50545b]" : "text-[#a8a8a2]"}`}>
+                  Key modules
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {demo.modules.map((module) => (
+                    <span
+                      key={module}
+                      className={`rounded-full border px-2.5 py-1 text-[11px] ${
+                        isLight
+                          ? "border-[#d9d9d1] bg-white text-[#3d4147]"
+                          : "border-white/10 bg-white/[0.04] text-[#d8d8d2]"
+                      }`}
+                    >
+                      {module}
+                    </span>
                   ))}
                 </div>
               </div>
-
-              <div className="mt-3 flex flex-wrap gap-2">
-                {demo.modules.slice(0, 5).map((module) => (
-                  <span
-                    key={module}
-                    className={`rounded-full border px-2.5 py-1 text-[11px] ${
-                      isLight
-                        ? "border-[#d9d9d1] bg-white text-[#3d4147]"
-                        : "border-white/10 bg-white/[0.04] text-[#d8d8d2]"
-                    }`}
-                  >
-                    {module}
-                  </span>
-                ))}
-              </div>
             </div>
 
-            <div className="mt-5 flex flex-col gap-3">
+            <div className="mt-6 flex flex-col gap-3">
+              <Link
+                href={`/contact?demo_slug=${demo.slug}&lead_intent=demo_page#lead-form`}
+                data-event="request_demo_version_click"
+                data-demo-slug={demo.slug}
+                className={`cta-button w-full justify-center text-center text-sm font-semibold leading-none ${
+                  isLight ? "" : ""
+                }`}
+              >
+                Request This For My Business
+              </Link>
               <Link
                 href={`/demos/${demo.slug}`}
-                data-event="demo_open"
+                data-event="open_demo_click"
                 data-demo-slug={demo.slug}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#0891b2]"
+                className={`cta-secondary w-full justify-center text-center text-sm font-semibold leading-none ${
+                  isLight ? "" : "border-white/20 text-white hover:border-white/40"
+                }`}
               >
-                View Live Demo Systems <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                Open System Demo
               </Link>
-              <div className={`rounded-[8px] border p-4 ${isLight ? "border-[#d9d9d1] bg-[#f7f7f2]" : "border-white/10 bg-black/25"}`}>
-                <p className={`text-sm font-semibold ${isLight ? "text-[#0b0c10]" : "text-white"}`}>
-                  Want this adapted to your business?
-                </p>
-                <Link
-                  href={`/contact?demo_slug=${demo.slug}&lead_intent=demo_page#lead-form`}
-                  data-event="free_audit_click"
-                  data-demo-slug={demo.slug}
-                  className="cta-button mt-3 w-full justify-center"
-                >
-                  Get My Free System Audit
-                </Link>
-              </div>
             </div>
           </article>
         );

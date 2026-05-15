@@ -349,7 +349,7 @@ export function LeadForm({
             {!submitting && (status.includes("Sorry") || status.includes("could not")) && (
               <div className="mt-3 flex flex-wrap gap-3 text-sm font-medium">
                 <a
-                  href={`https://wa.me/${siteConfig.phonePlain.replace("+", "")}`}
+                  href={`https://wa.me/${siteConfig.phonePlain.replace("+", "")}?text=${encodeURIComponent("Hi Eddy, I tried to submit a contact form on your website but it failed. Please contact me.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#25D366] px-3 py-1.5 text-white hover:bg-[#128C7E]"

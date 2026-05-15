@@ -4,6 +4,7 @@ import { SendHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { trackCustomEvent, trackLeadConversion } from "@/lib/gtag";
+import { siteConfig } from "@/lib/site";
 
 type ShortAuditFormState = {
   name: string;
@@ -47,7 +48,7 @@ export function ShortAuditForm({
   demoSlug,
   industrySlug,
   leadIntent,
-  startEvent = "contact_form_start",
+  startEvent = "short_form_start",
   submitEvent = "short_form_submit",
 }: ShortAuditFormProps) {
   const [form, setForm] = useState(initialState);
@@ -239,16 +240,38 @@ export function ShortAuditForm({
       </form>
 
       {status ? (
-        <p
-          className={`mt-3 rounded-[8px] border p-3 text-sm leading-6 ${
-            status.startsWith("Sorry") || status.startsWith("Please")
-              ? "border-[#f97316]/40 bg-[#FFF7ED] text-[#9a3412]"
-              : "border-[#67E8F9]/40 bg-[#ECFDF5] text-[#065f46]"
-          }`}
-          role="status"
-        >
-          {status}
-        </p>
+        status.startsWith("Sorry") || status.startsWith("Please") ? (
+          <div
+            className="mt-3 rounded-[8px] border border-[#f97316]/40 bg-[#FFF7ED] p-3 text-sm leading-6 text-[#9a3412]"
+            role="status"
+          >
+            <p>{status}</p>
+            <div className="mt-3 flex flex-wrap gap-3 text-sm font-medium">
+              <a
+                href={`https://wa.me/${siteConfig.phonePlain.replace("+", "")}?text=${encodeURIComponent("Hi Eddy, I tried to submit a form on your website but it failed. Please contact me.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#25D366] px-3 py-1.5 text-white hover:bg-[#128C7E]"
+                data-event="whatsapp_click"
+              >
+                WhatsApp Eddy
+              </a>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="inline-flex items-center gap-1.5 rounded-[6px] border border-[#111111]/20 bg-[#F7F7F2] px-3 py-1.5 text-[#111111] hover:bg-[#ECEAE4]"
+              >
+                Email Pine X Systems
+              </a>
+            </div>
+          </div>
+        ) : (
+          <p
+            className="mt-3 rounded-[8px] border border-[#67E8F9]/40 bg-[#ECFDF5] p-3 text-sm leading-6 text-[#065f46]"
+            role="status"
+          >
+            {status}
+          </p>
+        )
       ) : null}
     </section>
   );

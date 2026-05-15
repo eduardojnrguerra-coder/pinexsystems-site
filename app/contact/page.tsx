@@ -6,7 +6,7 @@ import { LeadForm } from "@/components/ui/lead-form";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ShortAuditForm } from "@/components/ui/short-audit-form";
 import { createPageMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, waUrl } from "@/lib/site";
 
 export const metadata = createPageMetadata({
   title: "Contact | Pine X Systems",
@@ -69,7 +69,7 @@ export default function ContactPage() {
       <SectionHeading
         badge="Contact"
         title="Get a Free System Audit for Your Business"
-        description="Tell us where your business is losing time, leads, control or visibility. We'll review it and send back practical system ideas before trying to sell you anything."
+        description="Tell us what feels messy in your business. We'll review it and send back practical system ideas before trying to sell you anything."
       />
 
       <div className="mx-auto mt-8 max-w-3xl">
@@ -84,7 +84,7 @@ export default function ContactPage() {
             </h2>
             <div className="mt-5 space-y-3">
               <TrackedWhatsAppLink
-                href={`https://wa.me/${siteConfig.phonePlain.replace("+", "")}`}
+                href={waUrl("Hi Eddy, I'd like to discuss a custom business system for my business.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 location="contact_direct"

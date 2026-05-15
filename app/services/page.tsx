@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { fullServiceDetails } from "@/lib/content/core";
 import { createPageMetadata } from "@/lib/metadata";
+import { breadcrumbSchema } from "@/lib/schema";
+import { SchemaScript } from "@/components/ui/schema-script";
 
 export const metadata = createPageMetadata({
   title: "Services | Pine X Systems",
@@ -276,6 +278,12 @@ const serviceProfiles: Record<
 export default function ServicesPage() {
   return (
     <div className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.12),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)]">
+      <SchemaScript
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ])}
+      />
       <div className="section-shell py-12 sm:py-16">
       <SectionHeading
         badge="Services"

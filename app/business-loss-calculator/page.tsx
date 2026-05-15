@@ -6,7 +6,7 @@ import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
-import { faqSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title:
@@ -131,6 +131,12 @@ const relatedResources = [
 export default function BusinessLossCalculatorPage() {
   return (
     <div className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.12),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)]">
+      <SchemaScript
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Business Loss Calculator", path: "/business-loss-calculator" },
+        ])}
+      />
       <SchemaScript data={faqSchema(calculatorFaq)} />
       <div className="section-shell py-12 sm:py-16">
         <SectionHeading

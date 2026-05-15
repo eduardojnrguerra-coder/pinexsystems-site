@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { CheckCircle, SendHorizontal } from "lucide-react";
+
+import { siteConfig } from "@/lib/site";
 import {
   ArrowRight,
   CircleDollarSign,
@@ -305,6 +308,8 @@ function getDiagnosis({
 export function LeakEstimator() {
   const [values, setValues] = useState<CalculatorValues>(defaultValues);
   const [activePreset, setActivePreset] = useState("Custom");
+  const [leadForm, setLeadForm] = useState({ name: "", businessName: "", phone: "", email: "" });
+  const [leadStatus, setLeadStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const sectionRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef<number | null>(null);
@@ -524,6 +529,57 @@ export function LeakEstimator() {
       delete panel.dataset.floatingActive;
     };
   }, []);
+
+  const isFormValid = leadForm.name.trim() && leadForm.businessName.trim() && leadForm.phone.trim() && leadForm.email.trim();
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+    setLeadStatus("submitting");
+
+    try {
+      const biggestCategory =
+        result.monthlyGrossProfitRisk >= result.monthlyAdminWaste
+          ? "Missed follow-up revenue"
+          : "Admin waste";
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: leadForm.name,
+          businessName: leadForm.businessName,
+          phone: leadForm.phone,
+          email: leadForm.email,
+          source: "business_loss_calculator",
+          lead_offer: "Free Business System Audit",
+          preferredContact: "WhatsApp",
+          industry: activePreset !== "Custom" ? activePreset : "Not specified",
+          biggestProblem: [
+            "Calculator results from Business Loss Calculator:",
+            `- Monthly leakage: R${Math.round(result.monthlyLeakage).toLocaleString("en-ZA")}`,
+            `- Yearly leakage: R${Math.round(result.yearlyLeakage).toLocaleString("en-ZA")}`,
+            `- Revenue at risk (monthly): R${Math.round(result.monthlyRevenueRisk).toLocaleString("en-ZA")}`,
+            `- Admin waste (monthly): R${Math.round(result.monthlyAdminWaste).toLocaleString("en-ZA")}`,
+            `- Industry preset: ${activePreset}`,
+            `- Biggest leakage category: ${biggestCategory}`,
+            `- Risk band: ${result.risk.label}`,
+          ].join("\n"),
+          systemNeeded: "Free system audit from calculator",
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+
+      if (!res.ok) throw new Error("API error");
+      const data = await res.json();
+      if (!data.success) throw new Error("API failed");
+
+      setLeadStatus("success");
+      setLeadForm({ name: "", businessName: "", phone: "", email: "" });
+    } catch {
+      setLeadStatus("error");
+    }
+  };
 
   return (
     <section ref={sectionRef} className="relative overflow-visible">
@@ -769,6 +825,123 @@ export function LeakEstimator() {
             </div>
           </div>
         </aside>
+      </div>
+
+      <div className="mt-10">
+        <div className="light-panel rounded-[8px] border border-[#d9d9d1] p-6 sm:p-8">
+          <p className="text-[11px] uppercase tracking-[0.16em] text-[#7b7e86]">
+            Next Step
+          </p>
+          <h2 className="mt-3 font-heading text-2xl font-semibold text-[#111111] sm:text-3xl">
+            Want us to review these numbers?
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#555962] sm:text-base">
+            Send your calculator result to Pine X Systems and we&rsquo;ll suggest 3 practical system improvements based on where your business appears to be leaking time, leads, or control.
+          </p>
+
+          {leadStatus === "success" ? (
+            <div className="mt-6 rounded-[8px] border border-[#67E8F9]/40 bg-[#ECFDF5] p-5 text-[#065f46]">
+              <div className="flex items-center gap-3">
+                <CheckCircle className="h-6 w-6 shrink-0 text-[#10b981]" />
+                <div>
+                  <p className="font-semibold">Thanks for sharing your results.</p>
+                  <p className="mt-1 text-sm leading-6">
+                    We will review your numbers and send back practical system improvement ideas within one business day.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <form
+              className="mt-6 grid gap-4 sm:grid-cols-2"
+              onSubmit={handleLeadSubmit}
+              data-event="calculator_lead_start"
+              noValidate
+            >
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-medium text-[#3d4147]">Name *</span>
+                <input
+                  required
+                  value={leadForm.name}
+                  onChange={(e) => setLeadForm((prev) => ({ ...prev, name: e.target.value }))}
+                  className="form-input form-input-light"
+                  placeholder="Your name"
+                  data-event="calculator_lead_start"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-medium text-[#3d4147]">Business name *</span>
+                <input
+                  required
+                  value={leadForm.businessName}
+                  onChange={(e) => setLeadForm((prev) => ({ ...prev, businessName: e.target.value }))}
+                  className="form-input form-input-light"
+                  placeholder="Business name"
+                  data-event="calculator_lead_start"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-medium text-[#3d4147]">WhatsApp number *</span>
+                <input
+                  required
+                  value={leadForm.phone}
+                  onChange={(e) => setLeadForm((prev) => ({ ...prev, phone: e.target.value }))}
+                  className="form-input form-input-light"
+                  placeholder="Your WhatsApp number"
+                  data-event="calculator_lead_start"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-medium text-[#3d4147]">Email address *</span>
+                <input
+                  type="email"
+                  required
+                  value={leadForm.email}
+                  onChange={(e) => setLeadForm((prev) => ({ ...prev, email: e.target.value }))}
+                  className="form-input form-input-light"
+                  placeholder="you@company.com"
+                  data-event="calculator_lead_start"
+                />
+              </label>
+
+              <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center">
+                <button
+                  type="submit"
+                  disabled={leadStatus === "submitting"}
+                  className="cta-button w-full justify-center disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                  data-event="calculator_lead_submit"
+                >
+                  {leadStatus === "submitting" ? "Sending..." : "Send My Results For Review"}
+                  <SendHorizontal className={`h-4 w-4 ${leadStatus === "submitting" ? "animate-pulse" : ""}`} />
+                </button>
+              </div>
+            </form>
+          )}
+
+          {leadStatus === "error" && (
+            <div className="mt-4 rounded-[8px] border border-[#f97316]/40 bg-[#FFF7ED] p-4 text-sm text-[#9a3412]" role="status" data-event="calculator_lead_error">
+              <p>Sorry, we could not send your results right now. Please try again or reach us directly:</p>
+              <div className="mt-3 flex flex-wrap gap-3 text-sm font-medium">
+                <a
+                  href={`https://wa.me/${siteConfig.phonePlain.replace("+", "")}?text=${encodeURIComponent("Hi Eddy, I calculated my business leakage on your site but the submission failed. Please contact me.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#25D366] px-3 py-1.5 text-white hover:bg-[#128C7E]"
+                  data-event="whatsapp_click"
+                >
+                  WhatsApp Eddy
+                </a>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex items-center gap-1.5 rounded-[6px] border border-[#111111]/20 bg-[#F7F7F2] px-3 py-1.5 text-[#111111] hover:bg-[#ECEAE4]"
+                  data-event="calculator_lead_error"
+                >
+                  Email Pine X Systems
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

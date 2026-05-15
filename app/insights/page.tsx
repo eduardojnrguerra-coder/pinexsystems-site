@@ -1,9 +1,11 @@
 import Link from "next/link";
 
 import { InsightsExplorer } from "@/components/ui/insights-explorer";
+import { SchemaScript } from "@/components/ui/schema-script";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { insightArticles } from "@/lib/content/insights";
 import { createPageMetadata } from "@/lib/metadata";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Insights | Pine X Systems",
@@ -42,6 +44,12 @@ const insightPriorities = [
 export default function InsightsPage() {
   return (
     <div className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.14),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)]">
+      <SchemaScript
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Insights", path: "/insights" },
+        ])}
+      />
       <div className="section-shell py-12 sm:py-16">
       <SectionHeading
         badge="Insights"

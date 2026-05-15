@@ -1,8 +1,10 @@
 import Link from "next/link";
 
-import { DemoCardGrid } from "@/components/demos/DemoCardGrid";
+import { DemoFilterPanel } from "@/components/demos/DemoFilterPanel";
+import { SchemaScript } from "@/components/ui/schema-script";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Interactive System Demos | Pine X Systems",
@@ -25,6 +27,12 @@ export const metadata = createPageMetadata({
 export default function DemosPage() {
   return (
     <div className="bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.14),transparent_26rem),linear-gradient(180deg,#F7F7F2_0%,#ECEAE4_100%)]">
+      <SchemaScript
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Demos", path: "/demos" },
+        ])}
+      />
       <div className="section-shell py-12 sm:py-16 lg:py-20">
         <SectionHeading
           badge="Interactive Demos"
@@ -38,12 +46,16 @@ export default function DemosPage() {
         />
 
         <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-7 text-[#555962] sm:text-base">
-          Interactive concept previews built to show how Pine X systems can structure dashboards, workflows, approvals, and reporting around real operations.
+          Open realistic interactive system previews showing how Pine X Systems can structure dashboards, workflows, role views, actions, and reporting around different business types.
         </p>
 
-        <div id="demo-systems" className="mt-8">
-          <DemoCardGrid tone="light" />
+        <div className="mt-8">
+          <DemoFilterPanel />
         </div>
+
+        <p className="mx-auto mt-12 max-w-3xl text-center text-sm leading-7 text-[#555962] sm:text-base">
+          These demos are built to show realistic system structure, workflows, dashboards, and role-based views. Your final Pine X system would be scoped around your exact business process, team structure, and operational priorities.
+        </p>
 
         <div className="mt-10 rounded-[8px] border border-[#111111]/10 bg-white p-6 text-center shadow-[0_24px_70px_rgba(17,17,17,0.08)] sm:p-8">
           <h2 className="font-heading text-3xl font-semibold text-[#111111]">
@@ -56,10 +68,7 @@ export default function DemosPage() {
             <Link href="/contact#lead-form" className="cta-button" data-event="free_audit_click">
               Get My Free System Audit
             </Link>
-            <Link href="#demo-systems" className="cta-secondary" data-event="demo_click">
-              View Live Demo Systems
-            </Link>
-            <Link href="/case-studies" className="cta-secondary">
+            <Link href="/case-studies" className="cta-secondary" data-event="case_studies_click">
               Demo Case Studies
             </Link>
           </div>
